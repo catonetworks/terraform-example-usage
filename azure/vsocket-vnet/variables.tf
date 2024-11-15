@@ -25,7 +25,7 @@ variable "resource_group_name" {
   default     = null
 }
 
-variable "windows-assets-prefix" {
+variable "windows-vm-name" {
   type        = string
   description = "Your asset prefix for resources created"
   default     = "windows-demo-vm"

@@ -27,31 +27,42 @@ module "vsocket-azure" {
 module "WindowsVM" {
   source                = "../../modules/WindowsVM-Azure"
   location              = var.location
-  resource-group-name   = module.vsocket-azure.resource_group_name
-  windows-assets-prefix = "windows-vm-VNET"
-  lan_subnet_id         = module.vsocket-azure.lan_subnet_id
+  resource-group-name   = module.vnet.resource-group-name
+  windows-assets-prefix = var.windows-vm-name
+  lan_subnet_id         = module.vnet.lan_subnet_id
   admin_username        = var.admin_username
   admin_password        = var.admin_password
 }
 
 resource "cato_static_host" "win-host" {
-  site_id     = module.vsocket-azure.socket_site_id
-  name        = module.WindowsVM.hostname
-  ip          = module.WindowsVM.private_ip
+  site_id = module.vsocket-azure.socket_site_id
+  name    = module.WindowsVM.hostname
+  ip      = module.WindowsVM.private_ip
 }
 
-# ## Internet Firewall Rules
-module "IFW-Rules" {
-  source         = "../../modules/IFW-Rules"
-  cato_token     = var.cato_token 
-  account_id     = var.account_id
-  rbi_category   = "Unsanctioned"
-  block_domains  = ["reddit.com", "www.reddit.com"]
-  prompt_domains = ["espn.com", "www.espn.com"]
-  allow_domains  = ["slashdot.org", "www.slashdot.org"]
-}
-
-# ## WAN Firewall Rules
+# ## WAN Firewall Rules - Use Case 3
 # module "WAN-Rules" {
-#   source                = "../../modules/WAN-Rules"
+#   source                   = "../../modules/WAN-Rules"
+#   cato_token               = var.cato_token
+#   account_id               = var.account_id
+#   site_id                  = module.vsocket-aws.socket_site_id
+#   host_id                  = cato_static_host.win-host.id
+#   p1_group_name            = "Your User Group Here"
+#   p1_device_posture_policy = "Your Device Posture Policy Name Here"
 # }
+
+# # ## Internet Firewall Rules - Use Case 5
+# module "IFW-Rules" {
+#   source     = "../../modules/IFW-Rules"
+#   cato_token = var.cato_token
+#   account_id = var.account_id
+#   ifw_group_names = [
+#     { "name" : "Your User Group 1 Here" },
+#     { "name" : "Your User Group 2 Here" }
+#   ]
+#   rbi_category   = "RBI-URLs"
+#   block_domains  = ["reddit.com", "www.reddit.com"]
+#   prompt_domains = ["espn.com", "www.espn.com"]
+#   allow_domains  = ["slashdot.org", "www.slashdot.org"]
+# }
+
