@@ -6,7 +6,6 @@ provider "cato" {
 
 # ## Create Cato SocketSite and Deploy Vsocket
 module "vsocket-azure" {
-  # source              = "../../../terraform-cato-vsocket-azure-vnet"
   source              = "catonetworks/vsocket-azure-vnet/cato"
   token               = var.cato_token
   account_id          = var.account_id
