@@ -2,6 +2,8 @@
 
 The Cato Terraform Example Usage in Azure.
 
+1. [IPSec](https://github.com/catonetworks/terraform-example-usage/tree/master/azure/IPSec) - Create IPSec vpn connection from Azure to an IPSec site in the Cato Cloud.
+
 1. [Azure vSocket](https://github.com/catonetworks/terraform-example-usage/tree/master/azure/vsocket) - Deploy a Cato virtual socket into an existing VPC in Azure.
 
 1. [Azure vSocket with VPC](https://github.com/catonetworks/terraform-example-usage/tree/master/azure/vsocket-vnet) - Create a VNET from scratch, and deploy a Cato virtual socket in Azure.
