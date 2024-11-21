@@ -7,8 +7,7 @@ provider "cato" {
 
 resource "cato_if_section" "if_section" {
   at = {
-    position = "AFTER_SECTION"
-    ref      = "70"
+    position = "LAST_IN_POLICY"
   }
   section = {
     name = "IFW Section"

@@ -7,8 +7,7 @@ provider "cato" {
 
 resource "cato_wf_section" "wanaccess" {
   at = {
-    position = "BEFORE_SECTION"
-    ref = "14cd8e8b-c3b4-4424-95f8-be1d72ed31d1"
+    position = "LAST_IN_POLICY"
   }
   section = {
     name = "WAN Access"
