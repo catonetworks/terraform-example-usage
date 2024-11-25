@@ -1,5 +1,15 @@
 ## VPC Variables
-variable "cato_token" {}
+variable "baseurl" {
+  description = "Cato Networks API URL"
+  type        = string
+  default     = "https://api.catonetworks.com/api/v1/graphql2"
+}
+
+variable "cato_token" {
+  description = "Account API Token"
+  type        = string
+  # sensitive   = true
+}
 
 variable "account_id" {
   description = "Account ID"

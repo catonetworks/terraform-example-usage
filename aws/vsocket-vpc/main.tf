@@ -1,3 +1,9 @@
+provider "cato" { 
+  baseurl    = var.baseurl
+  token      = var.cato_token
+  account_id = var.account_id
+}
+
 module "vsocket-aws-vpc" {
   source               = "catonetworks/vsocket-aws-vpc/cato"
   token                = var.cato_token
@@ -25,16 +31,8 @@ module "WindowsVM" {
   key_pair      = var.key_pair
 }
 
-module "WindowsVM" {
-  source        = "../../modules/WindowsVM-AWS"
-  lan_subnet_id = module.vpc.lan_subnet_id
-  vpc_id        = module.vpc.vpc_id
-  region        = var.region
-  key_pair      = var.key_pair
-}
-
 # resource "cato_static_host" "win-host" {
-#   site_id = module.vsocket-aws.socket_site_id
+#   site_id = module.vsocket-aws-vpc.socket_site_id
 #   name    = module.WindowsVM.hostname
 #   ip      = module.WindowsVM.private_ip
 # }
@@ -44,7 +42,7 @@ module "WindowsVM" {
 #   source                   = "../../modules/WAN-Rules"
 #   cato_token               = var.cato_token
 #   account_id               = var.account_id
-#   site_id                  = module.vsocket-aws.socket_site_id
+#   site_id                  = module.vsocket-aws-vpc.socket_site_id
 #   host_id                  = cato_static_host.win-host.id
 #   p1_group_name            = "Your User Group Here"
 #   p1_device_posture_policy = "Your Device Posture Policy Name Here"
