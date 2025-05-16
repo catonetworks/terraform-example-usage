@@ -7,7 +7,8 @@ The Cato Terraform Example Usage project provides functional examples of how to 
 1. [System Requirements](#requirements)
    * [Terraform Installation](#terraform-installation)
    * [Cloud Provider Configuration](#cloud-provider-configuration)
-2. [Getting started](#getting-started)
+2. [Setting up environment variables](setting-up-environment-variables)
+3. [Getting started](#getting-started)
    * [Usage Instructions](#usage-instructions)
    * [Run Your Deployment](#run-your-deployment)
    * [Apply Specific Modules](#applying-specific-modules)
@@ -247,6 +248,53 @@ Terraform requires the respective cloud provider CLIs—AWS CLI, Azure CLI, and 
 </details>
 
 
+## Setting up environment variables
+
+Create system environment variables for the cato token and account id.  Using the `TF_VAR` prefix when creating environment variables tells terraform to resolve those values from the host OS as opposed to in your local variables files.  
+WARNING: DO NOT add your cato token in clear text to any variable files on your local system. 
+
+
+<details>
+<summary>Setting environment variables in Unix</summary>
+Use the following syntax in a unix command prompt to temporarily set environment variables.
+```bash
+set TF_VAR_account_id=xxxxx
+set TF_VAR_cato_token=xxxxx
+```
+To make these values persistent, run either `vi ~/.bash_profile` or `vi ~/.zshrc`, and add the following lines.
+```bash
+set TF_VAR_account_id=xxxxx
+set TF_VAR_cato_token=xxxxx
+```
+</details>
+<details>
+<summary>Setting environment variables in Windows</summary>
+Use the following syntax in a windows command prompt to temporarily set environment variables.
+```bash
+set TF_VAR_account_id=xxxxx
+set TF_VAR_cato_token=xxxxx
+```
+To make these values persistent, run the following windows command prompt:
+```bash
+setx TF_VAR_account_id=xxxxx
+setx TF_VAR_cato_token=xxxxx
+```
+NOTE: On a local system, variables created or modified by this tool will be available in future command windows but not in the current CMD.exe command window.
+</details>
+<details>
+<summary>Setting environment variables in Windows Powershell</summary>
+Use the following syntax in a powershell command prompt to temporarily set environment variables.
+```bash
+$env:TF_VAR_account_id = "xxxxx" 
+$env:TF_VAR_cato_token = "xxxxx"
+```
+To make these values persistent, run the following in a powershell terminal as Admin (UserLevel):
+```bash
+[System.Environment]::SetEnvironmentVariable('TF_VAR_account_id','xxxxxxx', 'User')
+[System.Environment]::SetEnvironmentVariable('TF_VAR_cato_token','xxxxxxx', 'User')
+```
+</details>
+
 ## Getting Started
 
 <details>
@@ -276,13 +324,16 @@ Below is a list of the terraform modules included in this package, and the assoc
 </details>
 
 ### Usage Instructions
-After checking out the project, rename the following files removing `.example` from from the file names to start to use in your deployment.  Renaming these files ensures you can start to use this project, and received updaetes to the repo without future code conflicts.  The following 2 files are the only files you will need to modify. 
+After checking out the project, rename the following files removing `.example` from from the file names to start to use in your deployment.  Renaming these files ensures you can start to use this project, and received updaetes to the repo without future code conflicts.  There is a main file created for each cloud environment (AWS, GCP, Azure), as well as a main file for a physical socket.  Rename the main for the deployment you are looking to run.
 
 ```bash
 git clone https://github.com/catonetworks/terraform-example-usage.git
 cd terraform-example-usage
-mv main.tf.example main.tf
 mv terraform.tfvars.example terraform.tfvars
+mv main.azure.tf.example main.azure.tf
+mv main.aws.tf.example main.aws.tf
+mv main.gcp.tf.example main.gcp.tf
+mv main.socket.tf.example main.socket.tf
 ```
 
 Pull in future updates to this repository by using `git pull`.
