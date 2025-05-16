@@ -278,11 +278,13 @@ Below is a list of the terraform modules included in this package, and the assoc
 After checking out the project, rename the following files removing `.example` from from the file names to start to use in your deployment.  Renaming these files ensures you can start to use this project, and received updaetes to the repo without future code conflicts.  The following 2 files are the only files you will need to modify. 
 
 ```bash
-git checkout git@github.com:catonetworks/terraform-example-usage.git
+git clone https://github.com/catonetworks/terraform-example-usage.git
 cd terraform-example-usage
 mv main.tf.example main.tf
 mv terraform.tfvars.example terraform.tfvars
 ```
+
+Pull in future updates to this repository by using `git pull`.
 
 ### Enabling and disabling specific modules
 

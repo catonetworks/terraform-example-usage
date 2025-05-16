@@ -1,8 +1,11 @@
 # AWS Provider Variables
 aws_region = "us-west-1"
 
+# Azure Provider Variables
+azure_subscription_id = "abcde12345-abcd-1234-abcd-abcde12345"
+
 # GCP Provider Variables
-project    = "cato-vsocket-deployment"
+project    = "your-gcp-project-name"
 gcp_region = "us-west1"
 zone       = "us-west1-a"
 
