@@ -272,6 +272,7 @@ Below is a list of the terraform modules included in this package, and the assoc
 | [gcp-ipsec](https://registry.terraform.io/modules/catonetworks/vsocket-gcp-ipsec/cato/latest) | 10.100.0.0/16   | n/a  |
 | [gcp-socket](https://registry.terraform.io/modules/catonetworks/vsocket-gcp/cato/latest) | 10.101.0.0/16   | 5 min  |
 | [gcp-socket-vpc](https://registry.terraform.io/modules/catonetworks/vsocket-gcp-vpc/cato/latest) | 10.102.0.0/16   | n/a  |
+| [socket](https://registry.terraform.io/modules/catonetworks/socket/cato/latest) | 10.150.0.0/16   | 1 min  |
 </details>
 
 ### Usage Instructions

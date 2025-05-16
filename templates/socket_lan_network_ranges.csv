@@ -1,0 +1,7 @@
+interface_id,name,range_type,subnet,local_ip,gateway,vlan,translated_subnet,dhcp_type,ip_range
+INT_6,Lan Interface 6,Default,192.168.198.0/25,192.168.198.6,,,,,
+INT_6,VLAN_TF,VLAN,192.168.199.0/25,192.168.199.6,,,,,
+INT_7,Lan Interface 7,Default,192.168.187.0/25,192.168.187.6,,,,DHCP_RANGE,192.168.188.10 - 192.168.188.100
+INT_7,VLAN_TF2,VLAN,192.168.188.0/25,192.168.188.6,,,,DHCP_RANGE,192.168.188.10 - 192.168.188.100
+INT_7,VLAN_TF3,VLAN,192.168.189.0/25,192.168.189.6,,,,,
+INT_7,RoutedFW Name,Routed,172.22.123.0/25,,192.168.187.7,,,,

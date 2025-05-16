@@ -1,0 +1,22 @@
+################### Socket Modules ####################
+module "socket-csv" {
+  count  = var.build_socket_csv_module ? 1 : 0
+  source = "./modules/cato/socket/socket-csv"
+  cato_interfaces = [
+    {
+      interface_id         = "INT_4"
+      name                 = "Interface wan 4"
+      upstream_bandwidth   = 100
+      downstream_bandwidth = 100
+      role                 = "wan_2"
+      precedence           = "ACTIVE"
+    }
+  ]
+  socket_lan_network_ranges_csv_path = "./templates/socket_lan_network_ranges.csv"
+  site_location = {
+    city         = "New York City"
+    country_code = "US"
+    state_code   = "US-NY" ## Optional - for countries with states"
+    timezone     = "America/New_York"
+  }
+}

@@ -11,8 +11,8 @@ module "vpc" {
 }
 
 module "vsocket-gcp" {
-  depends_on = [module.vpc]
-  source                   = "catonetworks/vsocket-gcp/cato"  
+  depends_on               = [module.vpc]
+  source                   = "catonetworks/vsocket-gcp/cato"
   allowed_ports            = var.allowed_ports
   boot_disk_size           = var.boot_disk_size
   create_firewall_rule     = var.create_firewall_rule

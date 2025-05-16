@@ -13,7 +13,7 @@ module "vnet" {
 }
 
 module "ipsec-azure" {
-  depends_on = [module.vnet]
+  depends_on                  = [module.vnet]
   source                      = "catonetworks/ipsec-azure/cato"
   token                       = var.token
   account_id                  = var.account_id

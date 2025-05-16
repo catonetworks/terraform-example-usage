@@ -10,6 +10,11 @@ variable "aws_region" {
   type        = string
 }
 
+variable "aws_default_keypair" {
+  description = "AWS Key Pair"
+  type        = string
+}
+
 #GCP Provider Variables
 variable "project" {
   description = "GCP Project ID for the deployment"
@@ -121,6 +126,19 @@ variable "build_gcp_vsocket_module" {
 
 variable "build_gcp_vsocket_vpc_module" {
   description = "Build GCP vSocket VPC site module"
+  type        = bool
+  default     = false
+}
+
+# Settings for all GCP modules
+variable "build_socket_module" {
+  description = "Build Socket site module"
+  type        = bool
+  default     = false
+}
+
+variable "build_socket_csv_module" {
+  description = "Build Socket site from csv module"
   type        = bool
   default     = false
 }
