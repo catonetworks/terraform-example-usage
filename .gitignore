@@ -2,4 +2,7 @@
 .idea/*
 .terraform*
 terraform
+terraform*
 testing
+main.tf
+terraform.tvars
