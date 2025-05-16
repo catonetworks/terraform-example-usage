@@ -1,0 +1,43 @@
+#################### AWS Provider ####################
+provider "aws" {
+  region = var.aws_region
+}
+
+#################### AWS Modules ####################
+module "ipsec-aws" {
+  count  = var.build_aws_ipsec_module ? 1 : 0
+  source = "./modules/cato/aws/ipsec"
+  ### Create 2 Allocated IPs in Cato CMA, and retrieve the IDs via API 
+  ### using query.entityLookup() filtering for type allocatedIP
+  primary_public_cato_ip_id   = "12345" 
+  secondary_public_cato_ip_id = "12345"
+  cgw_ip                      = "11.11.11.11" # Primary cato public IP address
+}
+
+module "vsocket-aws" {
+  count    = var.build_aws_vsocket_module ? 1 : 0
+  source   = "./modules/cato/aws/vsocket"
+  key_pair = var.aws_default_keypair
+}
+
+module "vsocket-aws-vpc" {
+  count    = var.build_aws_vsocket_vpc_module ? 1 : 0
+  source   = "./modules/cato/aws/vsocket-vpc"
+  key_pair = var.aws_default_keypair
+}
+
+module "vsocket-aws-ha" {
+  count      = var.build_aws_vsocket_ha_module ? 1 : 0
+  source     = "./modules/cato/aws/vsocket-ha"
+  key_pair   = var.aws_default_keypair
+  token      = var.cato_token
+  account_id = var.account_id
+}
+
+module "vsocket-aws-ha-vpc" {
+  count      = var.build_aws_vsocket_ha_vpc_module ? 1 : 0
+  source     = "./modules/cato/aws/vsocket-ha-vpc"
+  key_pair   = var.aws_default_keypair
+  token      = var.cato_token
+  account_id = var.account_id
+}

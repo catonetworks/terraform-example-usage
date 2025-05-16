@@ -1,5 +1,6 @@
 # AWS Provider Variables
 aws_region = "us-west-1"
+aws_default_keypair = "cato-keypair-us-west-1"
 
 # Azure Provider Variables
 azure_subscription_id = "abcde12345-abcd-1234-abcd-abcde12345"
@@ -24,6 +25,10 @@ build_azure_vsocket_ha_module      = false
 build_azure_vsocket_ha_vnet_module = false
 
 # Settings for all GCP modules
-# build_gcp_ipsec_module     = false
-build_gcp_vsocket_module     = false
+# build_gcp_ipsec_module       = false
+build_gcp_vsocket_module       = false
 # build_gcp_vsocket_vpc_module = false
+
+# Settings for all Socket modules
+build_socket_module     = false
+build_socket_csv_module = false

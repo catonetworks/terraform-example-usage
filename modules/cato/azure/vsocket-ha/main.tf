@@ -14,7 +14,7 @@ module "vnet-ha" {
 
 ## Create Cato SocketSite and Deploy Vsocket-HA
 module "vsocket-azure-ha" {
-  depends_on = [module.vnet-ha]
+  depends_on              = [module.vnet-ha]
   source                  = "catonetworks/vsocket-azure-ha/cato"
   token                   = var.token
   account_id              = var.account_id
