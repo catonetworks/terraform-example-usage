@@ -6,3 +6,4 @@ terraform*
 testing
 main.tf
 terraform.tvars
+!terraform.tfvars.example

@@ -1,0 +1,26 @@
+# AWS Provider Variables
+aws_region = "us-west-1"
+
+# GCP Provider Variables
+project    = "cato-vsocket-deployment"
+gcp_region = "us-west1"
+zone       = "us-west1-a"
+
+# Global settings for AWS modules
+build_aws_ipsec_module          = false
+build_aws_vsocket_module        = false
+build_aws_vsocket_vpc_module    = false
+build_aws_vsocket_ha_module     = false
+build_aws_vsocket_ha_vpc_module = false
+
+# Settings for all Azure modules
+build_azure_ipsec_module           = false
+build_azure_vsocket_module         = false
+build_azure_vsocket_vnet_module    = false
+build_azure_vsocket_ha_module      = false
+build_azure_vsocket_ha_vnet_module = false
+
+# Settings for all GCP modules
+# build_gcp_ipsec_module     = false
+build_gcp_vsocket_module     = false
+# build_gcp_vsocket_vpc_module = false
