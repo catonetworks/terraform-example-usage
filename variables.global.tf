@@ -131,12 +131,6 @@ variable "build_gcp_vsocket_vpc_module" {
 }
 
 # Settings for all GCP modules
-variable "build_socket_module" {
-  description = "Build Socket site module"
-  type        = bool
-  default     = false
-}
-
 variable "build_socket_csv_module" {
   description = "Build Socket site from csv module"
   type        = bool
