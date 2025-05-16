@@ -1,0 +1,25 @@
+#################### Initialize Cato Provider ####################
+terraform {
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 4.0"
+    }
+  }
+}
+
+provider "google" {
+  project = var.project
+  region  = var.gcp_region
+}
+
+################### GCP Modules ####################
+
+module "vsocket-gcp" {
+  count  = var.build_gcp_vsocket_module ? 1 : 0
+  source = "./modules/cato/gcp/vsocket"
+  # create_firewall_rule     = true
+  # wan_firewall_rule_name   = "allow-management-access" # Only used if create_firewall_rule = true
+  # allowed_ports            = ["22", "443"] # Only used if create_firewall_rule = true
+  # management_source_ranges = [""] # Only used if create_firewall_rule = true, replace with your IP range
+}

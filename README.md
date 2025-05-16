@@ -36,7 +36,7 @@ Setup instructions for installing terraform on your host.
 </details>
 
 <details>
-<summary>Install Terraform on Mac</summary>
+<summary>Install Terraform on Windows</summary>
 
 ### Host setup Windows
 1. Option 1: Using Chocolatey (Recommended)

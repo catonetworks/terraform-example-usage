@@ -24,6 +24,6 @@ build_azure_vsocket_ha_module      = false
 build_azure_vsocket_ha_vnet_module = false
 
 # Settings for all GCP modules
-# build_gcp_ipsec_module     = false
-build_gcp_vsocket_module     = false
+# build_gcp_ipsec_module       = false
+build_gcp_vsocket_module       = false
 # build_gcp_vsocket_vpc_module = false

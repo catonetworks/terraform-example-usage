@@ -1,0 +1,55 @@
+#################### Azure Provider ####################
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 4.1.0"
+    }
+  }
+}
+
+provider "azurerm" {
+  features {}
+  subscription_id = var.azure_subscription_id
+}
+
+#################### Azure Modules ####################
+
+module "ipsec-azure" {
+  count  = var.build_azure_ipsec_module ? 1 : 0
+  source = "./modules/cato/azure/ipsec"
+  ### Create 2 Allocated IPs in Cato CMA, and retrieve the IDs via API 
+  ### using query.entityLookup() filtering for type allocatedIP
+  token                       = var.cato_token
+  account_id                  = var.account_id
+  primary_public_cato_ip_id   = "12345"
+  primary_cato_pop_ip         = "11.11.11.11"
+  secondary_public_cato_ip_id = "12346"
+  secondary_cato_pop_ip       = "11.11.22.22"
+}
+
+module "vsocket-azure" {
+  count  = var.build_azure_vsocket_module ? 1 : 0
+  source = "./modules/cato/azure/vsocket"
+}
+
+module "vsocket-azure-vnet" {
+  count  = var.build_azure_vsocket_vnet_module ? 1 : 0
+  source = "./modules/cato/azure/vsocket-vnet"
+}
+
+module "vsocket-azure-ha" {
+  count                 = var.build_azure_vsocket_ha_module ? 1 : 0
+  source                = "./modules/cato/azure/vsocket-ha"
+  token                 = var.cato_token
+  account_id            = var.account_id
+  azure_subscription_id = var.azure_subscription_id
+}
+
+module "vsocket-azure-ha-vnet" {
+  count                 = var.build_azure_vsocket_ha_vnet_module ? 1 : 0
+  source                = "./modules/cato/azure/vsocket-ha-vnet"
+  token                 = var.cato_token
+  account_id            = var.account_id
+  azure_subscription_id = var.azure_subscription_id
+}
