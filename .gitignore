@@ -5,5 +5,9 @@ terraform
 terraform*
 testing
 /main.tf
+main.aws.tf
+main.azure.tf
+main.gcp.tf
+main.socket.tf
 terraform.tvars
 !terraform.tfvars.example

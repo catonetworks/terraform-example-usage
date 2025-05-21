@@ -14,6 +14,7 @@ module "socket-csv" {
   ]
   socket_lan_network_ranges_csv_path = "./templates/socket_lan_network_ranges.csv"
   site_location = {
+    address      = null
     city         = "New York City"
     country_code = "US"
     state_code   = "US-NY" ## Optional - for countries with states"
