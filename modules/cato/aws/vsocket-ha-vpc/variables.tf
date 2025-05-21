@@ -148,7 +148,7 @@ variable "lan_eni_secondary_ip" {
   default     = null
 }
 
-variable "subnet_range_mgmt" {
+variable "subnet_range_mgmt_primary" {
   type        = string
   description = <<EOT
     Choose a range within the VPC to use as the Management subnet. This subnet will be used initially to access the public internet and register your vSocket to the Cato Cloud.
@@ -158,7 +158,27 @@ variable "subnet_range_mgmt" {
   default     = null
 }
 
-variable "subnet_range_wan" {
+variable "subnet_range_wan_primary" {
+  type        = string
+  description = <<EOT
+    Choose a range within the VPC to use as the Public/WAN subnet. This subnet will be used to access the public internet and securely tunnel to the Cato Cloud.
+    The minimum subnet length to support High Availability is /28.
+    The accepted input format is Standard CIDR Notation, e.g. X.X.X.X/X
+	EOT
+  default     = null
+}
+
+variable "subnet_range_mgmt_secondary" {
+  type        = string
+  description = <<EOT
+    Choose a range within the VPC to use as the Management subnet. This subnet will be used initially to access the public internet and register your vSocket to the Cato Cloud.
+    The minimum subnet length to support High Availability is /28.
+    The accepted input format is Standard CIDR Notation, e.g. X.X.X.X/X
+	EOT
+  default     = null
+}
+
+variable "subnet_range_wan_secondary" {
   type        = string
   description = <<EOT
     Choose a range within the VPC to use as the Public/WAN subnet. This subnet will be used to access the public internet and securely tunnel to the Cato Cloud.
@@ -192,4 +212,13 @@ variable "tags" {
   description = "Tags to be appended to AWS resources"
   type        = map(string)
   default     = {}
+}
+
+variable "native_network_range" {
+  type        = string
+  description = <<EOT
+  The Native network range for the Cato Site.  This is not necessarily just the VPC Range, but anything behind the Cato Devices within AWS. 
+  The accepted input format is Standard CIDR Notation, e.g. X.X.X.X/X
+  EOT
+  default     = "10.4.0.0/16"
 }

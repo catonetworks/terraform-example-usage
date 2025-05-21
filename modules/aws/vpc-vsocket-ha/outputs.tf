@@ -64,23 +64,33 @@ output "waneip_secondary" {
   value       = aws_eip.waneip_secondary.public_ip
 }
 
-output "mgmt_subnet_id" {
-  description = "The ID of the management subnet."
-  value       = aws_subnet.mgmt_subnet.id
+output "mgmt_subnet_primary_id" {
+  description = "Subnet ID dedicated to management traffic for vSockets"
+  value       = aws_subnet.mgmt_subnet_primary.id
 }
 
-output "wan_subnet_id" {
-  description = "The ID of the WAN subnet."
-  value       = aws_subnet.wan_subnet.id
+output "mgmt_subnet_secondary_id" {
+  description = "Subnet ID dedicated to management traffic for vSockets"
+  value       = aws_subnet.mgmt_subnet_secondary.id
+}
+
+output "wan_subnet_primary_id" {
+  description = "Subnet ID dedicated to WAN traffic for vSockets"
+  value       = aws_subnet.wan_subnet_primary.id
+}
+
+output "wan_subnet_secondary_id" {
+  description = "Subnet ID dedicated to WAN traffic for vSockets"
+  value       = aws_subnet.wan_subnet_secondary.id
 }
 
 output "lan_subnet_primary_id" {
-  description = "The ID of the primary LAN subnet."
+  description = "Primary LAN subnet ID serving internal applications"
   value       = aws_subnet.lan_subnet_primary.id
 }
 
 output "lan_subnet_secondary_id" {
-  description = "The ID of the secondary LAN subnet."
+  description = "Secondary LAN subnet ID providing HA for internal traffic"
   value       = aws_subnet.lan_subnet_secondary.id
 }
 
@@ -102,4 +112,18 @@ output "wan_route_table_id" {
 output "lan_route_table_id" {
   description = "The ID of the LAN route table."
   value       = aws_route_table.lanrt.id
+}
+
+output "lan_subnet_route_table_id" {
+  value = aws_route_table.lanrt.id
+}
+
+output "lan_subnet_primary_azid" {
+  description = "Primary LAN subnet ID serving internal applications"
+  value       = aws_subnet.lan_subnet_primary.availability_zone_id
+}
+
+output "lan_subnet_secondary_azid" {
+  description = "Secondary LAN subnet ID providing HA for internal traffic"
+  value       = aws_subnet.lan_subnet_secondary.availability_zone_id
 }

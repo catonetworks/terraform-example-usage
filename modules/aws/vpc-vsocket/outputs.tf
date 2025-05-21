@@ -142,3 +142,6 @@ output "lan_subnet_route_table_association" {
     route_table_id = aws_route_table_association.lan_subnet_route_table_association.route_table_id
   }
 }
+
+output "lan_subnet_route_table_id" { value = aws_route_table.intrt.id }
+output "lan_subnet_azid" { value = aws_subnet.lan_subnet.availability_zone }

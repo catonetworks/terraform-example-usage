@@ -22,26 +22,44 @@ resource "aws_internet_gateway" "internet_gateway" {
 }
 
 # Subnets
-resource "aws_subnet" "mgmt_subnet" {
-  vpc_id            = var.vpc_id != null ? var.vpc_id : aws_vpc.cato-vpc[0].id
-  cidr_block        = var.subnet_range_mgmt
+resource "aws_subnet" "mgmt_subnet_primary" {
+  vpc_id            = var.vpc_id == null ? aws_vpc.cato-vpc[0].id : var.vpc_id
+  cidr_block        = var.subnet_range_mgmt_primary
   availability_zone = data.aws_availability_zones.available.names[0]
   tags = {
     Name = "${var.site_name}-MGMT-Subnet"
   }
 }
 
-resource "aws_subnet" "wan_subnet" {
-  vpc_id            = var.vpc_id != null ? var.vpc_id : aws_vpc.cato-vpc[0].id
-  cidr_block        = var.subnet_range_wan
+resource "aws_subnet" "mgmt_subnet_secondary" {
+  vpc_id            = var.vpc_id == null ? aws_vpc.cato-vpc[0].id : var.vpc_id
+  cidr_block        = var.subnet_range_mgmt_secondary
+  availability_zone = data.aws_availability_zones.available.names[1]
+  tags = {
+    Name = "${var.site_name}-MGMT-Subnet"
+  }
+}
+
+resource "aws_subnet" "wan_subnet_primary" {
+  vpc_id            = var.vpc_id == null ? aws_vpc.cato-vpc[0].id : var.vpc_id
+  cidr_block        = var.subnet_range_wan_primary
   availability_zone = data.aws_availability_zones.available.names[0]
   tags = {
     Name = "${var.site_name}-WAN-Subnet"
   }
 }
 
+resource "aws_subnet" "wan_subnet_secondary" {
+  vpc_id            = var.vpc_id == null ? aws_vpc.cato-vpc[0].id : var.vpc_id
+  cidr_block        = var.subnet_range_wan_secondary
+  availability_zone = data.aws_availability_zones.available.names[1]
+  tags = {
+    Name = "${var.site_name}-WAN-Subnet"
+  }
+}
+
 resource "aws_subnet" "lan_subnet_primary" {
-  vpc_id            = var.vpc_id != null ? var.vpc_id : aws_vpc.cato-vpc[0].id
+  vpc_id            = var.vpc_id == null ? aws_vpc.cato-vpc[0].id : var.vpc_id
   cidr_block        = var.subnet_range_lan_primary
   availability_zone = data.aws_availability_zones.available.names[0]
   tags = {
@@ -50,9 +68,9 @@ resource "aws_subnet" "lan_subnet_primary" {
 }
 
 resource "aws_subnet" "lan_subnet_secondary" {
-  vpc_id            = var.vpc_id != null ? var.vpc_id : aws_vpc.cato-vpc[0].id
+  vpc_id            = var.vpc_id == null ? aws_vpc.cato-vpc[0].id : var.vpc_id
   cidr_block        = var.subnet_range_lan_secondary
-  availability_zone = data.aws_availability_zones.available.names[0]
+  availability_zone = data.aws_availability_zones.available.names[1]
   tags = {
     Name = "${var.site_name}-LAN-Subnet-Secondary"
   }
@@ -99,36 +117,46 @@ resource "aws_security_group" "external_sg" {
   name        = "${var.site_name}-External-SG"
   description = "CATO WAN Security Group - Allow HTTPS In"
   vpc_id      = var.vpc_id != null ? var.vpc_id : aws_vpc.cato-vpc[0].id
-  ingress = [
+  ingress     = []
+  egress = [
     {
-      description      = "Allow HTTPS In"
+      description      = "Allow HTTPS Outbound"
       protocol         = "tcp"
       from_port        = 443
       to_port          = 443
-      cidr_blocks      = var.ingress_cidr_blocks
+      cidr_blocks      = ["0.0.0.0/0"]
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
       security_groups  = []
       self             = false
     },
     {
-      description      = "Allow SSH In"
-      protocol         = "tcp"
-      from_port        = 22
-      to_port          = 22
-      cidr_blocks      = var.ingress_cidr_blocks
+      description      = "Allow DTLS Outbound"
+      protocol         = "udp"
+      from_port        = 443
+      to_port          = 443
+      cidr_blocks      = ["0.0.0.0/0"]
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
       security_groups  = []
       self             = false
-    }
-  ]
-  egress = [
+    },
     {
-      description      = "Allow all traffic Outbound"
-      protocol         = -1
-      from_port        = 0
-      to_port          = 0
+      description      = "Allow DNS-UDP Outbound"
+      protocol         = "udp"
+      from_port        = 53
+      to_port          = 53
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      security_groups  = []
+      self             = false
+    },
+    {
+      description      = "Allow DNS-TCP Outbound"
+      protocol         = "tcp"
+      from_port        = 53
+      to_port          = 53
       cidr_blocks      = ["0.0.0.0/0"]
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
@@ -144,7 +172,7 @@ resource "aws_security_group" "external_sg" {
 # vSocket Network Interfaces
 resource "aws_network_interface" "mgmteni_primary" {
   source_dest_check = "true"
-  subnet_id         = aws_subnet.mgmt_subnet.id
+  subnet_id         = aws_subnet.mgmt_subnet_primary.id
   private_ips       = [var.mgmt_eni_primary_ip]
   security_groups   = [aws_security_group.external_sg.id]
   tags = {
@@ -154,7 +182,7 @@ resource "aws_network_interface" "mgmteni_primary" {
 
 resource "aws_network_interface" "mgmteni_secondary" {
   source_dest_check = "true"
-  subnet_id         = aws_subnet.mgmt_subnet.id
+  subnet_id         = aws_subnet.mgmt_subnet_secondary.id
   private_ips       = [var.mgmt_eni_secondary_ip]
   security_groups   = [aws_security_group.external_sg.id]
   tags = {
@@ -164,7 +192,7 @@ resource "aws_network_interface" "mgmteni_secondary" {
 
 resource "aws_network_interface" "waneni_primary" {
   source_dest_check = "true"
-  subnet_id         = aws_subnet.wan_subnet.id
+  subnet_id         = aws_subnet.wan_subnet_primary.id
   private_ips       = [var.wan_eni_primary_ip]
   security_groups   = [aws_security_group.external_sg.id]
   tags = {
@@ -174,7 +202,7 @@ resource "aws_network_interface" "waneni_primary" {
 
 resource "aws_network_interface" "waneni_secondary" {
   source_dest_check = "true"
-  subnet_id         = aws_subnet.wan_subnet.id
+  subnet_id         = aws_subnet.wan_subnet_secondary.id
   private_ips       = [var.wan_eni_secondary_ip]
   security_groups   = [aws_security_group.external_sg.id]
   tags = {
@@ -291,13 +319,23 @@ resource "aws_route" "lan_route" {
 }
 
 # Route Table Associations
-resource "aws_route_table_association" "mgmt_subnet_route_table_association" {
-  subnet_id      = aws_subnet.mgmt_subnet.id
-  route_table_id = aws_route_table.mgmtrt.id
+resource "aws_route_table_association" "mgmt_subnet_primary_route_table_association" {
+  subnet_id      = aws_subnet.mgmt_subnet_primary.id
+  route_table_id = aws_route_table.wanrt.id
 }
 
-resource "aws_route_table_association" "wan_subnet_route_table_association" {
-  subnet_id      = aws_subnet.wan_subnet.id
+resource "aws_route_table_association" "mgmt_subnet_secondary_route_table_association" {
+  subnet_id      = aws_subnet.mgmt_subnet_secondary.id
+  route_table_id = aws_route_table.wanrt.id
+}
+
+resource "aws_route_table_association" "wan_subnet_primary_route_table_association" {
+  subnet_id      = aws_subnet.wan_subnet_primary.id
+  route_table_id = aws_route_table.wanrt.id
+}
+
+resource "aws_route_table_association" "wan_subnet_secondary_route_table_association" {
+  subnet_id      = aws_subnet.wan_subnet_secondary.id
   route_table_id = aws_route_table.wanrt.id
 }
 

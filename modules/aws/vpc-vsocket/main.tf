@@ -87,36 +87,46 @@ resource "aws_security_group" "external_sg" {
   name        = "${var.site_name}-External-SG"
   description = "CATO WAN Security Group - Allow HTTPS In"
   vpc_id      = aws_vpc.cato-lab.id
-  ingress = [
+  ingress     = []
+  egress = [
     {
-      description      = "Allow HTTPS In"
+      description      = "Allow HTTPS Outbound"
       protocol         = "tcp"
       from_port        = 443
       to_port          = 443
-      cidr_blocks      = var.ingress_cidr_blocks
+      cidr_blocks      = ["0.0.0.0/0"]
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
       security_groups  = []
       self             = false
     },
     {
-      description      = "Allow SSH In"
-      protocol         = "tcp"
-      from_port        = 22
-      to_port          = 22
-      cidr_blocks      = var.ingress_cidr_blocks
+      description      = "Allow DTLS Outbound"
+      protocol         = "udp"
+      from_port        = 443
+      to_port          = 443
+      cidr_blocks      = ["0.0.0.0/0"]
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
       security_groups  = []
       self             = false
-    }
-  ]
-  egress = [
+    },
     {
-      description      = "Allow all traffic Outbound"
-      protocol         = -1
-      from_port        = 0
-      to_port          = 0
+      description      = "Allow DNS-UDP Outbound"
+      protocol         = "udp"
+      from_port        = 53
+      to_port          = 53
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      security_groups  = []
+      self             = false
+    },
+    {
+      description      = "Allow DNS-TCP Outbound"
+      protocol         = "tcp"
+      from_port        = 53
+      to_port          = 53
       cidr_blocks      = ["0.0.0.0/0"]
       ipv6_cidr_blocks = []
       prefix_list_ids  = []

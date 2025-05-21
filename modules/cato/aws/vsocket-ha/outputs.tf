@@ -64,14 +64,14 @@ output "waneip_secondary" {
   value       = module.vpc.waneip_secondary
 }
 
-output "mgmt_subnet_id" {
+output "mgmt_subnet_primary_id" {
   description = "The ID of the management subnet."
-  value       = module.vpc.mgmt_subnet_id
+  value       = module.vpc.mgmt_subnet_primary_id
 }
 
-output "wan_subnet_id" {
+output "wan_subnet_primary_id" {
   description = "The ID of the WAN subnet."
-  value       = module.vpc.wan_subnet_id
+  value       = module.vpc.wan_subnet_primary_id
 }
 
 output "lan_subnet_primary_id" {
