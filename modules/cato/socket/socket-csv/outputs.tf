@@ -12,8 +12,8 @@ output "Socket_Network_Range_Information" {
       for subnet, net_info in iface_value.network_ranges : [
         for net_type in ["with_dhcp", "no_dhcp"] : [
           for range in net_info[net_type] : {
-            interface_id     = iface_value.interface.interface_id
-            interface_name   = iface_value.interface.name
+            interface_id     = iface_value.interface[0].interface_id
+            interface_name   = iface_value.interface[0].name
             subnet           = range.subnet
             local_ip         = range.local_ip
             gateway          = range.gateway
