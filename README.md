@@ -257,11 +257,13 @@ WARNING: DO NOT add your cato token in clear text to any variable files on your 
 <details>
 <summary>Setting environment variables in Unix</summary>
 Use the following syntax in a unix command prompt to temporarily set environment variables.
+
 ```bash
 set TF_VAR_account_id=xxxxx
 set TF_VAR_cato_token=xxxxx
 ```
 To make these values persistent, run either `vi ~/.bash_profile` or `vi ~/.zshrc`, and add the following lines.
+
 ```bash
 set TF_VAR_account_id=xxxxx
 set TF_VAR_cato_token=xxxxx
