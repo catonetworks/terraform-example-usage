@@ -21,19 +21,19 @@ variable "key_pair" {
   default     = null
 }
 
-variable "build_prod_test_server" { 
+variable "build_prod_test_server" {
   description = "A Boolean of whether to build or not"
-  default = false 
-  type = bool
+  default     = false
+  type        = bool
 }
 
-variable "prod_test_server_private_ip" { 
+variable "prod_test_server_private_ip" {
   description = "Private IP Address of the Test Server"
-  type = string 
+  type        = string
 }
 
 variable "tags" {
-  description = "A Map of Keys and Values to describe the infrastructure" 
-  type = map() 
-  default = null
+  description = "A Map of Keys and Values to describe the infrastructure"
+  type        = map()
+  default     = null
 }

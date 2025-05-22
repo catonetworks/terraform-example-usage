@@ -306,13 +306,13 @@ Below is a list of the terraform modules included in this package, and the assoc
 
 | Cato Module           | Network        | Module Deployment Time
 |-----------------------|----------------|------------------------|
-| [aws-ipsec](./modules/cato/aws/ipsec/README.md) | 10.0.0.0/16 | 40 min
+| [aws-ipsec](./modules/cato/aws/ipsec/README.md) | 10.0.0.0/16 | 40 min |
 | [aws-socket](./modules/cato/aws/vsocket/README.md) | 10.1.0.0/16     |  5 min |
 | [aws-socket-vpc](https://registry.terraform.io/modules/catonetworks/vsocket-aws-vpc/cato/latest) | 10.2.0.0/16     | 5 min |
 | [aws-socket-ha](https://registry.terraform.io/modules/catonetworks/vsocket-aws-ha/cato/latest) | 10.3.0.0/16     | 16 min |
 | [aws-socket-ha-vpc](https://registry.terraform.io/modules/catonetworks/vsocket-aws-ha-vpc/cato/latest) | 10.4.0.0/16     | 16 min |
-| [aws-socket-tgw](https://registry.terraform.io/modules/catonetworks/vsocket-aws-tgw/cato/latest) | 10.5.0.0/16     | n/a |
-| [aws-socket-tgw-ha](https://registry.terraform.io/modules/catonetworks/vsocket-aws-tgw-ha/cato/latest) | 10.6.0.0/16     | n/a  |
+| [aws-socket-tgw](https://registry.terraform.io/modules/catonetworks/vsocket-aws-tgw/cato/latest) | 10.5.0.0/16     | 5 min |
+| [aws-socket-tgw-ha](https://registry.terraform.io/modules/catonetworks/vsocket-aws-tgw-ha/cato/latest) | 10.6.0.0/16     | 16 min |
 | [azure-ipsec](https://registry.terraform.io/modules/catonetworks/ipsec-azure/cato/latest) | 10.50.0.0/16    | 40 min   |
 | [azure-socket](https://registry.terraform.io/modules/catonetworks/vsocket-azure/cato/latest) | 10.51.0.0/16    | 6 min  |
 | [azure-socket-vnet](https://registry.terraform.io/modules/catonetworks/vsocket-azure-vnet/cato/latest) | 10.52.0.0/16    | 6 min  |
