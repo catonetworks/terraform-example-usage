@@ -79,5 +79,13 @@ module "transit-gateway" {
   tags              = var.tags
 }
 
-#Could Put Module Test Env Here like module "Test_env" {} and 
-#source a ../../aws/tgw_test_env module which builds all the things
+module "test_env_ha" {
+  source = "../../../aws/test-env-tgw"
+  count  = var.build_aws_vsocket_tgw_ha_test_env == null ? 0 : 1
+
+  site_name            = var.site_name
+  tags                 = var.tags
+  native_network_range = var.native_network_range
+  tgw_id               = module.transit-gateway.ec2_transit_gateway_id
+  keypair_name         = var.key_pair
+}
