@@ -16,13 +16,13 @@ variable "key_pair" {
 variable "vpc_network_range" {
   description = "CIDR block for the VPC"
   type        = string
-  default = "10.6.0.0/24"
+  default     = "10.6.0.0/24"
 }
 
 variable "native_network_range" {
   description = "Native network CIDR range for Cato integration"
   type        = string
-  default = "10.6.0.0/16"
+  default     = "10.6.0.0/16"
 }
 
 variable "subnet_range_mgmt_primary" {
@@ -118,7 +118,7 @@ variable "ingress_cidr_blocks" {
 variable "site_name" {
   description = "Name of the Cato site"
   type        = string
-  default = "AWS-Cato-vSocket-TGW-HA-Site"
+  default     = "AWS-Cato-vSocket-TGW-HA-Site"
 }
 
 variable "site_description" {
@@ -209,4 +209,8 @@ variable "share_tgw" {
   description = "Indicates whether the TGW should be shared with other accounts"
   type        = bool
   default     = null
+}
+variable "build_aws_vsocket_tgw_ha_test_env" {
+  description = "Build AWS vSocket tgw ha test env module"
+  type        = bool
 }

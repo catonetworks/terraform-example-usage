@@ -86,8 +86,20 @@ variable "build_aws_vsocket_tgw_module" {
   default     = false
 }
 
+variable "build_aws_vsocket_tgw_test_env" {
+  description = "Build AWS vSocket tgw test env module"
+  type        = bool
+  default     = false
+}
+
 variable "build_aws_vsocket_tgw_ha_module" {
   description = "Build AWS vSocket tgw ha site module"
+  type        = bool
+  default     = false
+}
+
+variable "build_aws_vsocket_tgw_ha_test_env" {
+  description = "Build AWS vSocket tgw ha test env module"
   type        = bool
   default     = false
 }

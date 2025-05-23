@@ -68,3 +68,14 @@ module "transit-gateway" {
   create_tgw_routes = false
   tags              = var.tags
 }
+
+module "test_env" {
+  source = "../../../aws/test-env-tgw"
+  count  = var.build_aws_vsocket_tgw_test_env == null ? 0 : 1
+
+  site_name            = var.site_name
+  tags                 = var.tags
+  native_network_range = var.native_network_range
+  tgw_id               = module.transit-gateway.ec2_transit_gateway_id
+  keypair_name         = var.key_pair
+}

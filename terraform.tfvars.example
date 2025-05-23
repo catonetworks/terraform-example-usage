@@ -11,13 +11,15 @@ gcp_region = "us-west1"
 zone       = "us-west1-a"
 
 # Global settings for AWS modules
-build_aws_ipsec_module          = false
-build_aws_vsocket_module        = false
-build_aws_vsocket_vpc_module    = false
-build_aws_vsocket_ha_module     = false
-build_aws_vsocket_ha_vpc_module = false
-build_aws_vsocket_tgw_module    = false
-build_aws_vsocket_tgw_ha_module = false
+build_aws_ipsec_module            = false
+build_aws_vsocket_module          = false
+build_aws_vsocket_vpc_module      = false
+build_aws_vsocket_ha_module       = false
+build_aws_vsocket_ha_vpc_module   = false
+build_aws_vsocket_tgw_module      = false
+build_aws_vsocket_tgw_test_env    = false
+build_aws_vsocket_tgw_ha_module   = false
+build_aws_vsocket_tgw_ha_test_env = false
 
 # Settings for all Azure modules
 build_azure_ipsec_module           = false

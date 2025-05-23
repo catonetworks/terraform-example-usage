@@ -159,3 +159,9 @@ variable "share_tgw" {
   type        = bool
   default     = null
 }
+
+variable "build_aws_vsocket_tgw_test_env" {
+  description = "Build Test Environment for TGW"
+  type        = bool
+  default     = false
+}
