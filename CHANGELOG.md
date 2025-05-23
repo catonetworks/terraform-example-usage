@@ -14,3 +14,11 @@
  - Update variables.global.tf with updated vars for tgw deployments 
  - Update versions file to use latest aws provider (~>5.98)
  - Add TODO.md File to track needs within the Repo
+
+## 0.0.2 (2025-05-23)
+
+### Features
+ - Added Testing Env for TGW 
+ - Added Testing Env for TGW-HA
+ - Added Docs for Testing Env for TGW
+ 
