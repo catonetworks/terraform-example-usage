@@ -378,7 +378,8 @@ alias tfclear='rm -rf .terraform* && rm terraform.tfstate*'
 alias tffmt="tf fmt -recursive"
 ```
 
-## AWS Transit Gateway Test Environment 
+<details>
+<summary> <strong> 📦 AWS Transit Gateway Test Environment </strong> </summary>
 This repo comes with a test enviroment for testing connectivity and displaying how Cato vSockets can be deployed within a cloud provider.  By setting build_aws_vsocket_tgw_test_env = true in the terraform.tfvars file, the test environment for AWS Transit Gateway (Non-HA) will be built automatically 
 
 ### Technical Details 
@@ -393,7 +394,37 @@ This environment will build 3 VPCs, and associated subnets, route tables, routes
 | test-env-vpc2-server-1| 10.5.128.134 | Connect Via SSM| Cato Socket | AL2023 Unix Server
 | test-env-vpc3-server-0 | 10.5.4.6 | Connect Via SSM| Public IP and Subnets | AL2023 Unix Server
 | test-env-vpc3-server-1 | 10.5.4.136 | Connect Via SSM| Public IP and Subnets | AL2023 Unix Server
-| AWS-Cato-vSocket-TGW-Site-vSocket  | 10.5.0.134  | Connect via CMA | Public IP and Subnets | Cato Socket 
+| AWS-Cato-vSocket-TGW-Site-vSocket-LAN  | 10.5.0.134  | Connect via CMA | Public IP and Subnets | Cato Socket 
+| AWS-Cato-vSocket-TGW-Site-vSocket-WAN  | 10.5.0.70  | Connect via CMA | Public IP and Subnets | Cato Socket 
+| AWS-Cato-vSocket-TGW-Site-vSocket-MGMT  | 10.5.0.6  | Connect via CMA | Public IP and Subnets | Cato Socket 
 
 ### Diagram
 <img src=./images/tgw-test-env.png>
+</details>
+<p>
+<details>
+<summary> <strong> 📦 AWS Transit Gateway HA Test Environment </strong> </summary>
+This repo comes with a test enviroment for testing connectivity and displaying how Cato vSockets can be deployed within a cloud provider.  By setting build_aws_vsocket_tgw_test_env = true in the terraform.tfvars file, the test environment for AWS Transit Gateway (HA) will be built automatically 
+
+### Technical Details 
+This environment will build 3 VPCs, and associated subnets, route tables, routes, transit gateway, attachments, and transit gateway route tables and routes. This will also build 6 servers, which can be connected to via SSM. 
+
+### Networking Information
+| Resource | IP Address | Access Method | Egress Via | Type | 
+|----------|------------|----------------|----------------|-----| 
+| test-env-vpc1-server-0 | 10.6.1.6 | Connect Via SSM| Cato Socket | AL2023 Unix Server
+| test-env-vpc1-server-1 | 10.6.128.134 | Connect Via SSM| Cato Socket | AL2023 Unix Server
+| test-env-vpc2-server-0 | 10.6.2.6 | Connect Via SSM| Cato Socket | AL2023 Unix Server
+| test-env-vpc2-server-1| 10.6.128.134 | Connect Via SSM| Cato Socket | AL2023 Unix Server
+| test-env-vpc3-server-0 | 10.6.4.6 | Connect Via SSM| Public IP and Subnets | AL2023 Unix Server
+| test-env-vpc3-server-1 | 10.6.4.136 | Connect Via SSM| Public IP and Subnets | AL2023 Unix Server
+| AWS-Cato-vSocket-TGW-HA-Site-LAN-INT-Primary | 10.6.0.70  | Connect via CMA | Public IP and Subnets | Cato Socket 
+| AWS-Cato-vSocket-TGW-HA-Site-LAN-INT-Secondary | 10.6.0.86 | Connect via CMA | Public IP and Subnets | Cato Socket 
+| AWS-Cato-vSocket-TGW-HA-Site-MGMT-INT-Primary | 10.6.0.6  | Connect via CMA | Public IP and Subnets | Cato Socket 
+| AWS-Cato-vSocket-TGW-HA-Site-MGMT-INT-Secondary | 10.6.0.22  | Connect via CMA | Public IP and Subnets | Cato Socket 
+| AWS-Cato-vSocket-TGW-HA-Site-WAN-INT-Primary | 10.6.0.38 | Connect via CMA | Public IP and Subnets | Cato Socket 
+| AWS-Cato-vSocket-TGW-HA-Site-WAN-INT-Secondary | 10.6.0.54  | Connect via CMA | Public IP and Subnets | Cato Socket 
+
+### Diagram
+<img src=./images/tgw-ha-test-env.png>
+</details>
