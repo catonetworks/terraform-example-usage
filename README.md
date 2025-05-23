@@ -378,3 +378,22 @@ alias tfclear='rm -rf .terraform* && rm terraform.tfstate*'
 alias tffmt="tf fmt -recursive"
 ```
 
+## AWS Transit Gateway Test Environment 
+This repo comes with a test enviroment for testing connectivity and displaying how Cato vSockets can be deployed within a cloud provider.  By setting build_aws_vsocket_tgw_test_env = true in the terraform.tfvars file, the test environment for AWS Transit Gateway (Non-HA) will be built automatically 
+
+### Technical Details 
+This environment will build 3 VPCs, and associated subnets, route tables, routes, transit gateway, attachments, and transit gateway route tables and routes. This will also build 6 servers, which can be connected to via SSM. 
+
+### Networking Information
+| Resource | IP Address | Access Method | Egress Via | Type | 
+|----------|------------|----------------|----------------|-----| 
+| test-env-vpc1-server-0 | 10.5.1.6 | Connect Via SSM| Cato Socket | AL2023 Unix Server
+| test-env-vpc1-server-1 | 10.5.128.134 | Connect Via SSM| Cato Socket | AL2023 Unix Server
+| test-env-vpc2-server-0 | 10.5.2.6 | Connect Via SSM| Cato Socket | AL2023 Unix Server
+| test-env-vpc2-server-1| 10.5.128.134 | Connect Via SSM| Cato Socket | AL2023 Unix Server
+| test-env-vpc3-server-0 | 10.5.4.6 | Connect Via SSM| Public IP and Subnets | AL2023 Unix Server
+| test-env-vpc3-server-1 | 10.5.4.136 | Connect Via SSM| Public IP and Subnets | AL2023 Unix Server
+| AWS-Cato-vSocket-TGW-Site-vSocket  | 10.5.0.134  | Connect via CMA | Public IP and Subnets | Cato Socket 
+
+### Diagram
+<img src=./images/tgw-test-env.png>

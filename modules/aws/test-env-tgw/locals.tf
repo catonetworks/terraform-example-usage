@@ -17,7 +17,7 @@ locals {
   ]
 
   # VPC 3 - 1st /23 from native
-  vpc3_cidr = var.vpc3_cidr_block != null ? var.vpc3_cidr_block : cidrsubnet(local.native, 7, 1)
+  vpc3_cidr = var.vpc3_cidr_block != null ? var.vpc3_cidr_block : cidrsubnet(local.native, 7, 2)
   vpc3_private_subnets = [
     cidrsubnet(local.vpc3_cidr, 2, 0),
     cidrsubnet(local.vpc3_cidr, 2, 1)
