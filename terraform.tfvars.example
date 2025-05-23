@@ -34,5 +34,4 @@ build_gcp_vsocket_module       = false
 # build_gcp_vsocket_vpc_module = false
 
 # Settings for all Socket modules
-build_socket_module     = false
 build_socket_csv_module = false
