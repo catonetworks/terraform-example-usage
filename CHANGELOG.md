@@ -15,7 +15,13 @@
  - Update versions file to use latest aws provider (~>5.98)
  - Add TODO.md File to track needs within the Repo
 
-## 0.0.2 (2025-05-23)
+## 0.0.2 (2025-05-22)
+
+## Fixes
+ - Fixed syntax issue for output in socket-csv module for interface_id
+ - Removed unnecessary var for build_socket_module
+
+## 0.0.3 (2025-05-23)
 
 ### Features
  - Added Testing Env for TGW 
@@ -23,3 +29,4 @@
  - Added Docs for Testing Env for TGW
  - Added Docs for Testing Env for TGW-HA
  - Update ToDo
+
