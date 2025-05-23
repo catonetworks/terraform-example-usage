@@ -304,25 +304,26 @@ To make these values persistent, run the following in a powershell terminal as A
 
 Below is a list of the terraform modules included in this package, and the associated default networks for those modules to be used as an example.  Each module exposes variables to override these networks and module settings as needed on a per module basis.  
 
-| Cato Module           | Network        | Module Deployment Time
-|-----------------------|----------------|------------------------|
+| Cato Module           | Network        | Module Deployment Time | Test Environment Deployment Time | 
+|-----------------------|----------------|------------------------|----------------------------------|
 | [aws-ipsec](./modules/cato/aws/ipsec/README.md) | 10.0.0.0/16 | 40 min |
 | [aws-socket](./modules/cato/aws/vsocket/README.md) | 10.1.0.0/16     |  5 min |
-| [aws-socket-vpc](https://registry.terraform.io/modules/catonetworks/vsocket-aws-vpc/cato/latest) | 10.2.0.0/16     | 5 min |
-| [aws-socket-ha](https://registry.terraform.io/modules/catonetworks/vsocket-aws-ha/cato/latest) | 10.3.0.0/16     | 16 min |
-| [aws-socket-ha-vpc](https://registry.terraform.io/modules/catonetworks/vsocket-aws-ha-vpc/cato/latest) | 10.4.0.0/16     | 16 min |
-| [aws-socket-tgw](https://registry.terraform.io/modules/catonetworks/vsocket-aws-tgw/cato/latest) | 10.5.0.0/16     | 5 min |
-| [aws-socket-tgw-ha](https://registry.terraform.io/modules/catonetworks/vsocket-aws-tgw-ha/cato/latest) | 10.6.0.0/16     | 16 min |
-| [azure-ipsec](https://registry.terraform.io/modules/catonetworks/ipsec-azure/cato/latest) | 10.50.0.0/16    | 40 min   |
-| [azure-socket](https://registry.terraform.io/modules/catonetworks/vsocket-azure/cato/latest) | 10.51.0.0/16    | 6 min  |
-| [azure-socket-vnet](https://registry.terraform.io/modules/catonetworks/vsocket-azure-vnet/cato/latest) | 10.52.0.0/16    | 6 min  |
-| [azure-socket-ha](https://registry.terraform.io/modules/catonetworks/vsocket-azure-ha/cato/latest) | 10.53.0.0/16    | 16 min  |
-| [azure-socket-ha-vnet](https://registry.terraform.io/modules/catonetworks/vsocket-azure-ha-vpc/cato/latest) | 10.54.0.0/16    | 16 min  |
-| [azure-vwan](https://registry.terraform.io/modules/catonetworks/vsocket-azure-vwan/cato/latest) | 10.55.0.0/16    | 40 min  |
-| [gcp-ipsec](https://registry.terraform.io/modules/catonetworks/vsocket-gcp-ipsec/cato/latest) | 10.100.0.0/16   | n/a  |
-| [gcp-socket](https://registry.terraform.io/modules/catonetworks/vsocket-gcp/cato/latest) | 10.101.0.0/16   | 5 min  |
-| [gcp-socket-vpc](https://registry.terraform.io/modules/catonetworks/vsocket-gcp-vpc/cato/latest) | 10.102.0.0/16   | n/a  |
-| [socket](https://registry.terraform.io/modules/catonetworks/socket/cato/latest) | 10.150.0.0/16   | 1 min  |
+| [aws-socket-vpc](https://registry.terraform.io/modules/catonetworks/vsocket-aws-vpc/cato/latest) | 10.2.0.0/16 | 5 min | N/A | 
+| [aws-socket-ha](https://registry.terraform.io/modules/catonetworks/vsocket-aws-ha/cato/latest) | 10.3.0.0/16 | 16 min | N/A | 
+| [aws-socket-ha-vpc](https://registry.terraform.io/modules/catonetworks/vsocket-aws-ha-vpc/cato/latest) | 10.4.0.0/16 | 16 min | N/A | 
+| [aws-socket-tgw](https://registry.terraform.io/modules/catonetworks/vsocket-aws-tgw/cato/latest) | 10.5.0.0/16 | 5 min | 13 min |
+| [aws-socket-tgw](https://registry.terraform.io/modules/catonetworks/vsocket-aws-tgw/cato/latest) | 10.5.0.0/16 | 5 min | N/A | 
+| [aws-socket-tgw-ha](https://registry.terraform.io/modules/catonetworks/vsocket-aws-tgw-ha/cato/latest) | 10.6.0.0/16 | 16 min | N/A |
+| [azure-ipsec](https://registry.terraform.io/modules/catonetworks/ipsec-azure/cato/latest) | 10.50.0.0/16 | 40 min | N/A | 
+| [azure-socket](https://registry.terraform.io/modules/catonetworks/vsocket-azure/cato/latest) | 10.51.0.0/16 | 6 min | N/A | 
+| [azure-socket-vnet](https://registry.terraform.io/modules/catonetworks/vsocket-azure-vnet/cato/latest) | 10.52.0.0/16 | 6 min | N/A |
+| [azure-socket-ha](https://registry.terraform.io/modules/catonetworks/vsocket-azure-ha/cato/latest) | 10.53.0.0/16 | 16 min | N/A | 
+| [azure-socket-ha-vnet](https://registry.terraform.io/modules/catonetworks/vsocket-azure-ha-vpc/cato/latest) | 10.54.0.0/16 | 16 min | N/A |
+| [azure-vwan](https://registry.terraform.io/modules/catonetworks/vsocket-azure-vwan/cato/latest) | 10.55.0.0/16 | 40 min | N/A |
+| [gcp-ipsec](https://registry.terraform.io/modules/catonetworks/vsocket-gcp-ipsec/cato/latest) | 10.100.0.0/16 | n/a | N/A |
+| [gcp-socket](https://registry.terraform.io/modules/catonetworks/vsocket-gcp/cato/latest) | 10.101.0.0/16 | 5 min | N/A | 
+| [gcp-socket-vpc](https://registry.terraform.io/modules/catonetworks/vsocket-gcp-vpc/cato/latest) | 10.102.0.0/16 | n/a  | N/A |
+| [socket](https://registry.terraform.io/modules/catonetworks/socket/cato/latest) | 10.150.0.0/16 | 1 min | N/A |
 </details>
 
 ### Usage Instructions

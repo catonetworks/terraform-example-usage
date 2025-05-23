@@ -46,6 +46,7 @@ module "vsocket-aws-tgw" {
   count    = var.build_aws_vsocket_tgw_module ? 1 : 0
   source   = "./modules/cato/aws/vsocket-tgw"
   key_pair = var.aws_default_keypair
+  build_aws_vsocket_tgw_test_env = var.build_aws_vsocket_tgw_test_env
 }
 
 module "build_aws_vsocket_tgw_ha_module" { 

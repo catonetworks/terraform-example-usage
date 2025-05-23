@@ -17,6 +17,7 @@ build_aws_vsocket_vpc_module    = false
 build_aws_vsocket_ha_module     = false
 build_aws_vsocket_ha_vpc_module = false
 build_aws_vsocket_tgw_module    = false
+build_aws_vsocket_tgw_test_env  = false
 build_aws_vsocket_tgw_ha_module = false
 
 # Settings for all Azure modules
