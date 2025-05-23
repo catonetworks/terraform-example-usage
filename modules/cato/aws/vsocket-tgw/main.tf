@@ -77,5 +77,5 @@ module "test_env" {
   tags                 = var.tags
   native_network_range = var.native_network_range
   tgw_id               = module.transit-gateway.ec2_transit_gateway_id
-  keypair_name = var.key_pair
+  keypair_name         = var.key_pair
 }
