@@ -7,7 +7,7 @@ module "vpc1_internal_security_group" {
   vpc_id      = module.test-env-vpc-1.vpc_id
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
-  ingress_rules       = ["http-80-tcp", "all-icmp", "ssh-tcp", "https-443-tcp"]
+  ingress_rules       = ["http-80-tcp", "all-icmp", "ssh-tcp", "https-443-tcp","rdp-tcp", "rdp-udp"]
   egress_rules        = ["all-all"]
 
   tags = merge(var.tags, {
@@ -24,7 +24,7 @@ module "vpc2_internal_security_group" {
   vpc_id      = module.test-env-vpc-2.vpc_id
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
-  ingress_rules       = ["http-80-tcp", "all-icmp", "ssh-tcp", "https-443-tcp"]
+  ingress_rules       = ["http-80-tcp", "all-icmp", "ssh-tcp", "https-443-tcp", "rdp-tcp", "rdp-udp"]
   egress_rules        = ["all-all"]
 
   tags = merge(var.tags, {
@@ -41,7 +41,7 @@ module "vpc3_internal_security_group" {
   vpc_id      = module.test-env-vpc-3.vpc_id
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
-  ingress_rules       = ["http-80-tcp", "all-icmp", "ssh-tcp", "https-443-tcp"]
+  ingress_rules       = ["http-80-tcp", "all-icmp", "ssh-tcp", "https-443-tcp", "rdp-tcp", "rdp-udp"]
   egress_rules        = ["all-all"]
 
   tags = merge(var.tags, {
@@ -59,7 +59,7 @@ module "vpc3_external_security_group" {
 
   ingress_cidr_blocks = []
   ingress_rules       = []
-  egress_rules        = ["http-80-tcp", "all-icmp", "https-443-tcp"]
+  egress_rules        = ["http-80-tcp", "all-icmp", "https-443-tcp", "rdp-tcp", "rdp-udp"]
   egress_cidr_blocks  = ["0.0.0.0/0"]
   egress_with_cidr_blocks = [{
     from_port  = 443

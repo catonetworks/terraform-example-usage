@@ -1,0 +1,61 @@
+<powershell>
+ # Enable detailed logging
+    $ErrorActionPreference = "Stop"
+
+    # Download the Cato client installer (assumes it's an .msi)
+    $installerPath = "C:\\Windows\\Temp\\setup.msi"
+    Invoke-WebRequest -Uri "https://clientdownload.catonetworks.com/public/clients/setup.msi" -OutFile $installerPath
+
+    # Install the Cato client
+    Start-Process msiexec.exe -ArgumentList "/i `"$installerPath`" /qn" -Wait
+
+
+# Download the Cato certificate
+$certUrl = "https://myvpn.catonetworks.com/public/certificates/CatoNetworksTrustedRootCA.cer"
+$certPath = "$env:TEMP\CatoNetworksTrustedRootCA.cer"
+Invoke-WebRequest -Uri $certUrl -OutFile $certPath
+Import-Certificate -FilePath $certPath -CertStoreLocation Cert:\LocalMachine\Root
+Remove-Item $certPath
+
+# Install Google Chrome
+$installerUrl = "https://dl.google.com/chrome/install/latest/chrome_installer.exe"
+$installerPath = "C:\chrome_installer.exe"
+Invoke-WebRequest -Uri $installerUrl -OutFile $installerPath
+Start-Process -FilePath $installerPath -ArgumentList "/silent /install" -Wait
+Remove-Item -Path $installerPath -Force
+Write-Output "Google Chrome has been installed successfully."
+
+# Convert PEM to DER format (Windows doesn't import .pem natively)
+    $cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
+    $cert.Import($certPem)
+    [System.IO.File]::WriteAllBytes($certDer, $cert.Export([System.Security.Cryptography.X509Certificates.X509ContentType]::Cert))
+
+    # Add to Trusted Root Certification Authorities
+    Import-Certificate -FilePath $certDer -CertStoreLocation Cert:\\LocalMachine\\Root
+
+    # Clean up
+    Remove-Item $certPem, $certDer, $installerPath -Force
+
+# Download the latest SSM Agent installer for US East (N. Virginia)
+$ssmInstallerUrl = "https://s3.amazonaws.com/amazon-ssm-${region}/latest/windows_amd64/AmazonSSMAgentSetup.exe"
+$installerPath = "$env:TEMP\AmazonSSMAgentSetup.exe"
+
+Write-Output "Downloading SSM Agent installer..."
+Invoke-WebRequest -Uri $ssmInstallerUrl -OutFile $installerPath
+
+Write-Output "Installing SSM Agent silently..."
+Start-Process -FilePath $installerPath -ArgumentList "/quiet" -Wait
+
+# Ensure the service is running
+$service = Get-Service -Name "AmazonSSMAgent" -ErrorAction SilentlyContinue
+if ($service -and $service.Status -ne 'Running') {
+    Write-Output "Starting SSM Agent service..."
+    Start-Service -Name "AmazonSSMAgent"
+}
+
+# Cleanup
+Remove-Item $installerPath -Force
+
+Write-Output "SSM Agent installation complete."
+
+</powershell>

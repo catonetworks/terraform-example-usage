@@ -63,4 +63,43 @@ locals {
       }
     ]
   ])
+
+
+servers_windows = flatten([
+    // VPC 1
+    [
+      for i, subnet in module.test-env-vpc-1.private_subnets_cidr_blocks : {
+        name                        = "test-env-vpc-1-wserver-${i}"
+        subnet_id                   = module.test-env-vpc-1.private_subnets[i]
+        az                          = module.test-env-vpc-1.azs[i]
+        sg_id                       = module.vpc1_internal_security_group.security_group_id
+        private_ip                  = cidrhost(subnet, 7)
+        associate_public_ip_address = false
+      }
+    ],
+
+    // VPC 2
+    [
+      for i, subnet in module.test-env-vpc-2.private_subnets_cidr_blocks : {
+        name                        = "test-env-vpc-2-wserver-${i}"
+        subnet_id                   = module.test-env-vpc-2.private_subnets[i]
+        az                          = module.test-env-vpc-2.azs[i]
+        sg_id                       = module.vpc2_internal_security_group.security_group_id
+        private_ip                  = cidrhost(subnet, 7)
+        associate_public_ip_address = false
+      }
+    ],
+
+    // VPC 3 - Public subnets with public IPs
+    [
+      for i, subnet in module.test-env-vpc-3.public_subnets_cidr_blocks : {
+        name                        = "test-env-vpc-3-wserver-${i}"
+        subnet_id                   = module.test-env-vpc-3.public_subnets[i]
+        az                          = module.test-env-vpc-3.azs[i]
+        sg_id                       = module.vpc3_external_security_group.security_group_id
+        private_ip                  = cidrhost(subnet, 7)
+        associate_public_ip_address = true
+      }
+    ]
+  ])
 }
