@@ -22,5 +22,7 @@ filter {
 filter {
        name   = "virtualization-type"
        values = ["hvm"]  
-  }     
+  }
+
+owners = ["801119661308"]     
 }

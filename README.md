@@ -413,11 +413,17 @@ This environment will build 3 VPCs, and associated subnets, route tables, routes
 | Resource | IP Address | Access Method | Egress Via | Type | 
 |----------|------------|----------------|----------------|-----| 
 | test-env-vpc1-server-0 | 10.6.1.6 | Connect Via SSM| Cato Socket | AL2023 Unix Server
-| test-env-vpc1-server-1 | 10.6.128.134 | Connect Via SSM| Cato Socket | AL2023 Unix Server
+| test-env-vpc1-server-1 | 10.6.1.134 | Connect Via SSM| Cato Socket | AL2023 Unix Server
+| test-env-vpc1-wserver-0 | 10.6.1.7 | Connect Via SSM or RDP | Cato Socket | Windows 2019 Server
+| test-env-vpc1-wserver-1 | 10.6.1.135 | Connect Via SSM or RDP | Cato Socket | Windows 2019 Server
 | test-env-vpc2-server-0 | 10.6.2.6 | Connect Via SSM| Cato Socket | AL2023 Unix Server
-| test-env-vpc2-server-1| 10.6.128.134 | Connect Via SSM| Cato Socket | AL2023 Unix Server
+| test-env-vpc2-server-1| 10.6.2.134 | Connect Via SSM| Cato Socket | AL2023 Unix Server
+| test-env-vpc2-wserver-0 | 10.6.2.7 | Connect Via SSM or RDP | Cato Socket | Windows 2019 Server
+| test-env-vpc2-wserver-1 | 10.6.2.135 | Connect Via SSM or RDP | Cato Socket | Windows 2019 Server
 | test-env-vpc3-server-0 | 10.6.4.6 | Connect Via SSM| Public IP and Subnets | AL2023 Unix Server
 | test-env-vpc3-server-1 | 10.6.4.136 | Connect Via SSM| Public IP and Subnets | AL2023 Unix Server
+| test-env-vpc1-wserver-0 | 10.6.5.7 | Connect Via SSM| Public IP and Subnets| Windows 2019 Server
+| test-env-vpc1-wserver-1 | 10.6.5.135 | Connect Via SSM| Public IP and Subnets | Windows 2019 Server
 | AWS-Cato-vSocket-TGW-HA-Site-LAN-INT-Primary | 10.6.0.70  | Connect via CMA | Public IP and Subnets | Cato Socket 
 | AWS-Cato-vSocket-TGW-HA-Site-LAN-INT-Secondary | 10.6.0.86 | Connect via CMA | Public IP and Subnets | Cato Socket 
 | AWS-Cato-vSocket-TGW-HA-Site-MGMT-INT-Primary | 10.6.0.6  | Connect via CMA | Public IP and Subnets | Cato Socket 
