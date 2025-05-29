@@ -37,12 +37,14 @@ variable "connection_type" {
 variable "site_location" {
   description = "Site location information."
   type = object({
+    address      = string
     city         = string
     country_code = string
     state_code   = string
     timezone     = string
   })
   default = {
+    address      = "123 Main St"
     city         = "New York City"
     country_code = "US"
     state_code   = "US-NY"

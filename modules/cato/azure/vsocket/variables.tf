@@ -47,7 +47,7 @@ variable "vnet_prefix" {
   	Choose a unique range for your new VPC that does not conflict with the rest of your Wide Area Network.
     The accepted input format is Standard CIDR Notation, e.g. X.X.X.X/X
 	EOT
-  default     = "10.51.0.0/16"
+  default     = "10.201.0.0/16"
 }
 
 variable "dns_servers" {

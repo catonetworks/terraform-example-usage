@@ -160,3 +160,9 @@ variable "build_socket_csv_module" {
   type        = bool
   default     = false
 }
+
+variable "build_bulk_socket_csv_module" {
+  description = "Build Bulk Socket site from csv module"
+  type        = bool
+  default     = false
+}
