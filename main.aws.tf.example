@@ -103,13 +103,14 @@ module "vsocket-aws-tgw" {
   
   // Required variables
   key_pair = var.aws_default_keypair
-  external_testing_range = [] #Entered as a CIDR such as "1.2.3.4/32"
+  
   
   // Example of overriding default values for module variables
   vpc_network_range = "10.5.0.0/24"
   native_network_range = "10.5.0.0/16"
   site_name = "AWS-Cato-vSocket-TGW-Site"
   site_description = "AWS Cato vSocket TGW Site"
+  external_testing_range = ["1.2.3.4/32"] #Entered as a CIDR such as "1.2.3.4/32"
 }
 
 module "build_aws_vsocket_tgw_ha_module" {
@@ -120,11 +121,12 @@ module "build_aws_vsocket_tgw_ha_module" {
   key_pair   = var.aws_default_keypair
   token      = var.cato_token
   account_id = var.account_id
-  external_testing_range = [] #Entered as a CIDR such as "1.2.3.4/32"
+  
   
   // Example of overriding default values for module variables
   vpc_network_range = "10.6.0.0/24"
   native_network_range = "10.6.0.0/16"
   site_name = "AWS-Cato-vSocket-TGW-HA-Site"
   site_description = "AWS Cato vSocket TGW HA Site"  
+  external_testing_range = ["1.2.3.4/32"] #Entered as a CIDR such as "1.2.3.4/32"
 }

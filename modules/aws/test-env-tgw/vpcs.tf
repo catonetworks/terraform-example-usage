@@ -3,7 +3,6 @@ module "test-env-vpc-1" {
   version = "5.21.0"
 
   name = "${var.site_name}-TestEnv-VPC-1"
-  #CIDR Block should be in Native_Range +1 /24 so 10.5.1.0/24 etc
   cidr               = local.vpc1_cidr
   azs                = [data.aws_availability_zones.available.names[0], data.aws_availability_zones.available.names[1]]
   private_subnets    = local.vpc1_private_subnets
