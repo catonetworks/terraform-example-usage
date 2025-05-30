@@ -1,30 +1,44 @@
 <powershell>
- # Enable detailed logging
-    $ErrorActionPreference = "Stop"
+# Enable detailed logging
+$ErrorActionPreference = "Stop"
 
-    # Download the Cato client installer (assumes it's an .msi)
-    $installerPath = "C:\\Windows\\Temp\\setup.msi"
-    Invoke-WebRequest -Uri "https://clientdownload.catonetworks.com/public/clients/setup.msi" -OutFile $installerPath
+# --- Cato Client Install ---
 
-    # Install the Cato client
-    Start-Process msiexec.exe -ArgumentList "/i `"$installerPath`" /qn" -Wait
+# Download the Cato client installer
+$installerPath = "C:\Windows\Temp\setup.msi"
+Invoke-WebRequest -Uri "https://clientdownload.catonetworks.com/public/clients/setup.msi" -OutFile $installerPath
 
+# Install the Cato client silently
+Start-Process msiexec.exe -ArgumentList "/i `"$installerPath`" /qn" -Wait
+
+# --- Cato Certificate Install --- ## The SDP Client should have installed this, but we're making sure. ##
 
 # Download the Cato certificate
 $certUrl = "https://clientdownload.catonetworks.com/public/certificates/CatoNetworksTrustedRootCA.cer"
 $certPath = "$env:TEMP\CatoNetworksTrustedRootCA.cer"
 Invoke-WebRequest -Uri $certUrl -OutFile $certPath
+
+# Import into Trusted Root Certification Authorities
 Import-Certificate -FilePath $certPath -CertStoreLocation Cert:\LocalMachine\Root
 Remove-Item $certPath
 
-# Convert PEM to DER format (Windows doesn't import .pem natively)
-    $cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
-    $cert.Import($certPem)
-    [System.IO.File]::WriteAllBytes($certDer, $cert.Export([System.Security.Cryptography.X509Certificates.X509ContentType]::Cert))
+# --- Chrome Install ---
 
-    # Add to Trusted Root Certification Authorities
-    Import-Certificate -FilePath $certDer -CertStoreLocation Cert:\\LocalMachine\\Root
+Write-Output "Installing Google Chrome..."
+$chromeInstaller = "$env:TEMP\chrome_installer.exe"
+Invoke-WebRequest -Uri "https://dl.google.com/chrome/install/latest/chrome_installer.exe" -OutFile $chromeInstaller
+Start-Process -FilePath $chromeInstaller -ArgumentList "/silent /install" -Wait
+Remove-Item $chromeInstaller
 
-    # Clean up
-    Remove-Item $certPem, $certDer, $installerPath -Force
+# --- Firefox Install ---
+
+Write-Output "Installing Mozilla Firefox..."
+$firefoxInstaller = "$env:TEMP\firefox_installer.exe"
+Invoke-WebRequest -Uri "https://download.mozilla.org/?product=firefox-latest&os=win64&lang=en-US" -OutFile $firefoxInstaller
+Start-Process -FilePath $firefoxInstaller -ArgumentList "-ms" -Wait
+Remove-Item $firefoxInstaller
+
+# --- Final Cleanup ---
+Remove-Item $installerPath -Force
+
 </powershell>
