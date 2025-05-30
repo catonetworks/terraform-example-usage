@@ -1,0 +1,13 @@
+#!/bin/bash
+terraform taint 'module.build_aws_vsocket_tgw_module[0].module.test_env_ha[0].module.windows_test_servers["test-env-vpc-1-wserver-0"].aws_instance.this[0]'
+terraform taint 'module.build_aws_vsocket_tgw_module[0].module.test_env_ha[0].module.windows_test_servers["test-env-vpc-1-wserver-1"].aws_instance.this[0]'
+terraform taint 'module.build_aws_vsocket_tgw_module[0].module.test_env_ha[0].module.prod_test_servers["test-env-vpc-1-server-0"].aws_instance.this[0]'
+terraform taint 'module.build_aws_vsocket_tgw_module[0].module.test_env_ha[0].module.prod_test_servers["test-env-vpc-1-server-1"].aws_instance.this[0]'
+terraform taint 'module.build_aws_vsocket_tgw_module[0].module.test_env_ha[0].module.windows_test_servers["test-env-vpc-2-wserver-0"].aws_instance.this[0]' 
+terraform taint 'module.build_aws_vsocket_tgw_module[0].module.test_env_ha[0].module.windows_test_servers["test-env-vpc-2-wserver-1"].aws_instance.this[0]'
+terraform taint 'module.build_aws_vsocket_tgw_module[0].module.test_env_ha[0].module.prod_test_servers["test-env-vpc-2-server-0"].aws_instance.this[0]'
+terraform taint 'module.build_aws_vsocket_tgw_module[0].module.test_env_ha[0].module.prod_test_servers["test-env-vpc-2-server-1"].aws_instance.this[0]'
+terraform taint 'module.build_aws_vsocket_tgw_module[0].module.test_env_ha[0].module.windows_test_servers["test-env-vpc-3-wserver-0"].aws_instance.this[0]' 
+terraform taint 'module.build_aws_vsocket_tgw_module[0].module.test_env_ha[0].module.windows_test_servers["test-env-vpc-3-wserver-1"].aws_instance.this[0]'
+terraform taint 'module.build_aws_vsocket_tgw_module[0].module.test_env_ha[0].module.prod_test_servers["test-env-vpc-3-server-0"].aws_instance.this[0]'
+terraform taint 'module.build_aws_vsocket_tgw_module[0].module.test_env_ha[0].module.prod_test_servers["test-env-vpc-3-server-1"].aws_instance.this[0]'

@@ -15,6 +15,7 @@ provider "aws" {
 
 #################### AWS Modules ####################
 module "ipsec-aws" {
+  
   // Example passing in region specific provider
   providers = {
     aws = aws.aws-us-west-1
@@ -23,11 +24,13 @@ module "ipsec-aws" {
   source = "./modules/cato/aws/ipsec"
   ### Create 2 Allocated IPs in Cato CMA, and retrieve the IDs via API 
   ### using query.entityLookup() filtering for type allocatedIP
+ 
   // Required variables
   primary_public_cato_ip_id   = "12345"
   secondary_public_cato_ip_id = "12345"
   cgw_ip                      = "11.11.11.11" # Primary cato public IP address
-  // Example of overriding default values for module variables
+ 
+ // Example of overriding default values for module variables
   native_network_range        = "10.0.0.0/16"
   site_name = "AWS-Cato-IPSec-Site"
   site_description = "AWS Cato IPSec Site us-west-1"
@@ -40,8 +43,10 @@ module "vsocket-aws" {
   }
   count     = var.build_aws_vsocket_module ? 1 : 0
   source    = "./modules/cato/aws/vsocket"
+ 
   // Required variables
   key_pair  = "cato-keypair-us-east-2"
+ 
   // Example of overriding default values for module variables
   vpc_range = "10.1.0.0/16"
   site_name = "AWS-Cato-vSocket-Site"
@@ -51,8 +56,10 @@ module "vsocket-aws" {
 module "vsocket-aws-vpc" {
   count     = var.build_aws_vsocket_vpc_module ? 1 : 0
   source    = "./modules/cato/aws/vsocket-vpc"
+ 
   // Required variables
   key_pair  = var.aws_default_keypair
+  
   // Example of overriding default values for module variables
   vpc_range = "10.2.0.0/16"
   site_name = "AWS-Cato-vSocket-VPC-Site"
@@ -62,10 +69,12 @@ module "vsocket-aws-vpc" {
 module "vsocket-aws-ha" {
   count      = var.build_aws_vsocket_ha_module ? 1 : 0
   source     = "./modules/cato/aws/vsocket-ha"
+  
   // Required variables
   key_pair   = var.aws_default_keypair
   token      = var.cato_token
   account_id = var.account_id
+  
   // Example of overriding default values for module variables
   vpc_range  = "10.3.0.0/16"
   site_name = "AWS-Cato-vSocket-HA-Site"
@@ -75,10 +84,12 @@ module "vsocket-aws-ha" {
 module "vsocket-aws-ha-vpc" {
   count                = var.build_aws_vsocket_ha_vpc_module ? 1 : 0
   source               = "./modules/cato/aws/vsocket-ha-vpc"
+  
   // Required variables
   key_pair             = var.aws_default_keypair
   token                = var.cato_token
   account_id           = var.account_id
+  
   // Example of overriding default values for module variables
   vpc_range            = "10.4.0.0/16"
   native_network_range = "10.4.0.0/16"
@@ -89,25 +100,33 @@ module "vsocket-aws-ha-vpc" {
 module "vsocket-aws-tgw" {
   count    = var.build_aws_vsocket_tgw_module ? 1 : 0
   source   = "./modules/cato/aws/vsocket-tgw"
+  
   // Required variables
   key_pair = var.aws_default_keypair
+  
+  
   // Example of overriding default values for module variables
   vpc_network_range = "10.5.0.0/24"
   native_network_range = "10.5.0.0/16"
   site_name = "AWS-Cato-vSocket-TGW-Site"
   site_description = "AWS Cato vSocket TGW Site"
+  external_testing_range = ["1.2.3.4/32"] #Entered as a CIDR such as "1.2.3.4/32"
 }
 
 module "build_aws_vsocket_tgw_ha_module" {
   count      = var.build_aws_vsocket_tgw_ha_module ? 1 : 0
   source     = "./modules/cato/aws/vsocket-tgw-ha"
+  
   // Required variables
   key_pair   = var.aws_default_keypair
   token      = var.cato_token
   account_id = var.account_id
+  
+  
   // Example of overriding default values for module variables
   vpc_network_range = "10.6.0.0/24"
   native_network_range = "10.6.0.0/16"
   site_name = "AWS-Cato-vSocket-TGW-HA-Site"
   site_description = "AWS Cato vSocket TGW HA Site"  
+  external_testing_range = ["1.2.3.4/32"] #Entered as a CIDR such as "1.2.3.4/32"
 }

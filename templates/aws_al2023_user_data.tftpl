@@ -1,0 +1,22 @@
+#!/bin/bash
+set -euxo pipefail
+
+# Update and install required packages
+dnf update -y
+dnf install -y wget openssl ca-certificates
+
+# Download and install Cato client RPM
+wget -O /tmp/cato-client-install.rpm https://clientdownload.catonetworks.com/public/clients/cato-client-install.rpm
+dnf install -y /tmp/cato-client-install.rpm
+
+# Create directory for CA certs and download the Cato root certificate
+mkdir -p /usr/local/share/ca-certificates/Cato
+chmod 755 /usr/local/share/ca-certificates/Cato
+
+cd /usr/local/share/ca-certificates/Cato
+wget --no-check-certificate https://clientdownload.catonetworks.com/public/certificates/CatoNetworksTrustedRootCA.pem
+openssl x509 -in CatoNetworksTrustedRootCA.pem -out CatoNetworksTrustedRootCA.crt
+rm -f CatoNetworksTrustedRootCA.pem
+
+# Update system trust store
+update-ca-trust extract
