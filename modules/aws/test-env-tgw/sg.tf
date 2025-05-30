@@ -57,9 +57,9 @@ module "vpc3_external_security_group" {
   description = "Security group for usage with EC2 instance in vpc3"
   vpc_id      = module.test-env-vpc-3.vpc_id
 
-  ingress_cidr_blocks = []
-  ingress_rules       = []
-  egress_rules        = ["http-80-tcp", "all-icmp", "https-443-tcp", "rdp-tcp", "rdp-udp"]
+  ingress_cidr_blocks = var.external_testing_range == null ? [] : var.external_testing_range
+  ingress_rules       = ["http-80-tcp", "all-icmp", "https-443-tcp", "rdp-tcp", "rdp-udp", "ssh-tcp"]
+  egress_rules        = ["http-80-tcp", "all-icmp", "https-443-tcp", "rdp-tcp", "rdp-udp", "ssh-tcp"]
   egress_cidr_blocks  = ["0.0.0.0/0"]
   egress_with_cidr_blocks = [{
     from_port  = 443

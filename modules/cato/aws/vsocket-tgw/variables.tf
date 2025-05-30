@@ -165,3 +165,8 @@ variable "build_aws_vsocket_tgw_test_env" {
   type        = bool
   default     = false
 }
+
+variable "external_testing_range" { 
+  description = "IP Address for Remote Access to Externally Faced Servers"
+  default = null
+}

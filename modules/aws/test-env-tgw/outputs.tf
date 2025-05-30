@@ -68,3 +68,19 @@ output "ami_id" {
   value       = data.aws_ami.amazon_linux_23.id
   description = "AMI ID used for EC2 instances"
 }
+
+output "vpc3_public_ips" {
+  description = "Public IPs of servers in VPC 3"
+  value = {
+    prod = {
+      for name, server in module.prod_test_servers :
+      name => server.public_ip
+      if startswith(name, "test-env-vpc-3-")
+    }
+    windows = {
+      for name, server in module.windows_test_servers :
+      name => server.public_ip
+      if startswith(name, "test-env-vpc-3-")
+    }
+  }
+}
