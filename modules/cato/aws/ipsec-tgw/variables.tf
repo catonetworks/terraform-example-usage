@@ -1,7 +1,16 @@
-variable "ingress_cidr_blocks" {
-  description = "List of CIDR blocks allowed to access the vSocket"
-  type        = list(string)
-  default     = ["0.0.0.0/0"]
+variable "region" {
+  description = "AWS Region"
+  type        = string
+}
+
+variable "account_id" {
+  description = "Cato Networks Account ID"
+  type        = string
+}
+
+variable "token" {
+  description = "Cato Networks API Token"
+  type        = string
 }
 
 variable "key_pair" {
@@ -9,70 +18,22 @@ variable "key_pair" {
   type        = string
 }
 
-variable "vpc_network_range" {
-  description = "CIDR block for the new VPC"
-  type        = string
-  default     = "10.5.0.0/24"
-}
-
 variable "native_network_range" {
   description = "CIDR block for native subnet inside the vSocket"
   type        = string
-  default     = "10.5.0.0/16"
-}
-
-variable "subnet_range_mgmt" {
-  description = "CIDR block for the management subnet"
-  type        = string
-  default     = null
-}
-
-variable "subnet_range_wan" {
-  description = "CIDR block for the WAN subnet"
-  type        = string
-  default     = null
-}
-
-variable "subnet_range_lan" {
-  description = "CIDR block for the LAN subnet"
-  type        = string
-  default     = null
-}
-
-variable "subnet_range_tgw" {
-  description = "CIDR block for the TGW subnet"
-  type        = string
-  default     = null
-}
-
-variable "mgmt_eni_ip" {
-  description = "Static IP for the management ENI"
-  type        = string
-  default     = null
-}
-
-variable "wan_eni_ip" {
-  description = "Static IP for the WAN ENI"
-  type        = string
-  default     = null
-}
-
-variable "lan_eni_ip" {
-  description = "Static IP for the LAN ENI"
-  type        = string
-  default     = null
+  default     = "10.7.0.0/16"
 }
 
 variable "site_name" {
   description = "Name for the Cato site"
   type        = string
-  default     = "AWS-Cato-vSocket-TGW-Site"
+  default     = "AWS-Cato-IPSEC-TGW-Site"
 }
 
 variable "site_description" {
   description = "Description of the Cato site"
   type        = string
-  default     = "AWS Cato vSocket TGW Site"
+  default     = "AWS Cato IPSEC TGW Site"
 }
 
 variable "site_location" {
@@ -94,7 +55,7 @@ variable "tags" {
   description = "Tags to apply to all resources"
   type        = map(string)
   default = {
-    cato_site_type = "AWS-Cato-vSocket-TGW-Site"
+    cato_site_type = "AWS-Cato-vSocket-IPSEC-Site"
     built_with     = "terraform"
     git_repo       = "https://github.com/catonetworks/terraform-example-usage"
   }
@@ -160,7 +121,7 @@ variable "share_tgw" {
   default     = null
 }
 
-variable "build_aws_vsocket_tgw_test_env" {
+variable "build_aws_ipsec_tgw_test_env" {
   description = "Build Test Environment for TGW"
   type        = bool
   default     = false
@@ -169,4 +130,77 @@ variable "build_aws_vsocket_tgw_test_env" {
 variable "external_testing_range" {
   description = "IP Address for Remote Access to Externally Faced Servers"
   default     = null
+}
+
+variable "cato_bgp_asn" {
+  description = "Cato BGP ASN - Defaults to 64515"
+  default     = 64515
+}
+
+variable "cato_primary_gateway_ip_address" {
+  description = "Cato Primary Gateway IP Address from Available Allocated IPs"
+}
+
+variable "cato_secondary_gateway_ip_address" {
+  description = "Cato Secondary Gateway IP Address from Available Allocated IPs"
+}
+
+variable "primary_vpn_tunnel1_inside_cidr" {
+  description = "Primary VPN, Tunnel 1 Inside CIDR"
+  type        = string
+  default     = "169.254.100.0/30"
+}
+
+variable "secondary_vpn_tunnel1_inside_cidr" {
+  description = "Primary VPN, Tunnel 2 Inside CIDR"
+  type        = string
+  default     = "169.254.200.0/30"
+}
+
+variable "primary_vpn_tunnel2_inside_cidr" {
+  description = "Primary VPN, Tunnel 1 Inside CIDR"
+  type        = string
+  default     = null
+}
+
+variable "secondary_vpn_tunnel2_inside_cidr" {
+  description = "Primary VPN, Tunnel 2 Inside CIDR"
+  type        = string
+  default     = null
+}
+
+variable "primary_private_cato_ip" {
+  description = "Private IP address of the Cato side for the primary tunnel"
+  type        = string
+  default     = "169.254.100.2"
+}
+
+variable "primary_private_site_ip" {
+  description = "Private IP address of the site side for the primary tunnel"
+  type        = string
+  default     = "169.254.100.1"
+}
+
+variable "secondary_private_cato_ip" {
+  description = "Private IP address of the Cato side for the secondary tunnel"
+  type        = string
+  default     = "169.254.200.2"
+}
+
+variable "secondary_private_site_ip" {
+  description = "Private IP address of the site side for the secondary tunnel"
+  type        = string
+  default     = "169.254.200.1"
+}
+
+variable "downstream_bw" {
+  description = "Downstream bandwidth in Mbps"
+  type        = number
+  default     = 100
+}
+
+variable "upstream_bw" {
+  description = "Upstream bandwidth in Mbps"
+  type        = number
+  default     = 100
 }

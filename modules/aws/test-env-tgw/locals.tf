@@ -65,7 +65,7 @@ locals {
   ])
 
 
-servers_windows = flatten([
+  servers_windows = flatten([
     // VPC 1
     [
       for i, subnet in module.test-env-vpc-1.private_subnets_cidr_blocks : {

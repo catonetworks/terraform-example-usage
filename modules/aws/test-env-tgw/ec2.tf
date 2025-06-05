@@ -33,11 +33,11 @@ module "prod_test_servers" {
     # }
   }]
   user_data = file("./templates/aws_al2023_user_data.tftpl")
-  
+
   #   user_data = templatefile("./templates/aws_al2023_user_data.tftpl",
   # variable_name = thing 
   # Then in the file Ref with ${variable_name})
-  
+
   tags = merge(var.tags, {
     Name = each.key
   })
@@ -72,18 +72,18 @@ module "windows_test_servers" {
     encrypted   = false
     volume_type = "gp3"
     throughput  = 200
-    volume_size = 150  # Size in GB
+    volume_size = 150 # Size in GB
     # tags = {
     #   Name = "root-disk"
     # }
   }]
   user_data = file("./templates/aws_windows_user_data.tftpl")
-  
+
   #   user_data = templatefile("./templates/aws_al2023_user_data.tftpl",{
   # region = var.region
   # })
   # Then in the file Ref with ${variable_name})
-  
+
   tags = merge(var.tags, {
     Name = each.key
   })
