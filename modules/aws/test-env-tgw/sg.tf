@@ -7,7 +7,7 @@ module "vpc1_internal_security_group" {
   vpc_id      = module.test-env-vpc-1.vpc_id
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
-  ingress_rules       = ["http-80-tcp", "all-icmp", "ssh-tcp", "https-443-tcp","rdp-tcp", "rdp-udp"]
+  ingress_rules       = ["http-80-tcp", "all-icmp", "ssh-tcp", "https-443-tcp", "rdp-tcp", "rdp-udp"]
   egress_rules        = ["all-all"]
 
   tags = merge(var.tags, {

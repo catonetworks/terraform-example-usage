@@ -67,7 +67,7 @@ variable "keypair_name" {
   description = "KeyPair for use on all Machines"
 }
 
-variable "external_testing_range" { 
+variable "external_testing_range" {
   description = "IP Address for Remote Access to Externally Faced Servers"
-  default = null
+  default     = null
 }

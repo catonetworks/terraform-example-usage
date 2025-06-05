@@ -1,5 +1,4 @@
 ### TODO
-- [ ] Leverage the Above to build out full testing framework for transit gateway 
 - [ ] Add Destroy-Time to Readme. 
 
 ### In-Progress 
@@ -12,3 +11,4 @@
 - [x] AWS Modules to build testing VPCs for Transit Gateway 
 - [x] AWS Modules to build Ubuntu Servers 
 - [x] Documentation for TGW HA Deployment
+- [x] Leverage the Above to build out full testing framework for transit gateway 

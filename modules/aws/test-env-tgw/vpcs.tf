@@ -2,7 +2,7 @@ module "test-env-vpc-1" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "5.21.0"
 
-  name = "${var.site_name}-TestEnv-VPC-1"
+  name               = "${var.site_name}-TestEnv-VPC-1"
   cidr               = local.vpc1_cidr
   azs                = [data.aws_availability_zones.available.names[0], data.aws_availability_zones.available.names[1]]
   private_subnets    = local.vpc1_private_subnets

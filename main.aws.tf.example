@@ -111,6 +111,7 @@ module "vsocket-aws-tgw" {
   site_name = "AWS-Cato-vSocket-TGW-Site"
   site_description = "AWS Cato vSocket TGW Site"
   external_testing_range = ["1.2.3.4/32"] #Entered as a CIDR such as "1.2.3.4/32"
+  build_aws_vsocket_tgw_test_env = var.build_aws_vsocket_tgw_test_env
 }
 
 module "build_aws_vsocket_tgw_ha_module" {
@@ -128,5 +129,26 @@ module "build_aws_vsocket_tgw_ha_module" {
   native_network_range = "10.6.0.0/16"
   site_name = "AWS-Cato-vSocket-TGW-HA-Site"
   site_description = "AWS Cato vSocket TGW HA Site"  
+  external_testing_range = ["1.2.3.4/32"] #Entered as a CIDR such as "1.2.3.4/32"
+  build_aws_vsocket_tgw_ha_test_env = var.build_aws_vsocket_tgw_ha_test_env
+}
+
+module "build_aws_ipsec_tgw_module" {
+  count                             = var.build_aws_ipsec_tgw_module ? 1 : 0
+  source                            = "./modules/cato/aws/ipsec-tgw"
+  
+  // Required variables
+  key_pair                          = var.aws_default_keypair
+  token                             = var.cato_token
+  account_id                        = var.account_id
+  cato_primary_gateway_ip_address   = "x.x.x.x"
+  cato_secondary_gateway_ip_address = "y.y.y.y"
+  region                            = var.aws_region
+  build_aws_ipsec_tgw_test_env      = var.build_aws_ipsec_tgw_test_env
+
+  //Example of overriding default values for module variables
+  native_network_range = "10.7.0.0/16"
+  site_name = "AWS-Cato-IPSec-TGW-Site"
+  site_description = "AWS Cato IPSec TGW Site"
   external_testing_range = ["1.2.3.4/32"] #Entered as a CIDR such as "1.2.3.4/32"
 }

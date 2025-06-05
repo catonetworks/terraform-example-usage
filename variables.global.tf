@@ -104,6 +104,18 @@ variable "build_aws_vsocket_tgw_ha_test_env" {
   default     = false
 }
 
+variable "build_aws_ipsec_tgw_module" {
+  description = "Build AWS IPsec tgw site module"
+  type        = bool
+  default     = false
+}
+
+variable "build_aws_ipsec_tgw_test_env" {
+  description = "Build AWS IPsec tgw test env module"
+  type        = bool
+  default     = false
+}
+
 # Settings for all Azure modules
 variable "build_azure_ipsec_module" {
   description = "Build Azure IPsec site module"

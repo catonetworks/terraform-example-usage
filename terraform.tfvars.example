@@ -20,6 +20,8 @@ build_aws_vsocket_tgw_module      = false
 build_aws_vsocket_tgw_test_env    = false
 build_aws_vsocket_tgw_ha_module   = false
 build_aws_vsocket_tgw_ha_test_env = false
+build_aws_ipsec_tgw_module        = false
+build_aws_ipsec_tgw_test_env      = false
 
 # Settings for all Azure modules
 build_azure_ipsec_module           = false

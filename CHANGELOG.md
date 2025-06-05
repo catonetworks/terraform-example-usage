@@ -30,3 +30,10 @@
  - Added Docs for Testing Env for TGW-HA
  - Update ToDo
 
+## 0.0.4 (2025-06-05)
+
+### Features
+ - Added IPSEC to TGW 
+ - Added Testing Env for IPSEC to TGW 
+ - Added Docs for Testing Env for IPSEC to TGW
+ - Updated ToDo

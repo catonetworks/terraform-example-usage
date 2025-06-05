@@ -215,7 +215,7 @@ variable "build_aws_vsocket_tgw_ha_test_env" {
   type        = bool
 }
 
-variable "external_testing_range" { 
+variable "external_testing_range" {
   description = "IP Address for Remote Access to Externally Faced Servers"
-  default = null
+  default     = null
 }

@@ -2,17 +2,17 @@ locals {
   network_ranges_csv = csvdecode(file(var.socket_lan_network_ranges_csv_path))
   lan_interfaces = [
     for int_id in distinct([for row in local.network_ranges_csv : row.interface_id]) : {
-      interface_id = int_id
-      dest_type    = "LAN"
-      name = try([for row in local.network_ranges_csv : row.name if row.interface_id == int_id && row.range_type == "Default"][0], int_id == "LAN" ? null : "")
-      subnet = try([for row in local.network_ranges_csv : row.subnet if row.interface_id == int_id && row.range_type == "Default"][0], int_id == "LAN" ? null : "")
-      local_ip = try([for row in local.network_ranges_csv : row.local_ip if row.interface_id == int_id && row.range_type == "Default"][0], int_id == "LAN" ? null : "")
+      interface_id      = int_id
+      dest_type         = "LAN"
+      name              = try([for row in local.network_ranges_csv : row.name if row.interface_id == int_id && row.range_type == "Default"][0], int_id == "LAN" ? null : "")
+      subnet            = try([for row in local.network_ranges_csv : row.subnet if row.interface_id == int_id && row.range_type == "Default"][0], int_id == "LAN" ? null : "")
+      local_ip          = try([for row in local.network_ranges_csv : row.local_ip if row.interface_id == int_id && row.range_type == "Default"][0], int_id == "LAN" ? null : "")
       translated_subnet = null
       network_ranges = [
         for idx, row in [
           for r in local.network_ranges_csv : r
           if r.interface_id == int_id && r.range_type != "Default"
-        ] : {
+          ] : {
           name              = row.name
           range_type        = row.range_type
           subnet            = row.subnet
@@ -20,7 +20,7 @@ locals {
           gateway           = row.gateway != "" ? row.gateway : null
           vlan              = row.range_type == "VLAN" ? 10 + idx + (int_id == "INT_6" ? 0 : 1) : null
           translated_subnet = row.translated_subnet != "" ? row.translated_subnet : null
-          dhcp_settings     = row.dhcp_type != "" ? {
+          dhcp_settings = row.dhcp_type != "" ? {
             dhcp_type = row.dhcp_type
             ip_range  = row.ip_range
           } : null

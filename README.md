@@ -313,6 +313,7 @@ Below is a list of the terraform modules included in this package, and the assoc
 | [aws-socket-ha-vpc](https://registry.terraform.io/modules/catonetworks/vsocket-aws-ha-vpc/cato/latest) | 10.4.0.0/16 | 16 min | N/A | 
 | [aws-socket-tgw](https://registry.terraform.io/modules/catonetworks/vsocket-aws-tgw/cato/latest) | 10.5.0.0/16 | 5 min | 13 min |
 | [aws-socket-tgw-ha](https://registry.terraform.io/modules/catonetworks/vsocket-aws-tgw-ha/cato/latest) | 10.6.0.0/16 | 16 min | 25 min |
+| [aws-ipsec-tgw](https://registry.terraform.io/modules/catonetworks/ipsec-aws-tgw/cato/latest) | 10.7.0.0/16 | 10 min | 20 min
 | [azure-ipsec](https://registry.terraform.io/modules/catonetworks/ipsec-azure/cato/latest) | 10.50.0.0/16 | 40 min | N/A | 
 | [azure-socket](https://registry.terraform.io/modules/catonetworks/vsocket-azure/cato/latest) | 10.51.0.0/16 | 6 min | N/A | 
 | [azure-socket-vnet](https://registry.terraform.io/modules/catonetworks/vsocket-azure-vnet/cato/latest) | 10.52.0.0/16 | 6 min | N/A |
@@ -439,4 +440,32 @@ This environment will build 3 VPCs, and associated subnets, route tables, routes
 
 ### Diagram
 <img src=./images/tgw-ha-test-env.png>
+</details>
+
+details>
+<summary> <strong> 📦 AWS Transit Gateway IPSEC Test Environment </strong> </summary>
+This repo comes with a test enviroment for testing connectivity and displaying how Cato IPSEC can be deployed within a cloud provider.  By setting build_aws_ipsec_tgw_test_env = true in the terraform.tfvars file, the test environment for AWS Transit Gateway IPSEC will be built automatically 
+
+### Technical Details 
+This environment will build 3 VPCs, and associated subnets, route tables, routes, transit gateway, attachments, and transit gateway route tables and routes. This will also build 6 servers, which can be connected to via SSM. 
+
+### Networking Information
+| Resource | IP Address | Access Method | Egress Via | Type | 
+|----------|------------|----------------|----------------|-----| 
+| test-env-vpc1-server-0 | 10.7.1.6 | Connect Via SSM| Cato Socket | AL2023 Unix Server
+| test-env-vpc1-server-1 | 10.7.1.134 | Connect Via SSM| Cato Socket | AL2023 Unix Server
+| test-env-vpc1-wserver-0 | 10.7.1.7 | Connect Via SSM or RDP | Cato Socket | Windows 2019 Server
+| test-env-vpc1-wserver-1 | 10.7.1.135 | Connect Via SSM or RDP | Cato Socket | Windows 2019 Server
+| test-env-vpc2-server-0 | 10.7.2.6 | Connect Via SSM| Cato Socket | AL2023 Unix Server
+| test-env-vpc2-server-1| 10.7.2.134 | Connect Via SSM| Cato Socket | AL2023 Unix Server
+| test-env-vpc2-wserver-0 | 10.7.2.7 | Connect Via SSM or RDP | Cato Socket | Windows 2019 Server
+| test-env-vpc2-wserver-1 | 10.7.2.135 | Connect Via SSM or RDP | Cato Socket | Windows 2019 Server
+| test-env-vpc3-server-0 | 10.7.4.6 | Connect Via SSM| Public IP and Subnets | AL2023 Unix Server
+| test-env-vpc3-server-1 | 10.7.4.136 | Connect Via SSM| Public IP and Subnets | AL2023 Unix Server
+| test-env-vpc1-wserver-0 | 10.7.5.7 | Connect Via SSM| Public IP and Subnets| Windows 2019 Server
+| test-env-vpc1-wserver-1 | 10.7.5.135 | Connect Via SSM| Public IP and Subnets | Windows 2019 Server
+
+
+### Diagram
+#### Diagram Pending
 </details>
