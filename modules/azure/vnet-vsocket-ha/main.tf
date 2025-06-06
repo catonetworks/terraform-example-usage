@@ -69,7 +69,8 @@ resource "azurerm_public_ip" "mgmt-public-ip-primary" {
   resource_group_name = azurerm_resource_group.azure-rg.name
   sku                 = "Standard"
   depends_on = [
-    azurerm_resource_group.azure-rg
+    azurerm_resource_group.azure-rg,
+    azurerm_virtual_network.vnet
   ]
 }
 
@@ -80,7 +81,8 @@ resource "azurerm_public_ip" "wan-public-ip-primary" {
   resource_group_name = azurerm_resource_group.azure-rg.name
   sku                 = "Standard"
   depends_on = [
-    azurerm_resource_group.azure-rg
+    azurerm_resource_group.azure-rg,
+    azurerm_virtual_network.vnet
   ]
 }
 
@@ -91,7 +93,8 @@ resource "azurerm_public_ip" "mgmt-public-ip-secondary" {
   resource_group_name = azurerm_resource_group.azure-rg.name
   sku                 = "Standard"
   depends_on = [
-    azurerm_resource_group.azure-rg
+    azurerm_resource_group.azure-rg,
+    azurerm_virtual_network.vnet
   ]
 }
 
@@ -102,7 +105,8 @@ resource "azurerm_public_ip" "wan-public-ip-secondary" {
   resource_group_name = azurerm_resource_group.azure-rg.name
   sku                 = "Standard"
   depends_on = [
-    azurerm_resource_group.azure-rg
+    azurerm_resource_group.azure-rg,
+    azurerm_virtual_network.vnet
   ]
 }
 

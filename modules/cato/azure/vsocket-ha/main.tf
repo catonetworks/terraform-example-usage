@@ -23,9 +23,9 @@ module "vsocket-azure-ha" {
   location                = var.location
   vnet_name               = module.vnet-ha.vnet_name
   lan_subnet_name         = module.vnet-ha.lan_subnet_name
-  vnet_prefix             = var.vnet_prefix
+  native_network_range    = var.vnet_prefix
   dns_servers             = var.dns_servers
-  lan_prefix              = var.subnet_range_lan == null ? cidrsubnet(var.vnet_prefix, 8, 2) : var.subnet_range_lan
+  subnet_range_lan        = var.subnet_range_lan == null ? cidrsubnet(var.vnet_prefix, 8, 2) : var.subnet_range_lan
   floating_ip             = var.floating_ip == null ? cidrhost(cidrsubnet(var.vnet_prefix, 8, 2), 7) : var.floating_ip
   site_name               = var.site_name
   site_description        = var.site_description

@@ -169,17 +169,17 @@ output "lan_secondary_mac_address" {
   value       = module.vsocket-azure-ha-vnet.lan_secondary_mac_address
 }
 
-output "vsocket_primary_reboot_status" {
-  description = "Status of the Primary vSocket VM Reboot"
-  value       = module.vsocket-azure-ha-vnet.vsocket_primary_reboot_status
-}
+# output "vsocket_primary_reboot_status" {
+#   description = "Status of the Primary vSocket VM Reboot"
+#   value       = module.vsocket-azure-ha-vnet.vsocket_primary_reboot_status
+# }
 
-output "vsocket_secondary_reboot_status" {
-  description = "Status of the Secondary vSocket VM Reboot"
-  value       = module.vsocket-azure-ha-vnet.vsocket_secondary_reboot_status
-}
+# output "vsocket_secondary_reboot_status" {
+#   description = "Status of the Secondary vSocket VM Reboot"
+#   value       = module.vsocket-azure-ha-vnet.vsocket_secondary_reboot_status
+# }
 
-output "cato_license_site" {
-  description = "The license site information for the Cato Socket."
-  value       = module.vsocket-azure-ha-vnet.cato_license_site
-}
+# output "cato_license_site" {
+#   description = "The license site information for the Cato Socket."
+#   value       = module.vsocket-azure-ha-vnet.cato_license_site
+# }

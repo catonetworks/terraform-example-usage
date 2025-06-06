@@ -11,7 +11,8 @@ module "vsocket-azure-ha-vnet" {
   lan_ip_primary        = var.lan_ip_primary == null ? cidrhost(cidrsubnet(var.vnet_prefix, 8, 2), 5) : var.lan_ip_primary
   lan_ip_secondary      = var.lan_ip_secondary == null ? cidrhost(cidrsubnet(var.vnet_prefix, 8, 2), 6) : var.lan_ip_secondary
   floating_ip           = var.floating_ip == null ? cidrhost(cidrsubnet(var.vnet_prefix, 8, 2), 7) : var.floating_ip
-  vnet_prefix           = var.vnet_prefix
+  native_network_range  = var.vnet_prefix
+  vnet_network_range = var.vnet_prefix
   dns_servers           = var.dns_servers
   site_name             = var.site_name
   site_description      = var.site_description
