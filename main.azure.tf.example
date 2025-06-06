@@ -22,11 +22,13 @@ module "ipsec-azure" {
 module "vsocket-azure" {
   count  = var.build_azure_vsocket_module ? 1 : 0
   source = "./modules/cato/azure/vsocket"
+  location = "Central US"
 }
 
 module "vsocket-azure-vnet" {
   count  = var.build_azure_vsocket_vnet_module ? 1 : 0
   source = "./modules/cato/azure/vsocket-vnet"
+  location = "Central US"
 }
 
 module "vsocket-azure-ha" {
@@ -35,6 +37,7 @@ module "vsocket-azure-ha" {
   token                 = var.cato_token
   account_id            = var.account_id
   azure_subscription_id = var.azure_subscription_id
+  location = "Central US"
 }
 
 module "vsocket-azure-ha-vnet" {
@@ -43,4 +46,5 @@ module "vsocket-azure-ha-vnet" {
   token                 = var.cato_token
   account_id            = var.account_id
   azure_subscription_id = var.azure_subscription_id
+  location = "Central US"
 }
