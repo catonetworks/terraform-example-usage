@@ -37,3 +37,9 @@
  - Added Testing Env for IPSEC to TGW 
  - Added Docs for Testing Env for IPSEC to TGW
  - Updated ToDo
+
+## 0.0.5 (2025-06-06)
+
+### Features
+ - Updated to use newest Azure Modules 
+ - Updated Azure Examples to use 'Location' 

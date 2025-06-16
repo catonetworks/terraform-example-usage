@@ -28,3 +28,18 @@ output "lan_subnet_id" {
   description = "The ID of the LAN subnet."
   value       = azurerm_subnet.subnet-lan.id
 }
+
+output "mgmt-nic-name" {
+  description = "The ID of the management network interface."
+  value       = azurerm_network_interface.mgmt-nic.name
+}
+
+output "wan-nic-name" {
+  description = "The ID of the WAN network interface."
+  value       = azurerm_network_interface.wan-nic.name
+}
+
+output "lan-nic-name" {
+  description = "The ID of the LAN network interface."
+  value       = azurerm_network_interface.lan-nic.name
+}
