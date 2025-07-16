@@ -43,6 +43,8 @@ module "vsocket-aws-tgw-ha" {
   region              = var.region
   tags                = var.tags
 
+  build_default_tgw_route_to_cato = true
+
   routed_networks = var.build_aws_vsocket_tgw_ha_test_env ? {
     "test-env-vpc-1" = module.test_env_ha[0].vpc1_cidr_block
     "test-env-vpc-2" = module.test_env_ha[0].vpc2_cidr_block

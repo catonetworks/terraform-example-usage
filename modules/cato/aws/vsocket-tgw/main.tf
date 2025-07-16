@@ -24,12 +24,13 @@ module "vsocket-aws-vpc-tgw" {
   wan_eni_ip  = var.wan_eni_ip == null ? cidrhost(cidrsubnet(var.vpc_network_range, 2, 1), 6) : var.wan_eni_ip
   lan_eni_ip  = var.lan_eni_ip == null ? cidrhost(cidrsubnet(var.vpc_network_range, 2, 2), 6) : var.lan_eni_ip
 
-  site_name          = var.site_name
-  tgw_id             = module.transit-gateway.ec2_transit_gateway_id
-  tgw_route_table_id = module.transit-gateway.ec2_transit_gateway_association_default_route_table_id
-  site_description   = var.site_description
-  region             = var.region
-  tags               = var.tags
+  site_name                       = var.site_name
+  build_default_tgw_route_to_cato = true
+  tgw_id                          = module.transit-gateway.ec2_transit_gateway_id
+  tgw_route_table_id              = module.transit-gateway.ec2_transit_gateway_association_default_route_table_id
+  site_description                = var.site_description
+  region                          = var.region
+  tags                            = var.tags
 
   routed_networks = var.build_aws_vsocket_tgw_test_env ? {
     "test-env-vpc-1" = module.test_env[0].vpc1_cidr_block
