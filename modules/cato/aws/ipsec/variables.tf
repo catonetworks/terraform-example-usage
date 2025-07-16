@@ -47,13 +47,13 @@ variable "site_description" {
 variable "primary_private_cato_ip" {
   description = "Private IP address of the Cato side for the primary tunnel (replace with the desired value)"
   type        = string
-  default     = "169.1.1.2"
+  default     = "169.254.100.2"
 }
 
 variable "primary_private_site_ip" {
   description = "Private IP address of the site side for the primary tunnel (replace with the desired value)"
   type        = string
-  default     = "169.1.1.3"
+  default     = "169.254.100.1"
 }
 
 variable "primary_public_cato_ip" {
@@ -64,13 +64,13 @@ variable "primary_public_cato_ip" {
 variable "secondary_private_cato_ip" {
   description = "Private IP address of the Cato side for the secondary tunnel (replace with the desired value)"
   type        = string
-  default     = "169.2.1.2"
+  default     = "169.254.100.2"
 }
 
 variable "secondary_private_site_ip" {
   description = "Private IP address of the site side for the secondary tunnel (replace with the desired value)"
   type        = string
-  default     = "169.2.1.3"
+  default     = "169.254.100.1"
 }
 
 variable "secondary_public_cato_ip" {
