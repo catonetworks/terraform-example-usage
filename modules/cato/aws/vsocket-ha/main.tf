@@ -42,6 +42,6 @@ module "vsocket-aws-ha" {
   wan_eni_secondary_id           = module.vpc.wan_eni_secondary_id
   lan_eni_secondary_id           = module.vpc.lan_eni_secondary_id
   lan_route_table_id             = module.vpc.lan_route_table_id
-  site_location                  = var.site_location
+  region                         = var.region
   tags                           = var.tags
 }

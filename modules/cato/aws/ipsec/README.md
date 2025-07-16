@@ -71,55 +71,43 @@ Apache 2 Licensed. See [LICENSE](https://github.com/catonetworks/terraform-cato-
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.98.0 |
+| <a name="requirement_cato"></a> [cato](#requirement\_cato) | >= 0.0.30 |
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5.0 |
-| <a name="provider_cato"></a> [cato](#provider\_cato) | n/a |
+No providers.
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_ipsec-aws"></a> [ipsec-aws](#module\_ipsec-aws) | catonetworks/ipsec-aws/cato | n/a |
 
 ## Resources
 
-| Name | Type |
-|------|------|
-| [aws_customer_gateway.cgw](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/customer_gateway) | resource |
-| [aws_vpn_connection.vpn_connection](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpn_connection) | resource |
-| [aws_vpn_gateway.vgw](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpn_gateway) | resource |
-| [cato_ipsec_site.ipsec-site](https://registry.terraform.io/providers/catonetworks/cato/latest/docs/resources/ipsec_site) | resource |
-| [cato_license.license](https://registry.terraform.io/providers/catonetworks/cato/latest/docs/resources/license) | resource |
+No resources.
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_bgp_asn"></a> [bgp\_asn](#input\_bgp\_asn) | BGP ASN for the customer gateway | `number` | n/a | yes |
-| <a name="input_cgw_ip"></a> [cgw\_ip](#input\_cgw\_ip) | Public IP address for the customer gateway | `string` | n/a | yes |
-| <a name="input_downstream_bw"></a> [downstream\_bw](#input\_downstream\_bw) | Downstream bandwidth in Mbps | `number` | n/a | yes |
-| <a name="input_license_bw"></a> [license\_bw](#input\_license\_bw) | The license bandwidth number for the cato site, specifying bandwidth ONLY applies for pooled licenses.  For a standard site license that is not pooled, leave this value null. Must be a number greater than 0 and an increment of 10. | `string` | `null` | no |
-| <a name="input_license_id"></a> [license\_id](#input\_license\_id) | The license ID for the Cato vSocket of license type CATO\_SITE, CATO\_SSE\_SITE, CATO\_PB, CATO\_PB\_SSE.  Example License ID value: 'abcde123-abcd-1234-abcd-abcde1234567'.  Note that licenses are for commercial accounts, and not supported for trial accounts. | `string` | `null` | no |
-| <a name="input_native_network_range"></a> [native\_network\_range](#input\_native\_network\_range) | Native network range for the IPSec site | `string` | n/a | yes |
-| <a name="input_primary_destination_type"></a> [primary\_destination\_type](#input\_primary\_destination\_type) | The destination type of the IPsec tunnel | `string` | `null` | no |
-| <a name="input_primary_pop_location_id"></a> [primary\_pop\_location\_id](#input\_primary\_pop\_location\_id) | Primary tunnel POP location ID | `string` | `null` | no |
-| <a name="input_primary_private_cato_ip"></a> [primary\_private\_cato\_ip](#input\_primary\_private\_cato\_ip) | Private IP address of the Cato side for the primary tunnel | `string` | n/a | yes |
-| <a name="input_primary_private_site_ip"></a> [primary\_private\_site\_ip](#input\_primary\_private\_site\_ip) | Private IP address of the site side for the primary tunnel | `string` | n/a | yes |
-| <a name="input_primary_public_cato_ip_id"></a> [primary\_public\_cato\_ip\_id](#input\_primary\_public\_cato\_ip\_id) | Public IP address ID of the Cato side for the primary tunnel | `string` | n/a | yes |
-| <a name="input_secondary_destination_type"></a> [secondary\_destination\_type](#input\_secondary\_destination\_type) | The destination type of the IPsec tunnel | `string` | `null` | no |
-| <a name="input_secondary_pop_location_id"></a> [secondary\_pop\_location\_id](#input\_secondary\_pop\_location\_id) | Secondary tunnel POP location ID | `string` | `null` | no |
-| <a name="input_secondary_private_cato_ip"></a> [secondary\_private\_cato\_ip](#input\_secondary\_private\_cato\_ip) | Private IP address of the Cato side for the secondary tunnel | `string` | n/a | yes |
-| <a name="input_secondary_private_site_ip"></a> [secondary\_private\_site\_ip](#input\_secondary\_private\_site\_ip) | Private IP address of the site side for the secondary tunnel | `string` | n/a | yes |
-| <a name="input_secondary_public_cato_ip_id"></a> [secondary\_public\_cato\_ip\_id](#input\_secondary\_public\_cato\_ip\_id) | Public IP address ID of the Cato side for the secondary tunnel | `string` | n/a | yes |
-| <a name="input_site_description"></a> [site\_description](#input\_site\_description) | Description of the IPSec site | `string` | n/a | yes |
-| <a name="input_site_location"></a> [site\_location](#input\_site\_location) | n/a | <pre>object({<br/>    city         = string<br/>    country_code = string<br/>    state_code   = string<br/>    timezone     = string<br/>  })</pre> | <pre>{<br/>  "city": "Belmont",<br/>  "country_code": "US",<br/>  "state_code": "US-CA",<br/>  "timezone": "America/Los_Angeles"<br/>}</pre> | no |
-| <a name="input_site_name"></a> [site\_name](#input\_site\_name) | Name of the IPSec site | `string` | n/a | yes |
+| <a name="input_aws_bgp_asn"></a> [aws\_bgp\_asn](#input\_aws\_bgp\_asn) | AWS's BGP Autonomous System Number | `number` | `65000` | no |
+| <a name="input_cato_bgp_asn"></a> [cato\_bgp\_asn](#input\_cato\_bgp\_asn) | Cato's BGP Autonomous System Number | `number` | `65001` | no |
+| <a name="input_downstream_bw"></a> [downstream\_bw](#input\_downstream\_bw) | Downstream bandwidth in Mbps for the IPSec tunnel in Cato (replace with the desired value) | `number` | `100` | no |
+| <a name="input_native_network_range"></a> [native\_network\_range](#input\_native\_network\_range) | Native network range for the IPSec site (replace with the desired network range) | `string` | `"10.0.0.0/16"` | no |
+| <a name="input_primary_private_cato_ip"></a> [primary\_private\_cato\_ip](#input\_primary\_private\_cato\_ip) | Private IP address of the Cato side for the primary tunnel (replace with the desired value) | `string` | `"169.1.1.2"` | no |
+| <a name="input_primary_private_site_ip"></a> [primary\_private\_site\_ip](#input\_primary\_private\_site\_ip) | Private IP address of the site side for the primary tunnel (replace with the desired value) | `string` | `"169.1.1.3"` | no |
+| <a name="input_primary_public_cato_ip"></a> [primary\_public\_cato\_ip](#input\_primary\_public\_cato\_ip) | Public IP address ID of the Cato side for the primary tunnel (replace with the desired value) | `string` | n/a | yes |
+| <a name="input_region"></a> [region](#input\_region) | AWS region where resources will be deployed. | `string` | n/a | yes |
+| <a name="input_secondary_private_cato_ip"></a> [secondary\_private\_cato\_ip](#input\_secondary\_private\_cato\_ip) | Private IP address of the Cato side for the secondary tunnel (replace with the desired value) | `string` | `"169.2.1.2"` | no |
+| <a name="input_secondary_private_site_ip"></a> [secondary\_private\_site\_ip](#input\_secondary\_private\_site\_ip) | Private IP address of the site side for the secondary tunnel (replace with the desired value) | `string` | `"169.2.1.3"` | no |
+| <a name="input_secondary_public_cato_ip"></a> [secondary\_public\_cato\_ip](#input\_secondary\_public\_cato\_ip) | Public IP address ID of the Cato side for the secondary tunnel (replace with the desired value) | `string` | n/a | yes |
+| <a name="input_site_description"></a> [site\_description](#input\_site\_description) | Description of the IPSec site in Cato (replace with the desired description) | `string` | `"AWS Cato IPSec Site us-east-1"` | no |
+| <a name="input_site_location"></a> [site\_location](#input\_site\_location) | Site location which is used by the Cato Socket to connect to the closest Cato PoP. If not specified, the location will be derived from the Azure region dynamicaly. | <pre>object({<br/>    city         = string<br/>    country_code = string<br/>    state_code   = string<br/>    timezone     = string<br/>  })</pre> | <pre>{<br/>  "city": null,<br/>  "country_code": null,<br/>  "state_code": null,<br/>  "timezone": null<br/>}</pre> | no |
+| <a name="input_site_name"></a> [site\_name](#input\_site\_name) | Name of the IPSec site in Cato (replace with the desired site name) | `string` | `"AWS-Cato-IPSec-Site"` | no |
 | <a name="input_site_type"></a> [site\_type](#input\_site\_type) | The type of the site | `string` | `"CLOUD_DC"` | no |
-| <a name="input_upstream_bw"></a> [upstream\_bw](#input\_upstream\_bw) | Upstream bandwidth in Mbps | `number` | n/a | yes |
+| <a name="input_upstream_bw"></a> [upstream\_bw](#input\_upstream\_bw) | Upstream bandwidth in Mbps for the IPSec tunnel in Cato (replace with the desired value) | `number` | `100` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The VPC ID where the VPN gateway will be attached | `string` | `null` | no |
 
 ## Outputs
@@ -127,10 +115,12 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_cato_license_site"></a> [cato\_license\_site](#output\_cato\_license\_site) | n/a |
+| <a name="output_primary_tunnel_address"></a> [primary\_tunnel\_address](#output\_primary\_tunnel\_address) | n/a |
+| <a name="output_primary_vpn_connection_id"></a> [primary\_vpn\_connection\_id](#output\_primary\_vpn\_connection\_id) | ID of the created AWS VPN connection |
+| <a name="output_secondary_tunnel_address"></a> [secondary\_tunnel\_address](#output\_secondary\_tunnel\_address) | n/a |
+| <a name="output_secondary_vpn_connection_id"></a> [secondary\_vpn\_connection\_id](#output\_secondary\_vpn\_connection\_id) | ID of the created AWS VPN connection |
 | <a name="output_site_id"></a> [site\_id](#output\_site\_id) | ID of the created Cato IPSec site |
-| <a name="output_tunnel1_address"></a> [tunnel1\_address](#output\_tunnel1\_address) | n/a |
 | <a name="output_tunnel1_preshared_key"></a> [tunnel1\_preshared\_key](#output\_tunnel1\_preshared\_key) | n/a |
-| <a name="output_tunnel2_address"></a> [tunnel2\_address](#output\_tunnel2\_address) | n/a |
 | <a name="output_tunnel2_preshared_key"></a> [tunnel2\_preshared\_key](#output\_tunnel2\_preshared\_key) | n/a |
-| <a name="output_vpn_connection_id"></a> [vpn\_connection\_id](#output\_vpn\_connection\_id) | ID of the created AWS VPN connection |
+| <a name="output_vpc_id"></a> [vpc\_id](#output\_vpc\_id) | ID of the created Cato IPSec site |
 <!-- END_TF_DOCS -->

@@ -13,6 +13,21 @@ output "vpc3_id" {
   description = "VPC ID for VPC 3"
 }
 
+output "vpc1_cidr_block" {
+  value       = module.test-env-vpc-1.vpc_cidr_block
+  description = "CIDR Block for VPC 1"
+}
+
+output "vpc2_cidr_block" {
+  value       = module.test-env-vpc-2.vpc_cidr_block
+  description = "CIDR Block for VPC 2"
+}
+
+output "vpc3_cidr_block" {
+  value       = module.test-env-vpc-3.vpc_cidr_block
+  description = "CIDR Block for VPC 3"
+}
+
 output "vpc1_private_subnets" {
   value       = module.test-env-vpc-1.private_subnets
   description = "Private subnets for VPC 1"

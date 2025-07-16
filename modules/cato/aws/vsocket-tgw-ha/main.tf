@@ -1,11 +1,10 @@
 module "vsocket-aws-tgw-ha" {
   source = "catonetworks/vsocket-aws-tgw-ha/cato"
 
-  token                = var.token
-  account_id           = var.account_id
-  key_pair             = var.key_pair
-  vpc_network_range    = var.vpc_network_range
-  native_network_range = var.native_network_range
+  token             = var.token
+  account_id        = var.account_id
+  key_pair          = var.key_pair
+  vpc_network_range = var.vpc_network_range
 
   # | Subnet Purpose     | Index (N)     | CIDR Subnet     | 6th IP in Subnet     |
   # | ------------------ | ------------- | --------------- | -------------------- |
@@ -41,8 +40,14 @@ module "vsocket-aws-tgw-ha" {
   tgw_id              = module.transit-gateway.ec2_transit_gateway_id
   tgw_route_table_id  = module.transit-gateway.ec2_transit_gateway_association_default_route_table_id
   site_description    = var.site_description
-  site_location       = var.site_location
+  region              = var.region
   tags                = var.tags
+
+  routed_networks = var.build_aws_vsocket_tgw_ha_test_env ? {
+    "test-env-vpc-1" = module.test_env_ha[0].vpc1_cidr_block
+    "test-env-vpc-2" = module.test_env_ha[0].vpc2_cidr_block
+    "test-env-vpc-3" = module.test_env_ha[0].vpc3_cidr_block
+  } : null
 }
 
 module "transit-gateway" {

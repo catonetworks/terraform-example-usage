@@ -1,15 +1,14 @@
 module "vsocket-aws-ha-vpc" {
-  source               = "catonetworks/vsocket-aws-ha-vpc/cato"
-  token                = var.token
-  account_id           = var.account_id
-  vpc_id               = var.vpc_id
-  internet_gateway_id  = var.internet_gateway_id
-  vpc_range            = var.vpc_range
-  key_pair             = var.key_pair
-  site_name            = var.site_name
-  site_description     = var.site_description
-  site_type            = var.site_type
-  native_network_range = var.native_network_range
+  source              = "catonetworks/vsocket-aws-ha-vpc/cato"
+  token               = var.token
+  account_id          = var.account_id
+  vpc_id              = var.vpc_id
+  internet_gateway_id = var.internet_gateway_id
+  vpc_range           = var.vpc_range
+  key_pair            = var.key_pair
+  site_name           = var.site_name
+  site_description    = var.site_description
+  site_type           = var.site_type
   # Use unique indices 0–5 to avoid overlap
   subnet_range_mgmt_primary   = var.subnet_range_mgmt_primary == null ? cidrsubnet(var.vpc_range, 9, 0) : var.subnet_range_mgmt_primary
   subnet_range_mgmt_secondary = var.subnet_range_mgmt_secondary == null ? cidrsubnet(var.vpc_range, 9, 1) : var.subnet_range_mgmt_secondary
@@ -23,8 +22,7 @@ module "vsocket-aws-ha-vpc" {
   wan_eni_secondary_ip        = var.wan_eni_secondary_ip == null ? cidrhost(cidrsubnet(var.vpc_range, 9, 3), 5) : var.wan_eni_secondary_ip
   lan_eni_primary_ip          = var.lan_eni_primary_ip == null ? cidrhost(cidrsubnet(var.vpc_range, 9, 4), 5) : var.lan_eni_primary_ip
   lan_eni_secondary_ip        = var.lan_eni_secondary_ip == null ? cidrhost(cidrsubnet(var.vpc_range, 9, 5), 5) : var.lan_eni_secondary_ip
-  ingress_cidr_blocks         = var.ingress_cidr_blocks
   lan_ingress_cidr_blocks     = var.lan_ingress_cidr_blocks
-  site_location               = var.site_location
+  region                      = var.region
   tags                        = var.tags
 }

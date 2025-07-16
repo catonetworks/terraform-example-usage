@@ -469,3 +469,77 @@ This environment will build 3 VPCs, and associated subnets, route tables, routes
 ### Diagram
 #### Diagram Pending
 </details>
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.98.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 4.1.0 |
+| <a name="requirement_cato"></a> [cato](#requirement\_cato) | >= 0.0.30 |
+| <a name="requirement_google"></a> [google](#requirement\_google) | ~> 4.0 |
+
+## Providers
+
+No providers.
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_build_aws_ipsec_tgw_module"></a> [build\_aws\_ipsec\_tgw\_module](#module\_build\_aws\_ipsec\_tgw\_module) | ./modules/cato/aws/ipsec-tgw | n/a |
+| <a name="module_build_aws_vsocket_tgw_ha_module"></a> [build\_aws\_vsocket\_tgw\_ha\_module](#module\_build\_aws\_vsocket\_tgw\_ha\_module) | ./modules/cato/aws/vsocket-tgw-ha | n/a |
+| <a name="module_ipsec-aws"></a> [ipsec-aws](#module\_ipsec-aws) | ./modules/cato/aws/ipsec | n/a |
+| <a name="module_vsocket-aws"></a> [vsocket-aws](#module\_vsocket-aws) | ./modules/cato/aws/vsocket | n/a |
+| <a name="module_vsocket-aws-ha"></a> [vsocket-aws-ha](#module\_vsocket-aws-ha) | ./modules/cato/aws/vsocket-ha | n/a |
+| <a name="module_vsocket-aws-ha-vpc"></a> [vsocket-aws-ha-vpc](#module\_vsocket-aws-ha-vpc) | ./modules/cato/aws/vsocket-ha-vpc | n/a |
+| <a name="module_vsocket-aws-tgw"></a> [vsocket-aws-tgw](#module\_vsocket-aws-tgw) | ./modules/cato/aws/vsocket-tgw | n/a |
+| <a name="module_vsocket-aws-vpc"></a> [vsocket-aws-vpc](#module\_vsocket-aws-vpc) | ./modules/cato/aws/vsocket-vpc | n/a |
+
+## Resources
+
+No resources.
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_account_id"></a> [account\_id](#input\_account\_id) | Cato Networks Account ID | `string` | n/a | yes |
+| <a name="input_aws_default_keypair"></a> [aws\_default\_keypair](#input\_aws\_default\_keypair) | AWS Key Pair | `string` | n/a | yes |
+| <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS Region | `string` | n/a | yes |
+| <a name="input_azure_subscription_id"></a> [azure\_subscription\_id](#input\_azure\_subscription\_id) | Azure Subscription ID | `string` | n/a | yes |
+| <a name="input_baseurl"></a> [baseurl](#input\_baseurl) | Cato Networks API URL | `string` | `"https://api.catonetworks.com/api/v1/graphql2"` | no |
+| <a name="input_build_aws_ipsec_module"></a> [build\_aws\_ipsec\_module](#input\_build\_aws\_ipsec\_module) | Build AWS IPsec site module | `bool` | `false` | no |
+| <a name="input_build_aws_ipsec_tgw_module"></a> [build\_aws\_ipsec\_tgw\_module](#input\_build\_aws\_ipsec\_tgw\_module) | Build AWS IPsec tgw site module | `bool` | `false` | no |
+| <a name="input_build_aws_ipsec_tgw_test_env"></a> [build\_aws\_ipsec\_tgw\_test\_env](#input\_build\_aws\_ipsec\_tgw\_test\_env) | Build AWS IPsec tgw test env module | `bool` | `false` | no |
+| <a name="input_build_aws_vsocket_ha_module"></a> [build\_aws\_vsocket\_ha\_module](#input\_build\_aws\_vsocket\_ha\_module) | Build AWS vSocket VPC site module | `bool` | `false` | no |
+| <a name="input_build_aws_vsocket_ha_vpc_module"></a> [build\_aws\_vsocket\_ha\_vpc\_module](#input\_build\_aws\_vsocket\_ha\_vpc\_module) | Build AWS vSocket VPC site module | `bool` | `false` | no |
+| <a name="input_build_aws_vsocket_module"></a> [build\_aws\_vsocket\_module](#input\_build\_aws\_vsocket\_module) | Build AWS vSocket site module | `bool` | `false` | no |
+| <a name="input_build_aws_vsocket_tgw_ha_module"></a> [build\_aws\_vsocket\_tgw\_ha\_module](#input\_build\_aws\_vsocket\_tgw\_ha\_module) | Build AWS vSocket tgw ha site module | `bool` | `false` | no |
+| <a name="input_build_aws_vsocket_tgw_ha_test_env"></a> [build\_aws\_vsocket\_tgw\_ha\_test\_env](#input\_build\_aws\_vsocket\_tgw\_ha\_test\_env) | Build AWS vSocket tgw ha test env module | `bool` | `false` | no |
+| <a name="input_build_aws_vsocket_tgw_module"></a> [build\_aws\_vsocket\_tgw\_module](#input\_build\_aws\_vsocket\_tgw\_module) | Build AWS vSocket tgw site module | `bool` | `false` | no |
+| <a name="input_build_aws_vsocket_tgw_test_env"></a> [build\_aws\_vsocket\_tgw\_test\_env](#input\_build\_aws\_vsocket\_tgw\_test\_env) | Build AWS vSocket tgw test env module | `bool` | `false` | no |
+| <a name="input_build_aws_vsocket_vpc_module"></a> [build\_aws\_vsocket\_vpc\_module](#input\_build\_aws\_vsocket\_vpc\_module) | Build AWS vSocket VPC site module | `bool` | `false` | no |
+| <a name="input_build_azure_ipsec_module"></a> [build\_azure\_ipsec\_module](#input\_build\_azure\_ipsec\_module) | Build Azure IPsec site module | `bool` | `false` | no |
+| <a name="input_build_azure_vsocket_ha_module"></a> [build\_azure\_vsocket\_ha\_module](#input\_build\_azure\_vsocket\_ha\_module) | Build Azure vSocket VPC site module | `bool` | `false` | no |
+| <a name="input_build_azure_vsocket_ha_vnet_module"></a> [build\_azure\_vsocket\_ha\_vnet\_module](#input\_build\_azure\_vsocket\_ha\_vnet\_module) | Build Azure vSocket VNET site module | `bool` | `false` | no |
+| <a name="input_build_azure_vsocket_module"></a> [build\_azure\_vsocket\_module](#input\_build\_azure\_vsocket\_module) | Build Azure vSocket site module | `bool` | `false` | no |
+| <a name="input_build_azure_vsocket_vnet_module"></a> [build\_azure\_vsocket\_vnet\_module](#input\_build\_azure\_vsocket\_vnet\_module) | Build Azure vSocket VNET site module | `bool` | `false` | no |
+| <a name="input_build_bulk_socket_csv_module"></a> [build\_bulk\_socket\_csv\_module](#input\_build\_bulk\_socket\_csv\_module) | Build Bulk Socket site from csv module | `bool` | `false` | no |
+| <a name="input_build_gcp_ipsec_module"></a> [build\_gcp\_ipsec\_module](#input\_build\_gcp\_ipsec\_module) | Build GCP IPsec site module | `bool` | `false` | no |
+| <a name="input_build_gcp_vsocket_module"></a> [build\_gcp\_vsocket\_module](#input\_build\_gcp\_vsocket\_module) | Build GCP vSocket site module | `bool` | `false` | no |
+| <a name="input_build_gcp_vsocket_vpc_module"></a> [build\_gcp\_vsocket\_vpc\_module](#input\_build\_gcp\_vsocket\_vpc\_module) | Build GCP vSocket VPC site module | `bool` | `false` | no |
+| <a name="input_build_socket_csv_module"></a> [build\_socket\_csv\_module](#input\_build\_socket\_csv\_module) | Build Socket site from csv module | `bool` | `false` | no |
+| <a name="input_cato_token"></a> [cato\_token](#input\_cato\_token) | Cato Networks API Token | `string` | n/a | yes |
+| <a name="input_gcp_region"></a> [gcp\_region](#input\_gcp\_region) | GCP Region for the deployment | `string` | n/a | yes |
+| <a name="input_project"></a> [project](#input\_project) | GCP Project ID for the deployment | `string` | n/a | yes |
+| <a name="input_zone"></a> [zone](#input\_zone) | GCP Zone for the deployment | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_vpc3_public_ips_from_ipsec_tgw_test_env"></a> [vpc3\_public\_ips\_from\_ipsec\_tgw\_test\_env](#output\_vpc3\_public\_ips\_from\_ipsec\_tgw\_test\_env) | Public IPs of Public VPC servers in the test environment |
+| <a name="output_vpc3_public_ips_from_tgw_ha_test_env"></a> [vpc3\_public\_ips\_from\_tgw\_ha\_test\_env](#output\_vpc3\_public\_ips\_from\_tgw\_ha\_test\_env) | Public IPs of Public VPC servers in the test environment |
+| <a name="output_vpc3_public_ips_from_tgw_test_env"></a> [vpc3\_public\_ips\_from\_tgw\_test\_env](#output\_vpc3\_public\_ips\_from\_tgw\_test\_env) | Public IPs of Public VPC servers in the test environment |
+<!-- END_TF_DOCS -->

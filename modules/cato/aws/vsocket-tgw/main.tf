@@ -2,10 +2,9 @@
 module "vsocket-aws-vpc-tgw" {
   source = "catonetworks/vsocket-aws-tgw/cato"
 
-  ingress_cidr_blocks  = var.ingress_cidr_blocks
-  key_pair             = var.key_pair
-  vpc_network_range    = var.vpc_network_range
-  native_network_range = var.native_network_range
+  ingress_cidr_blocks = var.ingress_cidr_blocks
+  key_pair            = var.key_pair
+  vpc_network_range   = var.vpc_network_range
 
   # | Subnet Purpose | CIDR            | ENI IP       |
   # | -------------- | --------------- | ------------ |
@@ -29,8 +28,14 @@ module "vsocket-aws-vpc-tgw" {
   tgw_id             = module.transit-gateway.ec2_transit_gateway_id
   tgw_route_table_id = module.transit-gateway.ec2_transit_gateway_association_default_route_table_id
   site_description   = var.site_description
-  site_location      = var.site_location
+  region             = var.region
   tags               = var.tags
+
+  routed_networks = var.build_aws_vsocket_tgw_test_env ? {
+    "test-env-vpc-1" = module.test_env[0].vpc1_cidr_block
+    "test-env-vpc-2" = module.test_env[0].vpc2_cidr_block
+    "test-env-vpc-3" = module.test_env[0].vpc3_cidr_block
+  } : null
 
   depends_on = [module.transit-gateway]
 }
@@ -71,7 +76,7 @@ module "transit-gateway" {
 
 module "test_env" {
   source = "../../../aws/test-env-tgw"
-  count  = var.build_aws_vsocket_tgw_test_env ? 1 : 0 
+  count  = var.build_aws_vsocket_tgw_test_env ? 1 : 0
 
   site_name              = var.site_name
   tags                   = var.tags

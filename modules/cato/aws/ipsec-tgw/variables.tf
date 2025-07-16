@@ -37,6 +37,7 @@ variable "site_description" {
 }
 
 variable "site_location" {
+  description = "Site location which is used by the Cato Socket to connect to the closest Cato PoP. If not specified, the location will be derived from the Azure region dynamicaly."
   type = object({
     city         = string
     country_code = string
@@ -44,10 +45,10 @@ variable "site_location" {
     timezone     = string
   })
   default = {
-    city         = "San Diego"
-    country_code = "US"
-    state_code   = "US-CA" ## Optional - for countries with states
-    timezone     = "America/Los_Angeles"
+    city         = null
+    country_code = null
+    state_code   = null ## Optional - for countries with states
+    timezone     = null
   }
 }
 
