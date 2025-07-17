@@ -37,6 +37,7 @@ variable "site_description" {
 }
 
 variable "site_location" {
+  description = "Site location which is used by the Cato Socket to connect to the closest Cato PoP. If not specified, the location will be derived from the Azure region dynamicaly."
   type = object({
     city         = string
     country_code = string
@@ -44,10 +45,10 @@ variable "site_location" {
     timezone     = string
   })
   default = {
-    city         = "San Diego"
-    country_code = "US"
-    state_code   = "US-CA" ## Optional - for countries with states
-    timezone     = "America/Los_Angeles"
+    city         = null
+    country_code = null
+    state_code   = null ## Optional - for countries with states
+    timezone     = null
   }
 }
 
@@ -172,25 +173,25 @@ variable "secondary_vpn_tunnel2_inside_cidr" {
 variable "primary_private_cato_ip" {
   description = "Private IP address of the Cato side for the primary tunnel"
   type        = string
-  default     = "169.254.100.2"
+  default     = "169.254.101.2"
 }
 
 variable "primary_private_site_ip" {
   description = "Private IP address of the site side for the primary tunnel"
   type        = string
-  default     = "169.254.100.1"
+  default     = "169.254.101.1"
 }
 
 variable "secondary_private_cato_ip" {
   description = "Private IP address of the Cato side for the secondary tunnel"
   type        = string
-  default     = "169.254.200.2"
+  default     = "169.254.201.2"
 }
 
 variable "secondary_private_site_ip" {
   description = "Private IP address of the site side for the secondary tunnel"
   type        = string
-  default     = "169.254.200.1"
+  default     = "169.254.201.1"
 }
 
 variable "downstream_bw" {

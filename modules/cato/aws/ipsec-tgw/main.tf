@@ -1,22 +1,22 @@
 module "ipsec-aws-tgw" {
-  source                              = "catonetworks/ipsec-aws-transit-gateway/cato"
-  account_id                          = var.account_id
-  token                               = var.token
-  aws_transit_gateway_id              = module.transit-gateway.ec2_transit_gateway_id
-  region                              = var.region
-  cato_bgp_asn                        = var.cato_bgp_asn
-  cato_primary_gateway_ip_address     = var.cato_primary_gateway_ip_address
-  cato_secondary_gateway_ip_address   = var.cato_secondary_gateway_ip_address
-  site_name                           = var.site_name
-  site_description                    = var.site_description
-  native_network_range                = var.native_network_range
-  primary_vpn_tunnel1_inside_cidr     = var.primary_vpn_tunnel1_inside_cidr
-  secondary_vpn_tunnel1_inside_cidr   = var.secondary_vpn_tunnel1_inside_cidr
-  primary_vpn_tunnel1_preshared_key   = random_password.primary_vpn_tunnel1_preshared_key.result
-  secondary_vpn_tunnel1_preshared_key = random_password.primary_vpn_tunnel1_preshared_key.result
-  primary_vpn_tunnel2_preshared_key   = random_password.secondary_vpn_tunnel1_preshared_key.result
-  secondary_vpn_tunnel2_preshared_key = random_password.secondary_vpn_tunnel1_preshared_key.result
-  cato_primary_bgp_advertise_default_route = true
+  source                                     = "catonetworks/ipsec-aws-transit-gateway/cato"
+  account_id                                 = var.account_id
+  token                                      = var.token
+  aws_transit_gateway_id                     = module.transit-gateway.ec2_transit_gateway_id
+  region                                     = var.region
+  cato_bgp_asn                               = var.cato_bgp_asn
+  cato_primary_gateway_ip_address            = var.cato_primary_gateway_ip_address
+  cato_secondary_gateway_ip_address          = var.cato_secondary_gateway_ip_address
+  site_name                                  = var.site_name
+  site_description                           = var.site_description
+  native_network_range                       = var.native_network_range
+  primary_vpn_tunnel1_inside_cidr            = var.primary_vpn_tunnel1_inside_cidr
+  secondary_vpn_tunnel1_inside_cidr          = var.secondary_vpn_tunnel1_inside_cidr
+  primary_vpn_tunnel1_preshared_key          = random_password.primary_vpn_tunnel1_preshared_key.result
+  secondary_vpn_tunnel1_preshared_key        = random_password.primary_vpn_tunnel1_preshared_key.result
+  primary_vpn_tunnel2_preshared_key          = random_password.secondary_vpn_tunnel1_preshared_key.result
+  secondary_vpn_tunnel2_preshared_key        = random_password.secondary_vpn_tunnel1_preshared_key.result
+  cato_primary_bgp_advertise_default_route   = true
   cato_secondary_bgp_advertise_default_route = true
 
 
@@ -82,13 +82,13 @@ module "test_env" {
 }
 
 resource "random_password" "primary_vpn_tunnel1_preshared_key" {
-  length  = 24
-  special = true
+  length           = 24
+  special          = true
   override_special = "._"
 }
 
 resource "random_password" "secondary_vpn_tunnel1_preshared_key" {
-  length  = 24
-  special = true
+  length           = 24
+  special          = true
   override_special = "._"
 }

@@ -4,21 +4,22 @@ variable "vpc_id" {
   default     = null
 }
 
-variable "native_network_range" {
-  description = "Native network range for the IPSec site (replace with the desired network range)"
-  type        = string
-  default     = "10.0.0.0/16"
-}
-
-variable "bgp_asn" {
-  description = "BGP ASN for the AWS customer gateway (Amazon default is 65000, but it can be changed)"
+variable "aws_bgp_asn" {
+  description = "AWS's BGP Autonomous System Number"
   type        = number
   default     = 65000
 }
 
-variable "cgw_ip" {
-  description = "Public IP address for the AWS customer gateway (replace with your actual IP)"
+variable "cato_bgp_asn" {
+  description = "Cato's BGP Autonomous System Number"
+  type        = number
+  default     = 65001
+}
+
+variable "native_network_range" {
+  description = "Native network range for the IPSec site (replace with the desired network range)"
   type        = string
+  default     = "10.0.0.0/16"
 }
 
 variable "site_name" {
@@ -46,16 +47,16 @@ variable "site_description" {
 variable "primary_private_cato_ip" {
   description = "Private IP address of the Cato side for the primary tunnel (replace with the desired value)"
   type        = string
-  default     = "169.1.1.2"
+  default     = "169.254.100.2"
 }
 
 variable "primary_private_site_ip" {
   description = "Private IP address of the site side for the primary tunnel (replace with the desired value)"
   type        = string
-  default     = "169.1.1.3"
+  default     = "169.254.100.1"
 }
 
-variable "primary_public_cato_ip_id" {
+variable "primary_public_cato_ip" {
   description = "Public IP address ID of the Cato side for the primary tunnel (replace with the desired value)"
   type        = string
 }
@@ -63,16 +64,16 @@ variable "primary_public_cato_ip_id" {
 variable "secondary_private_cato_ip" {
   description = "Private IP address of the Cato side for the secondary tunnel (replace with the desired value)"
   type        = string
-  default     = "169.2.1.2"
+  default     = "169.254.200.2"
 }
 
 variable "secondary_private_site_ip" {
   description = "Private IP address of the site side for the secondary tunnel (replace with the desired value)"
   type        = string
-  default     = "169.2.1.3"
+  default     = "169.254.200.1"
 }
 
-variable "secondary_public_cato_ip_id" {
+variable "secondary_public_cato_ip" {
   description = "Public IP address ID of the Cato side for the secondary tunnel (replace with the desired value)"
   type        = string
 }
@@ -89,8 +90,13 @@ variable "upstream_bw" {
   default     = 100
 }
 
+variable "region" {
+  description = "AWS region where resources will be deployed."
+  type        = string
+}
+
 variable "site_location" {
-  description = "Location details for the IPSec site"
+  description = "Site location which is used by the Cato Socket to connect to the closest Cato PoP. If not specified, the location will be derived from the Azure region dynamicaly."
   type = object({
     city         = string
     country_code = string
@@ -98,9 +104,9 @@ variable "site_location" {
     timezone     = string
   })
   default = {
-    city         = "New York City"
-    country_code = "US"
-    state_code   = "US-NY"
-    timezone     = "America/New_York"
+    city         = null
+    country_code = null
+    state_code   = null ## Optional - for countries with states
+    timezone     = null
   }
 }

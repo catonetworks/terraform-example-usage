@@ -19,9 +19,9 @@ module "vsocket-azure" {
   location             = var.location
   native_network_range = var.subnet_range_lan == null ? cidrsubnet(var.vnet_prefix, 8, 2) : var.subnet_range_lan
   resource_group_name  = module.vnet.resource_group_name
-  mgmt_nic_name          = module.vnet.mgmt-nic-name
-  wan_nic_name           = module.vnet.wan-nic-name
-  lan_nic_name           = module.vnet.lan-nic-name
+  mgmt_nic_name        = module.vnet.mgmt-nic-name
+  wan_nic_name         = module.vnet.wan-nic-name
+  lan_nic_name         = module.vnet.lan-nic-name
   site_name            = var.site_name
   site_description     = var.site_description
   site_type            = var.site_type

@@ -26,10 +26,10 @@ module "ipsec-aws" {
   ### using query.entityLookup() filtering for type allocatedIP
  
   // Required variables
-  primary_public_cato_ip_id   = "12345"
-  secondary_public_cato_ip_id = "12345"
-  cgw_ip                      = "11.11.11.11" # Primary cato public IP address
- 
+  primary_public_cato_ip   = "x.x.x.x"
+  secondary_public_cato_ip = "y.y.y.y"
+  region                   = var.aws_region
+  
  // Example of overriding default values for module variables
   native_network_range        = "10.0.0.0/16"
   site_name = "AWS-Cato-IPSec-Site"
@@ -46,7 +46,8 @@ module "vsocket-aws" {
  
   // Required variables
   key_pair  = "cato-keypair-us-east-2"
- 
+  region    = var.aws_region
+
   // Example of overriding default values for module variables
   vpc_range = "10.1.0.0/16"
   site_name = "AWS-Cato-vSocket-Site"
@@ -59,6 +60,7 @@ module "vsocket-aws-vpc" {
  
   // Required variables
   key_pair  = var.aws_default_keypair
+  region    = var.aws_region
   
   // Example of overriding default values for module variables
   vpc_range = "10.2.0.0/16"
@@ -74,6 +76,7 @@ module "vsocket-aws-ha" {
   key_pair   = var.aws_default_keypair
   token      = var.cato_token
   account_id = var.account_id
+  region     = var.aws_region
   
   // Example of overriding default values for module variables
   vpc_range  = "10.3.0.0/16"
@@ -89,6 +92,7 @@ module "vsocket-aws-ha-vpc" {
   key_pair             = var.aws_default_keypair
   token                = var.cato_token
   account_id           = var.account_id
+  region               = var.aws_region
   
   // Example of overriding default values for module variables
   vpc_range            = "10.4.0.0/16"
@@ -103,7 +107,7 @@ module "vsocket-aws-tgw" {
   
   // Required variables
   key_pair = var.aws_default_keypair
-  
+  region   = var.aws_region
   
   // Example of overriding default values for module variables
   vpc_network_range = "10.5.0.0/24"
@@ -122,6 +126,7 @@ module "build_aws_vsocket_tgw_ha_module" {
   key_pair   = var.aws_default_keypair
   token      = var.cato_token
   account_id = var.account_id
+  region     = var.aws_region
   
   
   // Example of overriding default values for module variables
