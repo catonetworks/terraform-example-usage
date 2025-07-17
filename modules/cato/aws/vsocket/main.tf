@@ -23,7 +23,7 @@ module "vsocket-aws" {
   mgmt_eni_id      = module.vpc.mgmt_eni_id
   wan_eni_id       = module.vpc.wan_eni_id
   lan_eni_id       = module.vpc.lan_eni_id
-  lan_local_ip     = var.lan_eni_ip == null ? cidrhost(cidrsubnet(var.vpc_range, 8, 0), 5) : var.lan_eni_ip
+  lan_local_ip     = var.lan_eni_ip == null ? cidrhost(cidrsubnet(var.vpc_range, 8, 2), 5) : var.lan_eni_ip
   subnet_range_lan = var.subnet_range_lan == null ? cidrsubnet(var.vpc_range, 8, 2) : var.subnet_range_lan
   region           = var.region
 }
