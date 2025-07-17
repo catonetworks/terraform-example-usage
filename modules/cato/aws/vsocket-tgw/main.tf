@@ -36,7 +36,7 @@ module "vsocket-aws-vpc-tgw" {
     "test-env-vpc-1" = module.test_env[0].vpc1_cidr_block
     "test-env-vpc-2" = module.test_env[0].vpc2_cidr_block
     "test-env-vpc-3" = module.test_env[0].vpc3_cidr_block
-  } : null
+  } : {}
 
   depends_on = [module.transit-gateway]
 }
