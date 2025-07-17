@@ -147,6 +147,18 @@ variable "build_azure_vsocket_ha_vnet_module" {
   default     = false
 }
 
+variable "build_azure_vwan_module" {
+  description = "Build Azure vWAN Site Module"
+  type        = bool
+  default     = false
+}
+
+variable "build_azure_vsocket_ha_vnet_2nic_module" {
+  description = "Build Azure vSocket Net 2NIC site Module"
+  type        = bool
+  default     = false
+}
+
 # Settings for all GCP modules
 variable "build_gcp_ipsec_module" {
   description = "Build GCP IPsec site module"

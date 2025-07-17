@@ -34,15 +34,15 @@ output "vpn_gateway_id" {
   value       = module.ipsec-azure.vpn_gateway_id
 }
 
-output "vpn_gateway_public_ip" {
-  description = "The public IP address of the VPN Gateway"
-  value       = module.ipsec-azure.vpn_gateway_public_ip
-}
+# output "vpn_gateway_public_ip" {
+#   description = "The public IP address of the VPN Gateway"
+#   value       = module.ipsec-azure.vpn_gateway_public_ip
+# }
 
-output "site_id" {
-  description = "ID of the created Cato IPSec site"
-  value       = module.ipsec-azure.site_id
-}
+# output "site_id" {
+#   description = "ID of the created Cato IPSec site"
+#   value       = module.ipsec-azure.site_id
+# }
 
 output "cato_license_site" {
   description = "Cato site license"

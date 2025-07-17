@@ -13,28 +13,25 @@ module "vnet" {
 }
 
 module "ipsec-azure" {
-  depends_on                  = [module.vnet]
-  source                      = "catonetworks/ipsec-azure/cato"
-  token                       = var.token
-  account_id                  = var.account_id
-  resource_group_name         = module.vnet.resource_group_name
-  vnet_name                   = module.vnet.vnet_name
-  az_location                 = var.az_location
-  vpn_gateway_name            = var.vpn_gateway_name
-  site_name                   = var.site_name
-  site_description            = var.site_description
-  native_network_range        = var.native_network_range
-  local_network_gateway_name  = var.local_network_gateway_name
-  site_location               = var.site_location
-  primary_cato_pop_ip         = var.primary_cato_pop_ip
-  secondary_cato_pop_ip       = var.secondary_cato_pop_ip
-  primary_public_cato_ip_id   = var.primary_public_cato_ip_id
-  primary_private_cato_ip     = var.primary_private_cato_ip
-  primary_private_site_ip     = var.primary_private_site_ip
-  secondary_public_cato_ip_id = var.secondary_public_cato_ip_id
-  secondary_private_cato_ip   = var.secondary_private_cato_ip
-  secondary_private_site_ip   = var.secondary_private_site_ip
-  downstream_bw               = var.downstream_bw
-  upstream_bw                 = var.upstream_bw
-  gateway_subnet_id           = module.vnet.subnet_id
+  depends_on                 = [module.vnet]
+  source                     = "catonetworks/ipsec-azure/cato"
+  token                      = var.token
+  account_id                 = var.account_id
+  azure_resource_group_name  = module.vnet.resource_group_name
+  az_location                = var.az_location
+  site_name                  = var.site_name
+  site_description           = var.site_description
+  native_network_range       = var.native_network_range
+  site_location              = var.site_location
+  primary_cato_pop_ip        = var.primary_cato_pop_ip
+  secondary_cato_pop_ip      = var.secondary_cato_pop_ip
+  primary_private_cato_ip    = var.primary_private_cato_ip
+  primary_private_site_ip    = var.primary_private_site_ip
+  secondary_private_cato_ip  = var.secondary_private_cato_ip
+  secondary_private_site_ip  = var.secondary_private_site_ip
+  downstream_bw              = var.downstream_bw
+  upstream_bw                = var.upstream_bw
+  build_azure_vng_vnet       = false
+  build_azure_resource_group = false
+  azure_gateway_subnet_id = module.vnet.subnet_id
 }

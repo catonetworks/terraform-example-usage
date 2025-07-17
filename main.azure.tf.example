@@ -13,9 +13,7 @@ module "ipsec-azure" {
   ### using query.entityLookup() filtering for type allocatedIP
   token                       = var.cato_token
   account_id                  = var.account_id
-  primary_public_cato_ip_id   = "12345"
   primary_cato_pop_ip         = "11.11.11.11"
-  secondary_public_cato_ip_id = "12346"
   secondary_cato_pop_ip       = "11.11.22.22"
 }
 
@@ -47,4 +45,20 @@ module "vsocket-azure-ha-vnet" {
   account_id            = var.account_id
   azure_subscription_id = var.azure_subscription_id
   location = "Central US"
+}
+
+module "vsocket-azure-ha-vnet-2nic" {
+  count  = var.build_azure_vsocket_ha_vnet_2nic_module ? 1 : 0 
+  source = "./modules/cato/azure/vsocket-ha-vnet-2nic"
+  token                 = var.cato_token
+  account_id            = var.account_id
+  azure_subscription_id = var.azure_subscription_id
+}
+
+module "azure-vwan" { 
+  count  = var.build_azure_vwan_module ? 1 : 0 
+  source = "./modules/cato/azure/vwan"
+  token                 = var.cato_token
+  account_id            = var.account_id
+  azure_subscription_id = var.azure_subscription_id
 }
