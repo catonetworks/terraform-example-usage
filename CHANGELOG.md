@@ -43,3 +43,13 @@
 ### Features
  - Updated to use newest Azure Modules 
  - Updated Azure Examples to use 'Location' 
+
+## 0.0.6 (2025-07-17)
+
+### Features 
+ - Brought all AWS Modules Up to date.  
+    - Includes Updates to SiteLocation for AWS Modules 
+ - Tested Each Module and Validated Preconfigured Settings 
+    - Adjusted Settings for AWS-IPSec Module 
+ - Locked Cato Provider to 0.0.30 or Greater (For Site_Location) 
+ - Formatted Code
