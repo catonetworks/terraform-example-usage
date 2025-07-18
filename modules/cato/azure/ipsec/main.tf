@@ -33,5 +33,5 @@ module "ipsec-azure" {
   upstream_bw                = var.upstream_bw
   build_azure_vng_vnet       = false
   build_azure_resource_group = false
-  azure_gateway_subnet_id = module.vnet.subnet_id
+  azure_gateway_subnet_id    = module.vnet.subnet_id
 }
