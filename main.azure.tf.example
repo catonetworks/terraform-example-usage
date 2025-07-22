@@ -55,10 +55,14 @@ module "vsocket-azure-ha-vnet-2nic" {
   azure_subscription_id = var.azure_subscription_id
 }
 
-module "azure-vwan" { 
-  count  = var.build_azure_vwan_module ? 1 : 0 
-  source = "./modules/cato/azure/vwan"
+module "azure-vwan" {
+  count                 = var.build_azure_vwan_module ? 1 : 0
+  source                = "./modules/cato/azure/vwan"
   token                 = var.cato_token
   account_id            = var.account_id
-  azure_subscription_id = var.azure_subscription_id
+  hub1_location         = "West Central US"
+  hub2_location         = "East US"
+  location              = "West Central US"
+  primary_cato_pop_ip   = "x.x.x.x"
+  secondary_cato_pop_ip = "y.y.y.y"
 }
