@@ -121,16 +121,28 @@ variable "az_virtualhub_2_address_prefix" {
   default     = "10.55.128.0/17"
 }
 
-variable "site_name" {
+variable "hub1_site_name" {
   description = "The name of the site in the Cato Management Application."
   type        = string
-  default     = "Azure-Cato-vWAN-Site"
+  default     = "Azure-Cato-vWAN-Site_hub1"
 }
 
-variable "site_description" {
+variable "hub1_site_description" {
   description = "A description for the site in the Cato Management Application."
   type        = string
-  default     = "Azure-Cato-vWAN-Site"
+  default     = "Azure-Cato-vWAN-Site_hub1"
+}
+
+variable "hub2_site_name" {
+  description = "The name of the site in the Cato Management Application."
+  type        = string
+  default     = "Azure-Cato-vWAN-Site_hub2"
+}
+
+variable "hub2_site_description" {
+  description = "A description for the site in the Cato Management Application."
+  type        = string
+  default     = "Azure-Cato-vWAN-Site_hub2"
 }
 
 variable "site_type" {

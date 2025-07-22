@@ -35,8 +35,8 @@ module "cato_azure_vwan_connection-1" {
   azure_resource_group_name = azurerm_resource_group.azure-rg.name
   azure_vwan_name           = azurerm_virtual_wan.virtualwan.name
   azure_hub_name            = azurerm_virtual_hub.virtualhub-1.name
-  site_name                 = var.site_name
-  site_description          = var.site_description
+  site_name                 = var.hub1_site_name
+  site_description          = var.hub1_site_description
   site_type                 = var.site_type
   primary_cato_pop_ip       = var.primary_cato_pop_ip
   secondary_cato_pop_ip     = var.secondary_cato_pop_ip
@@ -61,8 +61,8 @@ module "cato_azure_vwan_connection-2" {
   azure_resource_group_name = azurerm_resource_group.azure-rg.name
   azure_vwan_name           = azurerm_virtual_wan.virtualwan.name
   azure_hub_name            = azurerm_virtual_hub.virtualhub-2.name
-  site_name                 = var.site_name
-  site_description          = var.site_description
+  site_name                 = var.hub2_site_name
+  site_description          = var.hub2_site_description
   site_type                 = var.site_type
   primary_cato_pop_ip       = var.primary_cato_pop_ip
   secondary_cato_pop_ip     = var.secondary_cato_pop_ip
