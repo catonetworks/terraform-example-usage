@@ -38,11 +38,10 @@ module "cato_azure_vwan_connection-1" {
   site_name                 = var.site_name
   site_description          = var.site_description
   site_type                 = var.site_type
-  native_network_range      = null
   primary_cato_pop_ip       = var.primary_cato_pop_ip
   secondary_cato_pop_ip     = var.secondary_cato_pop_ip
-  cato_asn                  = var.cato_asn  #Private ASN for Cato Side
-  azure_asn                 = var.azure_asn #Private ASN for Azure Side
+  cato_asn                  = var.cato_asn
+  azure_asn                 = var.azure_asn
   azure_bgp_peer_weight     = 10
   azure_primary_bgp_ip      = var.hub1_azure_primary_bgp_ip
   cato_primary_bgp_ip       = var.hub1_cato_primary_bgp_ip
@@ -65,7 +64,6 @@ module "cato_azure_vwan_connection-2" {
   site_name                 = var.site_name
   site_description          = var.site_description
   site_type                 = var.site_type
-  native_network_range      = null
   primary_cato_pop_ip       = var.primary_cato_pop_ip
   secondary_cato_pop_ip     = var.secondary_cato_pop_ip
   cato_asn                  = var.cato_asn

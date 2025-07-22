@@ -319,7 +319,7 @@ Below is a list of the terraform modules included in this package, and the assoc
 | [azure-socket-vnet](https://registry.terraform.io/modules/catonetworks/vsocket-azure-vnet/cato/latest) | 10.52.0.0/16 | 6 min | N/A |
 | [azure-socket-ha](https://registry.terraform.io/modules/catonetworks/vsocket-azure-ha/cato/latest) | 10.53.0.0/16 | 16 min | N/A | 
 | [azure-socket-ha-vnet](https://registry.terraform.io/modules/catonetworks/vsocket-azure-ha-vpc/cato/latest) | 10.54.0.0/16 | 16 min | N/A |
-| [azure-vwan](https://registry.terraform.io/modules/catonetworks/vsocket-azure-vwan/cato/latest) | 10.55.0.0/16 | 40 min | N/A |
+| [azure-vwan](https://registry.terraform.io/modules/catonetworks/vsocket-azure-vwan/cato/latest) | 10.55.0.0/16 | 120 min | N/A |
 | [azure-socket-ha-vnet-2nic](https://github.com/catonetworks/terraform-cato-vsocket-azure-ha-vnet-2nic) 10.56.0.0/16 | 25 min | N/A |
 | [gcp-ipsec](https://registry.terraform.io/modules/catonetworks/vsocket-gcp-ipsec/cato/latest) | 10.100.0.0/16 | n/a | N/A |
 | [gcp-socket](https://registry.terraform.io/modules/catonetworks/vsocket-gcp/cato/latest) | 10.101.0.0/16 | 5 min | N/A | 

@@ -154,7 +154,7 @@ variable "cato_asn" {
 variable "azure_asn" {
   description = "Private ASN for Azure Side"
   type        = number
-  default     = 65003
+  default     = 65515
 }
 
 variable "hub1_azure_primary_bgp_ip" {
