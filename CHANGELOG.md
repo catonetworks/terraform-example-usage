@@ -53,3 +53,10 @@
     - Adjusted Settings for AWS-IPSec Module 
  - Locked Cato Provider to 0.0.30 or Greater (For Site_Location) 
  - Formatted Code
+
+## 0.0.7 (2025-07-23)
+
+### Features 
+ - Brought all AWS Modules Up to date, updated site_location
+ - Added Azure vSocket 2-nic modules to repo
+ - Added Azure VWAN module to repo
