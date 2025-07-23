@@ -48,13 +48,13 @@ variable "site_location" {
 variable "site_name" {
   type        = string
   description = "Your Cato Site Name Here"
-  default     = "Azure-Cato-vSocket-HA-VNET-Site"
+  default     = "Azure-Cato-vSocket-HA-VNET-2-NIC-Site"
 }
 
 variable "site_description" {
   type        = string
   description = "Your site description"
-  default     = "Azure Cato vSocket HA VNET Site"
+  default     = "Azure Cato vSocket HA VNET 2Nic Site"
 }
 
 variable "site_type" {
@@ -73,7 +73,7 @@ variable "vnet_prefix" {
   	Choose a unique range for your new VPC that does not conflict with the rest of your Wide Area Network.
     The accepted input format is Standard CIDR Notation, e.g. X.X.X.X/X
 	EOT
-  default     = "10.54.0.0/16"
+  default     = "10.56.0.0/16"
 }
 
 variable "dns_servers" {
@@ -132,4 +132,34 @@ variable "floating_ip" {
   type        = string
   description = "Floating IP Address for the vSocket"
   default     = null
+}
+
+variable "create_resource_group" {
+  description = "Resource group creation true will create and false will use exsiting"
+  type        = bool
+  default     = true
+}
+
+variable "resource_prefix_name" {
+  description = "Prefix used for Azure resource names. Must conform to Azure naming restrictions."
+  type        = string
+  default     = null
+}
+
+variable "upstream_bandwidth" {
+  description = "Sockets upstream interface WAN Bandwidth in Mbps"
+  type        = string
+  default     = "25"
+}
+
+variable "downstream_bandwidth" {
+  description = "Sockets downstream interface WAN Bandwidth in Mbps"
+  type        = string
+  default     = "25"
+}
+
+variable "create_vnet" {
+  description = "Whether or not to create the Vnet, or use existing Vnet"
+  type        = bool
+  default     = true
 }

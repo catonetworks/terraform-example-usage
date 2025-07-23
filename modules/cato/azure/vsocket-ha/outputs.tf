@@ -120,25 +120,25 @@ output "vsocket_secondary_vm_name" {
   value       = module.vsocket-azure-ha.vsocket_secondary_vm_name
 }
 
-output "primary_disk_id" {
-  description = "ID of the Primary vSocket Managed Disk"
-  value       = module.vsocket-azure-ha.primary_disk_id
-}
+# output "primary_disk_id" {
+#   description = "ID of the Primary vSocket Managed Disk"
+#   value       = module.vsocket-azure-ha.primary_disk_id
+# }
 
-output "primary_disk_name" {
-  description = "Name of the Primary vSocket Managed Disk"
-  value       = module.vsocket-azure-ha.primary_disk_name
-}
+# output "primary_disk_name" {
+#   description = "Name of the Primary vSocket Managed Disk"
+#   value       = module.vsocket-azure-ha.primary_disk_name
+# }
 
-output "secondary_disk_id" {
-  description = "ID of the Secondary vSocket Managed Disk"
-  value       = module.vsocket-azure-ha.secondary_disk_id
-}
+# output "secondary_disk_id" {
+#   description = "ID of the Secondary vSocket Managed Disk"
+#   value       = module.vsocket-azure-ha.secondary_disk_id
+# }
 
-output "secondary_disk_name" {
-  description = "Name of the Secondary vSocket Managed Disk"
-  value       = module.vsocket-azure-ha.secondary_disk_name
-}
+# output "secondary_disk_name" {
+#   description = "Name of the Secondary vSocket Managed Disk"
+#   value       = module.vsocket-azure-ha.secondary_disk_name
+# }
 
 output "ha_identity_id" {
   description = "ID of the User Assigned Identity for HA"

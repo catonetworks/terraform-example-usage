@@ -24,11 +24,13 @@ build_aws_ipsec_tgw_module        = false
 build_aws_ipsec_tgw_test_env      = false
 
 # Settings for all Azure modules
-build_azure_ipsec_module           = false
-build_azure_vsocket_module         = false
-build_azure_vsocket_vnet_module    = false
-build_azure_vsocket_ha_module      = false
-build_azure_vsocket_ha_vnet_module = false
+build_azure_ipsec_module                = false
+build_azure_vsocket_module              = false
+build_azure_vsocket_vnet_module         = false
+build_azure_vsocket_ha_module           = false
+build_azure_vsocket_ha_vnet_module      = false
+build_azure_vwan_module                 = false
+build_azure_vsocket_ha_vnet_2nic_module = false
 
 # Settings for all GCP modules
 # build_gcp_ipsec_module       = false

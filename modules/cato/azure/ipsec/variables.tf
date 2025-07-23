@@ -85,6 +85,7 @@ variable "site_type" {
 }
 
 variable "site_location" {
+  description = "Site location which is used by the Cato Socket to connect to the closest Cato PoP. If not specified, the location will be derived from the Azure region dynamicaly."
   type = object({
     city         = string
     country_code = string
@@ -92,10 +93,10 @@ variable "site_location" {
     timezone     = string
   })
   default = {
-    city         = "New York City"
-    country_code = "US"
-    state_code   = "US-NY"
-    timezone     = "America/New_York"
+    city         = null
+    country_code = null
+    state_code   = null ## Optional - for countries with states
+    timezone     = null
   }
 }
 
@@ -109,11 +110,6 @@ variable "primary_private_site_ip" {
   description = "Private IP address of the site side for the primary tunnel"
   type        = string
   default     = "169.1.1.2"
-}
-
-variable "primary_public_cato_ip_id" {
-  description = "Public IP address ID of the Cato side for the primary tunnel"
-  type        = string
 }
 
 variable "primary_destination_type" {
@@ -138,11 +134,6 @@ variable "secondary_private_site_ip" {
   description = "Private IP address of the site side for the secondary tunnel"
   type        = string
   default     = "169.2.1.2"
-}
-
-variable "secondary_public_cato_ip_id" {
-  description = "Public IP address ID of the Cato side for the secondary tunnel"
-  type        = string
 }
 
 variable "secondary_destination_type" {
