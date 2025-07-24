@@ -76,3 +76,8 @@ variable "enable_kali" {
   description = "Enable build of Kali Instances"
   default     = false
 }
+
+variable "kali_ami_id" { 
+  description = "Custom AMI for Kali"
+  default = null
+}

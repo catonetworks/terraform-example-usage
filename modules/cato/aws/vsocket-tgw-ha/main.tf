@@ -97,4 +97,6 @@ module "test_env_ha" {
   keypair_name           = var.key_pair
   external_testing_range = var.external_testing_range
   enable_kali            = var.enable_kali
+  ### Needs a Custom AMI unless Marketplace has it enabled". Defaults to Null
+  kali_ami_id            = "ami-0395cfad13fba5338"
 }

@@ -28,7 +28,7 @@ data "aws_ami" "windows" {
 }
 
 data "aws_ami" "kali_linux" {
-  count       = var.enable_kali ? 1 : 0
+  count       = var.enable_kali && var.kali_ami_id == null ? 1 : 0
   most_recent = true
   owners      = ["679593333241"] # Offensive Security's account ID
 

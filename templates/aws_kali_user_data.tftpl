@@ -1,13 +1,21 @@
 #!/bin/bash
+set -e # Exit immediately if a command exits with a non-zero status.
 
-# EC2 Userdata Script for Kali Linux Instance
-# This script runs at boot time to customize the instance
+# Set DEBIAN_FRONTEND to noninteractive to prevent prompts
+export DEBIAN_FRONTEND=noninteractive
 
-# Update system packages
+# --- Logging Setup ---
+# Create a log file for this script's output
+LOG_FILE="/var/log/userdata-bootstrap.log"
+exec > >(tee -a ${LOG_FILE}) 2>&1
+echo "--- Userdata Script Started: $(date) ---"
+
+# --- System & Package Updates ---
 apt update -y
-apt full-upgrade -y
+# Use dist-upgrade to handle changing dependencies, new packages, or removing obsolete ones
+apt dist-upgrade -y
 
-# Install essential packages
+# --- Core & Kali Package Installation ---
 apt install -y \
     curl \
     wget \
@@ -16,86 +24,73 @@ apt install -y \
     htop \
     unzip \
     awscli \
-    python3-pip
+    python3-pip \
+    unattended-upgrades \
+    kali-linux-default \
+    xrdp \
+    kali-desktop-core \
+    kali-desktop-gnome \
+    kali-linux-headless
 
-# Configure SSH for better security
-# sed -i 's/#PermitRootLogin no/PermitRootLogin yes/' /etc/ssh/sshd_config
-# sed -i 's/#PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
-# sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+# --- AWS SSM Agent Installation ---
+echo "Installing AWS SSM Agent..."
+ARCH=$(dpkg --print-architecture)
+wget "https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/debian_${ARCH}/amazon-ssm-agent.deb" -O /tmp/amazon-ssm-agent.deb
+dpkg -i /tmp/amazon-ssm-agent.deb
+systemctl enable amazon-ssm-agent --now
+rm /tmp/amazon-ssm-agent.deb
+echo "SSM Agent installation complete."
 
-# Restart SSH service
-systemctl restart ssh
-systemctl enable ssh
-
-# Create a non-root user for Kali (if not exists)
+# --- User and SSH Configuration ---
+# Create a non-root user if it doesn't exist (Official Kali AMIs use 'kali' by default)
 if ! id "kali" &>/dev/null; then
-    useradd -m -s /bin/bash kali
-    usermod -aG sudo kali
+    echo "Creating 'kali' user..."
+    useradd -m -s /bin/bash -G sudo kali
     
-    # Set up SSH directory for kali user
+    # CRITICAL: Copy the SSH key from the default user to allow login
     mkdir -p /home/kali/.ssh
+    cp /root/.ssh/authorized_keys /home/kali/.ssh/authorized_keys
+    chown -R kali:kali /home/kali/.ssh
     chmod 700 /home/kali/.ssh
-    chown kali:kali /home/kali/.ssh
+    chmod 600 /home/kali/.ssh/authorized_keys
+    echo "'kali' user created."
 fi
 
-# Configure automatic security updates
-apt install -y unattended-upgrades
+# Configure SSH for X11 Forwarding
+# NOTE: Avoid enabling root login or password authentication for security.
+# Key-based authentication is the standard for cloud instances.
+sed -i.bak -E 's/^[#\s]*X11Forwarding.*/X11Forwarding yes/i' /etc/ssh/sshd_config
+systemctl restart sshd
+
+# --- Service Configuration ---
+# Enable and start the xrdp service for Remote Desktop
+systemctl enable xrdp --now
+
+# Configure automatic security updates (reboot is off by default)
 echo 'Unattended-Upgrade::Automatic-Reboot "false";' >> /etc/apt/apt.conf.d/50unattended-upgrades
 
-# Set timezone (customize as needed)
+# --- System Configuration ---
+# Set timezone to UTC
 timedatectl set-timezone UTC
 
-# Install common Kali tools (optional - uncomment if needed)
-apt install -y kali-linux-default kali-linux-large
-
-# Create useful directories
-mkdir -p /opt/tools
-chmod 755 /opt/tools
-
-# Set up logging
-mkdir -p /var/log/userdata
-echo "$(date): Userdata script execution started" >> /var/log/userdata/boot.log
-
-# Install Docker (optional - uncomment if needed)
-# curl -fsSL https://get.docker.com -o get-docker.sh
-# sh get-docker.sh
-# usermod -aG docker kali
-
-# Install and configure fail2ban for SSH protection
-# apt install -y fail2ban
-# systemctl enable fail2ban
-# systemctl start fail2ban
-
-# Create swap file (adjust size as needed)
+# Create swap file if it doesn't exist
 if [ ! -f /swapfile ]; then
+    echo "Creating 2G swap file..."
     fallocate -l 2G /swapfile
     chmod 600 /swapfile
     mkswap /swapfile
     swapon /swapfile
     echo '/swapfile none swap sw 0 0' >> /etc/fstab
+    echo "Swap file created and enabled."
 fi
 
-# Configure log rotation
-cat > /etc/logrotate.d/userdata << 'EOF'
-/var/log/userdata/*.log {
-    daily
-    missingok
-    rotate 7
-    compress
-    delaycompress
-    notifempty
-}
-EOF
+# Create useful directories
+mkdir -p /opt/tools
+chmod 755 /opt/tools
 
-# Final update and cleanup
+# --- Final Cleanup ---
 apt-get autoremove -y
 apt-get autoclean
 
-# Log completion
-echo "$(date): Userdata script execution completed successfully" >> /var/log/userdata/boot.log
+echo "--- Userdata Script Completed Successfully: $(date) ---"
 exit 0
-
-# Enable X11Forwarding 
-sed -i.bak -E 's/^[#\s]*X11Forwarding.*/X11Forwarding yes/i' /etc/ssh/sshd_config
-sed -i.bak -E 's/^[#\s]*X11UseLocalhost.*/X11UseLocalhost yes/i' /etc/ssh/sshd_config
-systemctl restart sshd

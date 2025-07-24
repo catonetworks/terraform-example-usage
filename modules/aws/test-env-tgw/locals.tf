@@ -115,7 +115,7 @@ locals {
     #     subnet_id                   = module.test-env-vpc-1.private_subnets[i]
     #     az                          = module.test-env-vpc-1.azs[i]
     #     sg_id                       = module.vpc1_internal_security_group.security_group_id
-    #     private_ip                  = cidrhost(subnet, 7)
+    #     private_ip                  = cidrhost(subnet, 8)
     #     associate_public_ip_address = false
     #   }
     # ],
@@ -127,7 +127,7 @@ locals {
     #     subnet_id                   = module.test-env-vpc-2.private_subnets[i]
     #     az                          = module.test-env-vpc-2.azs[i]
     #     sg_id                       = module.vpc2_internal_security_group.security_group_id
-    #     private_ip                  = cidrhost(subnet, 7)
+    #     private_ip                  = cidrhost(subnet, 8)
     #     associate_public_ip_address = false
     #   }
     # ],
@@ -139,7 +139,7 @@ locals {
         subnet_id                   = module.test-env-vpc-3.public_subnets[i]
         az                          = module.test-env-vpc-3.azs[i]
         sg_id                       = module.vpc3_external_security_group.security_group_id
-        private_ip                  = cidrhost(subnet, 7)
+        private_ip                  = cidrhost(subnet, 8)
         associate_public_ip_address = true
       }
     ]
