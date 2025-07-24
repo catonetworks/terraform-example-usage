@@ -476,7 +476,7 @@ This environment will build 3 VPCs, and associated subnets, route tables, routes
 | Name | Version |
 |------|---------|
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.98.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 4.1.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 4.1.0 |
 | <a name="requirement_cato"></a> [cato](#requirement\_cato) | >= 0.0.30 |
 | <a name="requirement_google"></a> [google](#requirement\_google) | ~> 4.0 |
 
@@ -488,6 +488,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_azure-vwan"></a> [azure-vwan](#module\_azure-vwan) | ./modules/cato/azure/vwan | n/a |
 | <a name="module_build_aws_ipsec_tgw_module"></a> [build\_aws\_ipsec\_tgw\_module](#module\_build\_aws\_ipsec\_tgw\_module) | ./modules/cato/aws/ipsec-tgw | n/a |
 | <a name="module_build_aws_vsocket_tgw_ha_module"></a> [build\_aws\_vsocket\_tgw\_ha\_module](#module\_build\_aws\_vsocket\_tgw\_ha\_module) | ./modules/cato/aws/vsocket-tgw-ha | n/a |
 | <a name="module_ipsec-aws"></a> [ipsec-aws](#module\_ipsec-aws) | ./modules/cato/aws/ipsec | n/a |
@@ -496,6 +497,11 @@ No providers.
 | <a name="module_vsocket-aws-ha-vpc"></a> [vsocket-aws-ha-vpc](#module\_vsocket-aws-ha-vpc) | ./modules/cato/aws/vsocket-ha-vpc | n/a |
 | <a name="module_vsocket-aws-tgw"></a> [vsocket-aws-tgw](#module\_vsocket-aws-tgw) | ./modules/cato/aws/vsocket-tgw | n/a |
 | <a name="module_vsocket-aws-vpc"></a> [vsocket-aws-vpc](#module\_vsocket-aws-vpc) | ./modules/cato/aws/vsocket-vpc | n/a |
+| <a name="module_vsocket-azure"></a> [vsocket-azure](#module\_vsocket-azure) | ./modules/cato/azure/vsocket | n/a |
+| <a name="module_vsocket-azure-ha"></a> [vsocket-azure-ha](#module\_vsocket-azure-ha) | ./modules/cato/azure/vsocket-ha | n/a |
+| <a name="module_vsocket-azure-ha-vnet"></a> [vsocket-azure-ha-vnet](#module\_vsocket-azure-ha-vnet) | ./modules/cato/azure/vsocket-ha-vnet | n/a |
+| <a name="module_vsocket-azure-ha-vnet-2nic"></a> [vsocket-azure-ha-vnet-2nic](#module\_vsocket-azure-ha-vnet-2nic) | ./modules/cato/azure/vsocket-ha-vnet-2nic | n/a |
+| <a name="module_vsocket-azure-vnet"></a> [vsocket-azure-vnet](#module\_vsocket-azure-vnet) | ./modules/cato/azure/vsocket-vnet | n/a |
 
 ## Resources
 
@@ -523,9 +529,11 @@ No resources.
 | <a name="input_build_aws_vsocket_vpc_module"></a> [build\_aws\_vsocket\_vpc\_module](#input\_build\_aws\_vsocket\_vpc\_module) | Build AWS vSocket VPC site module | `bool` | `false` | no |
 | <a name="input_build_azure_ipsec_module"></a> [build\_azure\_ipsec\_module](#input\_build\_azure\_ipsec\_module) | Build Azure IPsec site module | `bool` | `false` | no |
 | <a name="input_build_azure_vsocket_ha_module"></a> [build\_azure\_vsocket\_ha\_module](#input\_build\_azure\_vsocket\_ha\_module) | Build Azure vSocket VPC site module | `bool` | `false` | no |
+| <a name="input_build_azure_vsocket_ha_vnet_2nic_module"></a> [build\_azure\_vsocket\_ha\_vnet\_2nic\_module](#input\_build\_azure\_vsocket\_ha\_vnet\_2nic\_module) | Build Azure vSocket Net 2NIC site Module | `bool` | `false` | no |
 | <a name="input_build_azure_vsocket_ha_vnet_module"></a> [build\_azure\_vsocket\_ha\_vnet\_module](#input\_build\_azure\_vsocket\_ha\_vnet\_module) | Build Azure vSocket VNET site module | `bool` | `false` | no |
 | <a name="input_build_azure_vsocket_module"></a> [build\_azure\_vsocket\_module](#input\_build\_azure\_vsocket\_module) | Build Azure vSocket site module | `bool` | `false` | no |
 | <a name="input_build_azure_vsocket_vnet_module"></a> [build\_azure\_vsocket\_vnet\_module](#input\_build\_azure\_vsocket\_vnet\_module) | Build Azure vSocket VNET site module | `bool` | `false` | no |
+| <a name="input_build_azure_vwan_module"></a> [build\_azure\_vwan\_module](#input\_build\_azure\_vwan\_module) | Build Azure vWAN Site Module | `bool` | `false` | no |
 | <a name="input_build_bulk_socket_csv_module"></a> [build\_bulk\_socket\_csv\_module](#input\_build\_bulk\_socket\_csv\_module) | Build Bulk Socket site from csv module | `bool` | `false` | no |
 | <a name="input_build_gcp_ipsec_module"></a> [build\_gcp\_ipsec\_module](#input\_build\_gcp\_ipsec\_module) | Build GCP IPsec site module | `bool` | `false` | no |
 | <a name="input_build_gcp_vsocket_module"></a> [build\_gcp\_vsocket\_module](#input\_build\_gcp\_vsocket\_module) | Build GCP vSocket site module | `bool` | `false` | no |
