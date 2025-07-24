@@ -103,7 +103,11 @@ locals {
     ]
   ])
 
-  kali_servers = flatten([
+  kali_servers = var.enable_kali ? {
+    for server in local.kali_server_definition : server.name => server
+  } : {}
+
+  kali_server_definition = flatten([
     // VPC 1
     [
       for i, subnet in module.test-env-vpc-1.private_subnets_cidr_blocks : {

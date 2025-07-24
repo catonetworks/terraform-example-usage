@@ -96,4 +96,5 @@ module "test_env_ha" {
   tgw_id                 = module.transit-gateway.ec2_transit_gateway_id
   keypair_name           = var.key_pair
   external_testing_range = var.external_testing_range
+  enable_kali            = var.enable_kali
 }

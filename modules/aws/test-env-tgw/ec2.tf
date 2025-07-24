@@ -96,7 +96,7 @@ module "kali_server" {
   version = "5.8.0"
 
   name = each.key
-  ami  = data.aws_ami.kali_linux.id
+  ami  = data.aws_ami.kali_linux[0].id
 
   instance_type               = "t3.medium"
   key_name                    = var.keypair_name
