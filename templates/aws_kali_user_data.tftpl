@@ -1,0 +1,96 @@
+#!/bin/bash
+
+# EC2 Userdata Script for Kali Linux Instance
+# This script runs at boot time to customize the instance
+
+# Update system packages
+apt update -y
+apt full-upgrade -y
+
+# Install essential packages
+apt install -y \
+    curl \
+    wget \
+    git \
+    vim \
+    htop \
+    unzip \
+    awscli \
+    python3-pip
+
+# Configure SSH for better security
+# sed -i 's/#PermitRootLogin no/PermitRootLogin yes/' /etc/ssh/sshd_config
+# sed -i 's/#PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+# sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+
+# Restart SSH service
+systemctl restart ssh
+systemctl enable ssh
+
+# Create a non-root user for Kali (if not exists)
+if ! id "kali" &>/dev/null; then
+    useradd -m -s /bin/bash kali
+    usermod -aG sudo kali
+    
+    # Set up SSH directory for kali user
+    mkdir -p /home/kali/.ssh
+    chmod 700 /home/kali/.ssh
+    chown kali:kali /home/kali/.ssh
+fi
+
+# Configure automatic security updates
+apt install -y unattended-upgrades
+echo 'Unattended-Upgrade::Automatic-Reboot "false";' >> /etc/apt/apt.conf.d/50unattended-upgrades
+
+# Set timezone (customize as needed)
+timedatectl set-timezone UTC
+
+# Install common Kali tools (optional - uncomment if needed)
+apt install -y kali-linux-large
+
+# Create useful directories
+mkdir -p /opt/tools
+chmod 755 /opt/tools
+
+# Set up logging
+mkdir -p /var/log/userdata
+echo "$(date): Userdata script execution started" >> /var/log/userdata/boot.log
+
+# Install Docker (optional - uncomment if needed)
+# curl -fsSL https://get.docker.com -o get-docker.sh
+# sh get-docker.sh
+# usermod -aG docker kali
+
+# Install and configure fail2ban for SSH protection
+# apt install -y fail2ban
+# systemctl enable fail2ban
+# systemctl start fail2ban
+
+# Create swap file (adjust size as needed)
+if [ ! -f /swapfile ]; then
+    fallocate -l 2G /swapfile
+    chmod 600 /swapfile
+    mkswap /swapfile
+    swapon /swapfile
+    echo '/swapfile none swap sw 0 0' >> /etc/fstab
+fi
+
+# Configure log rotation
+cat > /etc/logrotate.d/userdata << 'EOF'
+/var/log/userdata/*.log {
+    daily
+    missingok
+    rotate 7
+    compress
+    delaycompress
+    notifempty
+}
+EOF
+
+# Final update and cleanup
+apt-get autoremove -y
+apt-get autoclean
+
+# Log completion
+echo "$(date): Userdata script execution completed successfully" >> /var/log/userdata/boot.log
+exit 0
