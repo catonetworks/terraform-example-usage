@@ -226,3 +226,8 @@ variable "external_testing_range" {
   description = "IP Address for Remote Access to Externally Faced Servers"
   default     = null
 }
+
+variable "enable_kali" {
+  description = "Enable Kali Instances in Test_Env"
+  default     = false
+}

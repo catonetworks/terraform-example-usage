@@ -13,6 +13,7 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_kali_server"></a> [kali\_server](#module\_kali\_server) | terraform-aws-modules/ec2-instance/aws | 5.8.0 |
 | <a name="module_prod_test_servers"></a> [prod\_test\_servers](#module\_prod\_test\_servers) | terraform-aws-modules/ec2-instance/aws | 5.8.0 |
 | <a name="module_test-env-vpc-1"></a> [test-env-vpc-1](#module\_test-env-vpc-1) | terraform-aws-modules/vpc/aws | 5.21.0 |
 | <a name="module_test-env-vpc-2"></a> [test-env-vpc-2](#module\_test-env-vpc-2) | terraform-aws-modules/vpc/aws | 5.21.0 |
@@ -29,9 +30,17 @@ No requirements.
 |------|------|
 | [aws_ec2_transit_gateway_vpc_attachment.test-env-vpc-1-attach](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_transit_gateway_vpc_attachment) | resource |
 | [aws_ec2_transit_gateway_vpc_attachment.test-env-vpc-2-attach](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_transit_gateway_vpc_attachment) | resource |
+| [aws_ec2_transit_gateway_vpc_attachment.test-env-vpc-3-attach](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_transit_gateway_vpc_attachment) | resource |
 | [aws_route.vpc1_private_to_tgw](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route) | resource |
 | [aws_route.vpc2_private_to_tgw](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route) | resource |
+| [aws_route.vpc3_private_to_tgw-1](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route) | resource |
+| [aws_route.vpc3_private_to_tgw-2](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route) | resource |
+| [aws_route.vpc3_private_to_tgw-3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route) | resource |
+| [aws_route.vpc3_public_to_tgw-1](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route) | resource |
+| [aws_route.vpc3_public_to_tgw-2](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route) | resource |
+| [aws_route.vpc3_public_to_tgw-3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route) | resource |
 | [aws_ami.amazon_linux_23](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
+| [aws_ami.kali_linux](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
 | [aws_ami.windows](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
 | [aws_availability_zones.available](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones) | data source |
 
@@ -39,6 +48,7 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_enable_kali"></a> [enable\_kali](#input\_enable\_kali) | Enable build of Kali Instances | `bool` | `false` | no |
 | <a name="input_external_testing_range"></a> [external\_testing\_range](#input\_external\_testing\_range) | IP Address for Remote Access to Externally Faced Servers | `any` | `null` | no |
 | <a name="input_keypair_name"></a> [keypair\_name](#input\_keypair\_name) | KeyPair for use on all Machines | `any` | n/a | yes |
 | <a name="input_native_network_range"></a> [native\_network\_range](#input\_native\_network\_range) | CIDR block for native subnet inside the vSocket | `string` | n/a | yes |

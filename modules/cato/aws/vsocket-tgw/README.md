@@ -32,6 +32,7 @@ No resources.
 | <a name="input_enable_default_route_table_association"></a> [enable\_default\_route\_table\_association](#input\_enable\_default\_route\_table\_association) | Enable association with default TGW route table | `bool` | `null` | no |
 | <a name="input_enable_default_route_table_propagation"></a> [enable\_default\_route\_table\_propagation](#input\_enable\_default\_route\_table\_propagation) | Enable propagation with default TGW route table | `bool` | `null` | no |
 | <a name="input_enable_dns_support"></a> [enable\_dns\_support](#input\_enable\_dns\_support) | Enable DNS support | `bool` | `null` | no |
+| <a name="input_enable_kali"></a> [enable\_kali](#input\_enable\_kali) | Build Kali Servers | `bool` | `false` | no |
 | <a name="input_enable_multicast_support"></a> [enable\_multicast\_support](#input\_enable\_multicast\_support) | Enable multicast support | `bool` | `null` | no |
 | <a name="input_enable_sg_referencing_support"></a> [enable\_sg\_referencing\_support](#input\_enable\_sg\_referencing\_support) | Enable Security Group referencing support | `bool` | `null` | no |
 | <a name="input_enable_vpn_ecmp_support"></a> [enable\_vpn\_ecmp\_support](#input\_enable\_vpn\_ecmp\_support) | Enable ECMP for VPN | `bool` | `null` | no |

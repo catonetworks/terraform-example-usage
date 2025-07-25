@@ -60,3 +60,8 @@
  - Brought all AWS Modules Up to date, updated site_location
  - Added Azure vSocket 2-nic modules to repo
  - Added Azure VWAN module to repo
+
+## 0.0.8 (2025-07-25)
+
+### Features
+ - Added Ability to build Kali Penetration Testing VM in Test Env
