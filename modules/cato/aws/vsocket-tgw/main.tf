@@ -86,4 +86,11 @@ module "test_env" {
   keypair_name           = var.key_pair
   external_testing_range = var.external_testing_range
   enable_kali            = var.enable_kali
+
+  ### Kali AMI IDs per Region: 
+  # us-west-2 : ami-0395cfad13fba5338
+  # us-west-1 : ami-09f6155bb6bc5e630
+  # us-east-1 : ami-0ce17303563d46234
+  # us-east-2 : ami-03756d73eb17f396b
+  ### 
 }
