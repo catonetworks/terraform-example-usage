@@ -26,3 +26,24 @@ data "aws_ami" "windows" {
 
   owners = ["801119661308"]
 }
+
+data "aws_ami" "kali_linux" {
+  count       = var.enable_kali && var.kali_ami_id == null ? 1 : 0
+  most_recent = true
+  owners      = ["679593333241"] # Offensive Security's account ID
+
+  filter {
+    name   = "name"
+    values = ["kali-linux-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  filter {
+    name   = "state"
+    values = ["available"]
+  }
+}

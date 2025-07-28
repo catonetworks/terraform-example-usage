@@ -32,11 +32,13 @@ No resources.
 | <a name="input_enable_default_route_table_association"></a> [enable\_default\_route\_table\_association](#input\_enable\_default\_route\_table\_association) | Enable association with default TGW route table | `bool` | `null` | no |
 | <a name="input_enable_default_route_table_propagation"></a> [enable\_default\_route\_table\_propagation](#input\_enable\_default\_route\_table\_propagation) | Enable propagation with default TGW route table | `bool` | `null` | no |
 | <a name="input_enable_dns_support"></a> [enable\_dns\_support](#input\_enable\_dns\_support) | Enable DNS support | `bool` | `null` | no |
+| <a name="input_enable_kali"></a> [enable\_kali](#input\_enable\_kali) | Build Kali Servers | `bool` | `false` | no |
 | <a name="input_enable_multicast_support"></a> [enable\_multicast\_support](#input\_enable\_multicast\_support) | Enable multicast support | `bool` | `null` | no |
 | <a name="input_enable_sg_referencing_support"></a> [enable\_sg\_referencing\_support](#input\_enable\_sg\_referencing\_support) | Enable Security Group referencing support | `bool` | `null` | no |
 | <a name="input_enable_vpn_ecmp_support"></a> [enable\_vpn\_ecmp\_support](#input\_enable\_vpn\_ecmp\_support) | Enable ECMP for VPN | `bool` | `null` | no |
 | <a name="input_external_testing_range"></a> [external\_testing\_range](#input\_external\_testing\_range) | IP Address for Remote Access to Externally Faced Servers | `any` | `null` | no |
 | <a name="input_ingress_cidr_blocks"></a> [ingress\_cidr\_blocks](#input\_ingress\_cidr\_blocks) | List of CIDR blocks allowed to access the vSocket | `list(string)` | <pre>[<br/>  "0.0.0.0/0"<br/>]</pre> | no |
+| <a name="input_kali_ami_id"></a> [kali\_ami\_id](#input\_kali\_ami\_id) | Custom AMI ID for Kali | `any` | `null` | no |
 | <a name="input_key_pair"></a> [key\_pair](#input\_key\_pair) | Name of the EC2 Key Pair to use for SSH access | `string` | n/a | yes |
 | <a name="input_lan_eni_ip"></a> [lan\_eni\_ip](#input\_lan\_eni\_ip) | Static IP for the LAN ENI | `string` | `null` | no |
 | <a name="input_mgmt_eni_ip"></a> [mgmt\_eni\_ip](#input\_mgmt\_eni\_ip) | Static IP for the management ENI | `string` | `null` | no |
@@ -59,5 +61,6 @@ No resources.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_test_env_private_ips"></a> [test\_env\_private\_ips](#output\_test\_env\_private\_ips) | Private IPs of Servers |
 | <a name="output_vpc3_public_ips_from_test_env"></a> [vpc3\_public\_ips\_from\_test\_env](#output\_vpc3\_public\_ips\_from\_test\_env) | Public IPs of VPC 3 servers in the test\_env module |
 <!-- END_TF_DOCS -->

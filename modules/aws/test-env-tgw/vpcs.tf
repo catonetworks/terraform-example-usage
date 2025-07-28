@@ -46,7 +46,7 @@ module "test-env-vpc-2" {
 }
 
 resource "aws_route" "vpc2_private_to_tgw" {
-  count = length(module.test-env-vpc-1.private_route_table_ids)
+  count = length(module.test-env-vpc-2.private_route_table_ids)
 
   route_table_id         = module.test-env-vpc-2.private_route_table_ids[count.index]
   destination_cidr_block = "0.0.0.0/0"
@@ -76,4 +76,60 @@ module "test-env-vpc-3" {
 
   tags = var.tags
 
+}
+
+resource "aws_route" "vpc3_private_to_tgw-1" {
+  count = length(module.test-env-vpc-3.private_route_table_ids)
+
+  route_table_id         = module.test-env-vpc-3.private_route_table_ids[count.index]
+  destination_cidr_block = "10.0.0.0/8"
+  transit_gateway_id     = var.tgw_id
+}
+
+resource "aws_route" "vpc3_private_to_tgw-2" {
+  count = length(module.test-env-vpc-3.private_route_table_ids)
+
+  route_table_id         = module.test-env-vpc-3.private_route_table_ids[count.index]
+  destination_cidr_block = "172.16.0.0/12"
+  transit_gateway_id     = var.tgw_id
+}
+
+resource "aws_route" "vpc3_private_to_tgw-3" {
+  count = length(module.test-env-vpc-3.private_route_table_ids)
+
+  route_table_id         = module.test-env-vpc-3.private_route_table_ids[count.index]
+  destination_cidr_block = "192.168.0.0/16"
+  transit_gateway_id     = var.tgw_id
+}
+
+resource "aws_route" "vpc3_public_to_tgw-1" {
+  count = length(module.test-env-vpc-3.public_route_table_ids)
+
+  route_table_id         = module.test-env-vpc-3.public_route_table_ids[count.index]
+  destination_cidr_block = "10.0.0.0/8"
+  transit_gateway_id     = var.tgw_id
+}
+
+resource "aws_route" "vpc3_public_to_tgw-2" {
+  count = length(module.test-env-vpc-3.public_route_table_ids)
+
+  route_table_id         = module.test-env-vpc-3.public_route_table_ids[count.index]
+  destination_cidr_block = "172.16.0.0/12"
+  transit_gateway_id     = var.tgw_id
+}
+
+resource "aws_route" "vpc3_public_to_tgw-3" {
+  count = length(module.test-env-vpc-3.public_route_table_ids)
+
+  route_table_id         = module.test-env-vpc-3.public_route_table_ids[count.index]
+  destination_cidr_block = "192.168.0.0/16"
+  transit_gateway_id     = var.tgw_id
+}
+
+resource "aws_ec2_transit_gateway_vpc_attachment" "test-env-vpc-3-attach" {
+  vpc_id             = module.test-env-vpc-3.vpc_id
+  transit_gateway_id = var.tgw_id
+  subnet_ids         = module.test-env-vpc-3.private_subnets
+  tags = merge(var.tags, {
+  Name = "${var.site_name}-VPC2-TGW-Attachment" })
 }

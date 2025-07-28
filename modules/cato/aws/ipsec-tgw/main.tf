@@ -79,6 +79,8 @@ module "test_env" {
   tgw_id                 = module.transit-gateway.ec2_transit_gateway_id
   keypair_name           = var.key_pair
   external_testing_range = var.external_testing_range
+  enable_kali            = var.enable_kali
+  kali_ami_id = var.kali_ami_id
 }
 
 resource "random_password" "primary_vpn_tunnel1_preshared_key" {
