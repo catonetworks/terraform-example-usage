@@ -442,8 +442,8 @@ This environment will build 3 VPCs, and associated subnets, route tables, routes
 ### Diagram
 <img src=./images/tgw-ha-test-env.png>
 </details>
-
-details>
+<p>
+<details>
 <summary> <strong> 📦 AWS Transit Gateway IPSEC Test Environment </strong> </summary>
 This repo comes with a test enviroment for testing connectivity and displaying how Cato IPSEC can be deployed within a cloud provider.  By setting build_aws_ipsec_tgw_test_env = true in the terraform.tfvars file, the test environment for AWS Transit Gateway IPSEC will be built automatically 
 
@@ -470,6 +470,89 @@ This environment will build 3 VPCs, and associated subnets, route tables, routes
 ### Diagram
 #### Diagram Pending
 </details>
+<p>
+
+<details>
+<summary><strong> 📦 Enabling the Kali Server Module </strong></summary>
+
+The Kali Server Module allows you to deploy Kali Linux penetration testing instances as part of your AWS Transit Gateway test environments. This module is available for security testing and network analysis purposes.
+
+### 1. How to Enable it
+
+To enable Kali servers in your deployment, you need to set the following variable(s) in your `terraform.tfvars` file:
+
+**Required Variable:**
+- `enable_kali = true` - Set this to `true` to enable the deployment of Kali Linux instances
+
+**Optional Variable:**
+- `kali_ami_id = "ami-xxxxxxxxx"` - Specify a custom Kali Linux AMI ID (if not provided, the module will automatically find the most recent Kali Linux AMI from Offensive Security)
+
+**Example Configuration:**
+```hcl
+# Enable Kali servers
+enable_kali = true
+
+# Optional: Specify a custom AMI ID
+# kali_ami_id = "ami-0395cfad13fba5338"  # Example for us-west-2
+```
+
+**Supported Environments/Modules:**
+The Kali server module is supported in the following AWS Transit Gateway test environments:
+- AWS Transit Gateway Test Environment (`build_aws_vsocket_tgw_test_env = true`)
+- AWS Transit Gateway HA Test Environment (`build_aws_vsocket_tgw_ha_test_env = true`)
+
+### 2. How to Use it
+
+**Instance Details:**
+- **Instance Type:** t3.medium (optimized for Kali Linux performance)
+- **Deployment Location:** VPC3 public subnets with public IP addresses
+- **Naming Convention:** `test-env-vpc-3-kaliServer-{index}`
+- **IP Assignment:** Static private IPs (typically .8 in each subnet)
+- **Storage:** 150GB GP3 EBS volume
+
+**Access Methods:**
+1. **SSH Access:** Use your configured EC2 key pair to SSH into the instances
+   ```bash
+   ssh -i your-key.pem kali@<private-ip> (If Connected to the network which houses the Kali Server)
+   ssh -i your-key.pem kali@<public-ip> (If accessing over the internet)
+   ```
+
+2. **AWS Systems Manager (SSM):** Connect via AWS SSM Session Manager
+   ```bash
+   aws ssm start-session --target <instance-id>
+   ```
+
+3. **Remote Desktop (XRDP):** The instances are configured with XRDP for GUI access
+   - Connect using any RDP client to `<public-ip>:3389`
+   - Use the `kali` user credentials
+
+**Pre-installed Tools:**
+The Kali instances come with:
+- Kali Linux default toolset (`kali-linux-default`)
+- Desktop environment (GNOME)
+- Headless tools (`kali-linux-headless`)
+- AWS CLI and SSM Agent
+- Development tools (git, vim, python3-pip)
+- Network utilities
+
+### 3. Caveats
+
+**Password Change Required**
+- You must ssh in to the server using the above instructions prior to using RDP
+- Once Connected with SSH you will need to change the password for the Kali User (`sudo passwd kali`)
+- Once the Password is changed you should be able to leverage an RDP client to connect to this server 
+
+**Boot Time**
+- Due to the number of updates, and installs on boot you must wait a minimum of 30 minutes for this server to be ready
+- You can check the status by viewing the cloud-init logs located in `/var/log/cloud-init*`
+
+**AMI ID**
+- Custom AMI IDs can be passed to the module using `kali_ami_id` in the case that you can't use the Marketplace version of Kali in your environment
+
+
+</details>
+
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -548,6 +631,9 @@ No resources.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_private_ips_from_ipsec_tgw_test_env"></a> [private\_ips\_from\_ipsec\_tgw\_test\_env](#output\_private\_ips\_from\_ipsec\_tgw\_test\_env) | private IPs of servers in the test environment |
+| <a name="output_private_ips_from_tgw_ha_test_env"></a> [private\_ips\_from\_tgw\_ha\_test\_env](#output\_private\_ips\_from\_tgw\_ha\_test\_env) | private IPs of servers in the test environment |
+| <a name="output_private_ips_from_tgw_test_env"></a> [private\_ips\_from\_tgw\_test\_env](#output\_private\_ips\_from\_tgw\_test\_env) | private IPs of servers in the test environment |
 | <a name="output_vpc3_public_ips_from_ipsec_tgw_test_env"></a> [vpc3\_public\_ips\_from\_ipsec\_tgw\_test\_env](#output\_vpc3\_public\_ips\_from\_ipsec\_tgw\_test\_env) | Public IPs of Public VPC servers in the test environment |
 | <a name="output_vpc3_public_ips_from_tgw_ha_test_env"></a> [vpc3\_public\_ips\_from\_tgw\_ha\_test\_env](#output\_vpc3\_public\_ips\_from\_tgw\_ha\_test\_env) | Public IPs of Public VPC servers in the test environment |
 | <a name="output_vpc3_public_ips_from_tgw_test_env"></a> [vpc3\_public\_ips\_from\_tgw\_test\_env](#output\_vpc3\_public\_ips\_from\_tgw\_test\_env) | Public IPs of Public VPC servers in the test environment |

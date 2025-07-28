@@ -98,7 +98,7 @@ module "test_env_ha" {
   external_testing_range = var.external_testing_range
   enable_kali            = var.enable_kali
   ### Needs a Custom AMI unless Marketplace has it enabled". Defaults to Null
-  kali_ami_id            = "ami-0395cfad13fba5338"
+  kali_ami_id = var.kali_ami_id
 
   ### Kali AMI IDs per Region: 
   # us-west-2 : ami-0395cfad13fba5338

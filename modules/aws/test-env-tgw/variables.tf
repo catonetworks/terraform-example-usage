@@ -77,7 +77,7 @@ variable "enable_kali" {
   default     = false
 }
 
-variable "kali_ami_id" { 
+variable "kali_ami_id" {
   description = "Custom AMI for Kali"
-  default = null
+  default     = null
 }

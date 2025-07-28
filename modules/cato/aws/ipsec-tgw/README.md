@@ -42,19 +42,21 @@
 | <a name="input_enable_default_route_table_association"></a> [enable\_default\_route\_table\_association](#input\_enable\_default\_route\_table\_association) | Enable association with default TGW route table | `bool` | `null` | no |
 | <a name="input_enable_default_route_table_propagation"></a> [enable\_default\_route\_table\_propagation](#input\_enable\_default\_route\_table\_propagation) | Enable propagation with default TGW route table | `bool` | `null` | no |
 | <a name="input_enable_dns_support"></a> [enable\_dns\_support](#input\_enable\_dns\_support) | Enable DNS support | `bool` | `null` | no |
+| <a name="input_enable_kali"></a> [enable\_kali](#input\_enable\_kali) | Enable Kali Instances in Test\_Env | `bool` | `false` | no |
 | <a name="input_enable_multicast_support"></a> [enable\_multicast\_support](#input\_enable\_multicast\_support) | Enable multicast support | `bool` | `null` | no |
 | <a name="input_enable_sg_referencing_support"></a> [enable\_sg\_referencing\_support](#input\_enable\_sg\_referencing\_support) | Enable Security Group referencing support | `bool` | `null` | no |
 | <a name="input_enable_vpn_ecmp_support"></a> [enable\_vpn\_ecmp\_support](#input\_enable\_vpn\_ecmp\_support) | Enable ECMP for VPN | `bool` | `null` | no |
 | <a name="input_external_testing_range"></a> [external\_testing\_range](#input\_external\_testing\_range) | IP Address for Remote Access to Externally Faced Servers | `any` | `null` | no |
+| <a name="input_kali_ami_id"></a> [kali\_ami\_id](#input\_kali\_ami\_id) | Custom AMI ID for Kali | `any` | `null` | no |
 | <a name="input_key_pair"></a> [key\_pair](#input\_key\_pair) | Name of the EC2 Key Pair to use for SSH access | `string` | n/a | yes |
 | <a name="input_native_network_range"></a> [native\_network\_range](#input\_native\_network\_range) | CIDR block for native subnet inside the vSocket | `string` | `"10.7.0.0/16"` | no |
-| <a name="input_primary_private_cato_ip"></a> [primary\_private\_cato\_ip](#input\_primary\_private\_cato\_ip) | Private IP address of the Cato side for the primary tunnel | `string` | `"169.254.100.2"` | no |
-| <a name="input_primary_private_site_ip"></a> [primary\_private\_site\_ip](#input\_primary\_private\_site\_ip) | Private IP address of the site side for the primary tunnel | `string` | `"169.254.100.1"` | no |
+| <a name="input_primary_private_cato_ip"></a> [primary\_private\_cato\_ip](#input\_primary\_private\_cato\_ip) | Private IP address of the Cato side for the primary tunnel | `string` | `"169.254.101.2"` | no |
+| <a name="input_primary_private_site_ip"></a> [primary\_private\_site\_ip](#input\_primary\_private\_site\_ip) | Private IP address of the site side for the primary tunnel | `string` | `"169.254.101.1"` | no |
 | <a name="input_primary_vpn_tunnel1_inside_cidr"></a> [primary\_vpn\_tunnel1\_inside\_cidr](#input\_primary\_vpn\_tunnel1\_inside\_cidr) | Primary VPN, Tunnel 1 Inside CIDR | `string` | `"169.254.100.0/30"` | no |
 | <a name="input_primary_vpn_tunnel2_inside_cidr"></a> [primary\_vpn\_tunnel2\_inside\_cidr](#input\_primary\_vpn\_tunnel2\_inside\_cidr) | Primary VPN, Tunnel 1 Inside CIDR | `string` | `null` | no |
 | <a name="input_region"></a> [region](#input\_region) | AWS Region | `string` | n/a | yes |
-| <a name="input_secondary_private_cato_ip"></a> [secondary\_private\_cato\_ip](#input\_secondary\_private\_cato\_ip) | Private IP address of the Cato side for the secondary tunnel | `string` | `"169.254.200.2"` | no |
-| <a name="input_secondary_private_site_ip"></a> [secondary\_private\_site\_ip](#input\_secondary\_private\_site\_ip) | Private IP address of the site side for the secondary tunnel | `string` | `"169.254.200.1"` | no |
+| <a name="input_secondary_private_cato_ip"></a> [secondary\_private\_cato\_ip](#input\_secondary\_private\_cato\_ip) | Private IP address of the Cato side for the secondary tunnel | `string` | `"169.254.201.2"` | no |
+| <a name="input_secondary_private_site_ip"></a> [secondary\_private\_site\_ip](#input\_secondary\_private\_site\_ip) | Private IP address of the site side for the secondary tunnel | `string` | `"169.254.201.1"` | no |
 | <a name="input_secondary_vpn_tunnel1_inside_cidr"></a> [secondary\_vpn\_tunnel1\_inside\_cidr](#input\_secondary\_vpn\_tunnel1\_inside\_cidr) | Primary VPN, Tunnel 2 Inside CIDR | `string` | `"169.254.200.0/30"` | no |
 | <a name="input_secondary_vpn_tunnel2_inside_cidr"></a> [secondary\_vpn\_tunnel2\_inside\_cidr](#input\_secondary\_vpn\_tunnel2\_inside\_cidr) | Primary VPN, Tunnel 2 Inside CIDR | `string` | `null` | no |
 | <a name="input_share_tgw"></a> [share\_tgw](#input\_share\_tgw) | Share TGW with other accounts | `bool` | `null` | no |
@@ -70,5 +72,6 @@
 
 | Name | Description |
 |------|-------------|
+| <a name="output_test_env_private_ips"></a> [test\_env\_private\_ips](#output\_test\_env\_private\_ips) | Private IPs of Servers |
 | <a name="output_vpc3_public_ips_from_test_env"></a> [vpc3\_public\_ips\_from\_test\_env](#output\_vpc3\_public\_ips\_from\_test\_env) | Public IPs of VPC 3 servers in the test\_env module |
 <!-- END_TF_DOCS -->

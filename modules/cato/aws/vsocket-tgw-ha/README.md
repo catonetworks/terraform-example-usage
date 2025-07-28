@@ -39,6 +39,7 @@ No resources.
 | <a name="input_enable_vpn_ecmp_support"></a> [enable\_vpn\_ecmp\_support](#input\_enable\_vpn\_ecmp\_support) | Enable VPN Equal Cost Multi-Path support | `bool` | `null` | no |
 | <a name="input_external_testing_range"></a> [external\_testing\_range](#input\_external\_testing\_range) | IP Address for Remote Access to Externally Faced Servers | `any` | `null` | no |
 | <a name="input_ingress_cidr_blocks"></a> [ingress\_cidr\_blocks](#input\_ingress\_cidr\_blocks) | List of CIDR blocks allowed for ingress | `list(string)` | <pre>[<br/>  "0.0.0.0/0"<br/>]</pre> | no |
+| <a name="input_kali_ami_id"></a> [kali\_ami\_id](#input\_kali\_ami\_id) | Custom AMI ID for Kali | `any` | `null` | no |
 | <a name="input_key_pair"></a> [key\_pair](#input\_key\_pair) | Name of the AWS EC2 key pair | `string` | n/a | yes |
 | <a name="input_lan_eni_primary_ip"></a> [lan\_eni\_primary\_ip](#input\_lan\_eni\_primary\_ip) | Primary LAN ENI private IP | `string` | `null` | no |
 | <a name="input_lan_eni_secondary_ip"></a> [lan\_eni\_secondary\_ip](#input\_lan\_eni\_secondary\_ip) | Secondary LAN ENI private IP | `string` | `null` | no |
@@ -69,5 +70,6 @@ No resources.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_test_env_private_ips"></a> [test\_env\_private\_ips](#output\_test\_env\_private\_ips) | Private IPs of Servers |
 | <a name="output_vpc3_public_ips_from_test_env"></a> [vpc3\_public\_ips\_from\_test\_env](#output\_vpc3\_public\_ips\_from\_test\_env) | Public IPs of VPC 3 servers in the test\_env module |
 <!-- END_TF_DOCS -->
