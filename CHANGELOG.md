@@ -66,3 +66,7 @@
 ### Features
  - Added Ability to build Kali Penetration Testing VM in Test Env
    - README, Examples, and Output Updates
+ - Added Compatibility for Cato provider 0.0.38 and above 
+ - Tested all modules with Default configurations
+ - Tested all Test-Environments with Default configurations
+ 
