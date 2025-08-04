@@ -46,10 +46,18 @@ module "vsocket-aws-tgw-ha" {
   build_default_tgw_route_to_cato = true
 
   routed_networks = var.build_aws_vsocket_tgw_ha_test_env ? {
-    "test-env-vpc-1" = module.test_env_ha[0].vpc1_cidr_block
-    "test-env-vpc-2" = module.test_env_ha[0].vpc2_cidr_block
-    "test-env-vpc-3" = module.test_env_ha[0].vpc3_cidr_block
-  } : {}
+    "test-env-vpc-1" = {
+      subnet = module.test_env_ha[0].vpc1_cidr_block
+    }
+
+    "test-env-vpc-2" = {
+      subnet = module.test_env_ha[0].vpc2_cidr_block
+    }
+
+    "test-env-vpc-3" = {
+      subnet = module.test_env_ha[0].vpc3_cidr_block
+    } 
+    } : {}
 }
 
 module "transit-gateway" {
@@ -97,13 +105,6 @@ module "test_env_ha" {
   keypair_name           = var.key_pair
   external_testing_range = var.external_testing_range
   enable_kali            = var.enable_kali
-  ### Needs a Custom AMI unless Marketplace has it enabled". Defaults to Null
   kali_ami_id = var.kali_ami_id
 
-  ### Kali AMI IDs per Region: 
-  # us-west-2 : ami-0395cfad13fba5338
-  # us-west-1 : ami-09f6155bb6bc5e630
-  # us-east-1 : ami-0ce17303563d46234
-  # us-east-2 : ami-03756d73eb17f396b
-  ### 
 }

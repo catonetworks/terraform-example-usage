@@ -33,9 +33,18 @@ module "vsocket-aws-vpc-tgw" {
   tags                            = var.tags
 
   routed_networks = var.build_aws_vsocket_tgw_test_env ? {
-    "test-env-vpc-1" = module.test_env[0].vpc1_cidr_block
-    "test-env-vpc-2" = module.test_env[0].vpc2_cidr_block
-    "test-env-vpc-3" = module.test_env[0].vpc3_cidr_block
+    "test-env-vpc-1" = {
+      subnet = module.test_env[0].vpc1_cidr_block
+    }
+
+    "test-env-vpc-2" = {
+      subnet = module.test_env[0].vpc2_cidr_block
+    }
+
+    "test-env-vpc-3" = {
+      subnet = module.test_env[0].vpc3_cidr_block
+    }
+
   } : {}
 
   depends_on = [module.transit-gateway]
@@ -87,11 +96,4 @@ module "test_env" {
   external_testing_range = var.external_testing_range
   enable_kali            = var.enable_kali
   kali_ami_id            = var.kali_ami_id
-
-  ### Kali AMI IDs per Region: 
-  # us-west-2 : ami-0395cfad13fba5338
-  # us-west-1 : ami-09f6155bb6bc5e630
-  # us-east-1 : ami-0ce17303563d46234
-  # us-east-2 : ami-03756d73eb17f396b
-  ### 
 }

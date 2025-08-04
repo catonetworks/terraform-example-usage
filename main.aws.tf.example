@@ -22,8 +22,7 @@ module "ipsec-aws" {
   }
   count  = var.build_aws_ipsec_module ? 1 : 0
   source = "./modules/cato/aws/ipsec"
-  ### Create 2 Allocated IPs in Cato CMA, and retrieve the IDs via API 
-  ### using query.entityLookup() filtering for type allocatedIP
+  ### Create 2 Allocated IPs in Cato CMA
  
   // Required variables
   primary_public_cato_ip   = "x.x.x.x"
@@ -111,7 +110,6 @@ module "vsocket-aws-tgw" {
   external_testing_range = ["1.2.3.4/32"] #Entered as a CIDR such as "1.2.3.4/32"
   build_aws_vsocket_tgw_test_env = var.build_aws_vsocket_tgw_test_env
   enable_kali                       = false
-  kali_ami_id                       = "ami-0395cfad13fba5338" #Optional
   
   // Example of overriding default values for module variables
   vpc_network_range = "10.5.0.0/24"
@@ -133,7 +131,6 @@ module "build_aws_vsocket_tgw_ha_module" {
   external_testing_range = ["1.2.3.4/32"] #Entered as a CIDR such as "1.2.3.4/32"
   build_aws_vsocket_tgw_ha_test_env = var.build_aws_vsocket_tgw_ha_test_env
   enable_kali                       = false
-  kali_ami_id                       = "ami-0395cfad13fba5338" #Optional
   
   
   // Example of overriding default values for module variables
@@ -157,7 +154,6 @@ module "build_aws_ipsec_tgw_module" {
   region                            = var.aws_region
   build_aws_ipsec_tgw_test_env      = var.build_aws_ipsec_tgw_test_env
   enable_kali                       = false
-  kali_ami_id                       = "ami-0395cfad13fba5338" #Optional
   external_testing_range = ["1.2.3.4/32"] #Entered as a CIDR such as "1.2.3.4/32"
 
   //Example of overriding default values for module variables

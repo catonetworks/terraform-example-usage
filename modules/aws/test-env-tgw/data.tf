@@ -34,7 +34,7 @@ data "aws_ami" "kali_linux" {
 
   filter {
     name   = "name"
-    values = ["kali-linux-*"]
+    values = ["kali-last-snapshot-*"]
   }
 
   filter {
@@ -45,5 +45,10 @@ data "aws_ami" "kali_linux" {
   filter {
     name   = "state"
     values = ["available"]
+  }
+
+  filter { 
+    name = "architecture"
+    values = ["x86_64"]
   }
 }
