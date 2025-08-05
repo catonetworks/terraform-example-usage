@@ -102,4 +102,21 @@ locals {
       }
     ]
   ])
+
+  kali_servers = var.enable_kali ? {
+    for server in local.kali_server_definition : server.name => server
+  } : {}
+
+  kali_server_definition = flatten([
+    [
+      for i, subnet in module.test-env-vpc-3.public_subnets_cidr_blocks : {
+        name                        = "test-env-vpc-3-kaliServer-${i}"
+        subnet_id                   = module.test-env-vpc-3.public_subnets[i]
+        az                          = module.test-env-vpc-3.azs[i]
+        sg_id                       = module.vpc3_external_security_group.security_group_id
+        private_ip                  = cidrhost(subnet, 8)
+        associate_public_ip_address = true
+      }
+    ]
+  ])
 }

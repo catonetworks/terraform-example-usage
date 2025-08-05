@@ -46,10 +46,18 @@ module "vsocket-aws-tgw-ha" {
   build_default_tgw_route_to_cato = true
 
   routed_networks = var.build_aws_vsocket_tgw_ha_test_env ? {
-    "test-env-vpc-1" = module.test_env_ha[0].vpc1_cidr_block
-    "test-env-vpc-2" = module.test_env_ha[0].vpc2_cidr_block
-    "test-env-vpc-3" = module.test_env_ha[0].vpc3_cidr_block
-  } : {}
+    "test-env-vpc-1" = {
+      subnet = module.test_env_ha[0].vpc1_cidr_block
+    }
+
+    "test-env-vpc-2" = {
+      subnet = module.test_env_ha[0].vpc2_cidr_block
+    }
+
+    "test-env-vpc-3" = {
+      subnet = module.test_env_ha[0].vpc3_cidr_block
+    } 
+    } : {}
 }
 
 module "transit-gateway" {
@@ -96,4 +104,7 @@ module "test_env_ha" {
   tgw_id                 = module.transit-gateway.ec2_transit_gateway_id
   keypair_name           = var.key_pair
   external_testing_range = var.external_testing_range
+  enable_kali            = var.enable_kali
+  kali_ami_id = var.kali_ami_id
+
 }

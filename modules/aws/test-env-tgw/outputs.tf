@@ -97,5 +97,28 @@ output "vpc3_public_ips" {
       name => server.public_ip
       if startswith(name, "test-env-vpc-3-")
     }
+    kali = {
+      for name, server in module.kali_server :
+      name => server.public_ip
+      if startswith(name, "test-env-vpc-3-kaliServer-")
+    }
+  }
+}
+
+output "test_env_private_ips" { 
+  description = "Private IPs of Servers" 
+  value = { 
+    prod = { 
+      for name, server in module.prod_test_servers : 
+      name => server.private_ip
+    }
+    windows = { 
+      for name, server in module.windows_test_servers : 
+      name => server.private_ip
+    }
+    kali = { 
+      for name, server in module.kali_server : 
+      name => server.private_ip
+    }
   }
 }

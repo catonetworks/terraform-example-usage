@@ -205,3 +205,13 @@ variable "upstream_bw" {
   type        = number
   default     = 100
 }
+
+variable "enable_kali" {
+  description = "Enable Kali Instances in Test_Env"
+  default     = false
+}
+
+variable "kali_ami_id" {
+  description = "Custom AMI ID for Kali"
+  default     = null
+}

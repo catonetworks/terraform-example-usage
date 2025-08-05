@@ -1,0 +1,96 @@
+#!/bin/bash
+set -e # Exit immediately if a command exits with a non-zero status.
+
+# Set DEBIAN_FRONTEND to noninteractive to prevent prompts
+export DEBIAN_FRONTEND=noninteractive
+
+# --- Logging Setup ---
+# Create a log file for this script's output
+LOG_FILE="/var/log/userdata-bootstrap.log"
+exec > >(tee -a ${LOG_FILE}) 2>&1
+echo "--- Userdata Script Started: $(date) ---"
+
+# --- System & Package Updates ---
+apt update -y
+# Use dist-upgrade to handle changing dependencies, new packages, or removing obsolete ones
+apt dist-upgrade -y
+
+# --- Core & Kali Package Installation ---
+apt install -y \
+    curl \
+    wget \
+    git \
+    vim \
+    htop \
+    unzip \
+    awscli \
+    python3-pip \
+    unattended-upgrades \
+    kali-linux-default \
+    xrdp \
+    kali-desktop-core \
+    kali-desktop-gnome \
+    kali-linux-headless
+
+# --- AWS SSM Agent Installation ---
+echo "Installing AWS SSM Agent..."
+ARCH=$(dpkg --print-architecture)
+wget "https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/debian_${ARCH}/amazon-ssm-agent.deb" -O /tmp/amazon-ssm-agent.deb
+dpkg -i /tmp/amazon-ssm-agent.deb
+systemctl enable amazon-ssm-agent --now
+rm /tmp/amazon-ssm-agent.deb
+echo "SSM Agent installation complete."
+
+# --- User and SSH Configuration ---
+# Create a non-root user if it doesn't exist (Official Kali AMIs use 'kali' by default)
+if ! id "kali" &>/dev/null; then
+    echo "Creating 'kali' user..."
+    useradd -m -s /bin/bash -G sudo kali
+    
+    # CRITICAL: Copy the SSH key from the default user to allow login
+    mkdir -p /home/kali/.ssh
+    cp /root/.ssh/authorized_keys /home/kali/.ssh/authorized_keys
+    chown -R kali:kali /home/kali/.ssh
+    chmod 700 /home/kali/.ssh
+    chmod 600 /home/kali/.ssh/authorized_keys
+    echo "'kali' user created."
+fi
+
+# Configure SSH for X11 Forwarding
+# NOTE: Avoid enabling root login or password authentication for security.
+# Key-based authentication is the standard for cloud instances.
+sed -i.bak -E 's/^[#\s]*X11Forwarding.*/X11Forwarding yes/i' /etc/ssh/sshd_config
+systemctl restart sshd
+
+# --- Service Configuration ---
+# Enable and start the xrdp service for Remote Desktop
+systemctl enable xrdp --now
+
+# Configure automatic security updates (reboot is off by default)
+echo 'Unattended-Upgrade::Automatic-Reboot "false";' >> /etc/apt/apt.conf.d/50unattended-upgrades
+
+# --- System Configuration ---
+# Set timezone to UTC
+timedatectl set-timezone UTC
+
+# Create swap file if it doesn't exist
+if [ ! -f /swapfile ]; then
+    echo "Creating 2G swap file..."
+    fallocate -l 2G /swapfile
+    chmod 600 /swapfile
+    mkswap /swapfile
+    swapon /swapfile
+    echo '/swapfile none swap sw 0 0' >> /etc/fstab
+    echo "Swap file created and enabled."
+fi
+
+# Create useful directories
+mkdir -p /opt/tools
+chmod 755 /opt/tools
+
+# --- Final Cleanup ---
+apt-get autoremove -y
+apt-get autoclean
+
+echo "--- Userdata Script Completed Successfully: $(date) ---"
+exit 0

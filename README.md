@@ -442,8 +442,8 @@ This environment will build 3 VPCs, and associated subnets, route tables, routes
 ### Diagram
 <img src=./images/tgw-ha-test-env.png>
 </details>
-
-details>
+<p>
+<details>
 <summary> <strong> 📦 AWS Transit Gateway IPSEC Test Environment </strong> </summary>
 This repo comes with a test enviroment for testing connectivity and displaying how Cato IPSEC can be deployed within a cloud provider.  By setting build_aws_ipsec_tgw_test_env = true in the terraform.tfvars file, the test environment for AWS Transit Gateway IPSEC will be built automatically 
 
@@ -470,13 +470,96 @@ This environment will build 3 VPCs, and associated subnets, route tables, routes
 ### Diagram
 #### Diagram Pending
 </details>
+<p>
+
+<details>
+<summary><strong> 📦 Enabling the Kali Server Module </strong></summary>
+
+The Kali Server Module allows you to deploy Kali Linux penetration testing instances as part of your AWS Transit Gateway test environments. This module is available for security testing and network analysis purposes.
+
+### 1. How to Enable it
+
+To enable Kali servers in your deployment, you need to set the following variable(s) in your `terraform.tfvars` file:
+
+**Required Variable:**
+- `enable_kali = true` - Set this to `true` to enable the deployment of Kali Linux instances
+
+**Optional Variable:**
+- `kali_ami_id = "ami-xxxxxxxxx"` - Specify a custom Kali Linux AMI ID (if not provided, the module will automatically find the most recent Kali Linux AMI from Offensive Security)
+
+**Example Configuration:**
+```hcl
+# Enable Kali servers
+enable_kali = true
+
+# Optional: Specify a custom AMI ID
+# kali_ami_id = "ami-0395cfad13fba5338"  # Example for us-west-2
+```
+
+**Supported Environments/Modules:**
+The Kali server module is supported in the following AWS Transit Gateway test environments:
+- AWS Transit Gateway Test Environment (`build_aws_vsocket_tgw_test_env = true`)
+- AWS Transit Gateway HA Test Environment (`build_aws_vsocket_tgw_ha_test_env = true`)
+
+### 2. How to Use it
+
+**Instance Details:**
+- **Instance Type:** t3.medium (optimized for Kali Linux performance)
+- **Deployment Location:** VPC3 public subnets with public IP addresses
+- **Naming Convention:** `test-env-vpc-3-kaliServer-{index}`
+- **IP Assignment:** Static private IPs (typically .8 in each subnet)
+- **Storage:** 150GB GP3 EBS volume
+
+**Access Methods:**
+1. **SSH Access:** Use your configured EC2 key pair to SSH into the instances
+   ```bash
+   ssh -i your-key.pem kali@<private-ip> (If Connected to the network which houses the Kali Server)
+   ssh -i your-key.pem kali@<public-ip> (If accessing over the internet)
+   ```
+
+2. **AWS Systems Manager (SSM):** Connect via AWS SSM Session Manager
+   ```bash
+   aws ssm start-session --target <instance-id>
+   ```
+
+3. **Remote Desktop (XRDP):** The instances are configured with XRDP for GUI access
+   - Connect using any RDP client to `<public-ip>:3389`
+   - Use the `kali` user credentials
+
+**Pre-installed Tools:**
+The Kali instances come with:
+- Kali Linux default toolset (`kali-linux-default`)
+- Desktop environment (GNOME)
+- Headless tools (`kali-linux-headless`)
+- AWS CLI and SSM Agent
+- Development tools (git, vim, python3-pip)
+- Network utilities
+
+### 3. Caveats
+
+**Password Change Required**
+- You must ssh in to the server using the above instructions prior to using RDP
+- Once Connected with SSH you will need to change the password for the Kali User (`sudo passwd kali`)
+- Once the Password is changed you should be able to leverage an RDP client to connect to this server 
+
+**Boot Time**
+- Due to the number of updates, and installs on boot you must wait a minimum of 30 minutes for this server to be ready
+- You can check the status by viewing the cloud-init logs located in `/var/log/cloud-init*`
+
+**AMI ID**
+- Custom AMI IDs can be passed to the module using `kali_ami_id` in the case that you can't use the Marketplace version of Kali in your environment
+
+
+</details>
+
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.98.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 4.1.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 4.1.0 |
 | <a name="requirement_cato"></a> [cato](#requirement\_cato) | >= 0.0.30 |
 | <a name="requirement_google"></a> [google](#requirement\_google) | ~> 4.0 |
 
@@ -488,6 +571,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_azure-vwan"></a> [azure-vwan](#module\_azure-vwan) | ./modules/cato/azure/vwan | n/a |
 | <a name="module_build_aws_ipsec_tgw_module"></a> [build\_aws\_ipsec\_tgw\_module](#module\_build\_aws\_ipsec\_tgw\_module) | ./modules/cato/aws/ipsec-tgw | n/a |
 | <a name="module_build_aws_vsocket_tgw_ha_module"></a> [build\_aws\_vsocket\_tgw\_ha\_module](#module\_build\_aws\_vsocket\_tgw\_ha\_module) | ./modules/cato/aws/vsocket-tgw-ha | n/a |
 | <a name="module_ipsec-aws"></a> [ipsec-aws](#module\_ipsec-aws) | ./modules/cato/aws/ipsec | n/a |
@@ -496,6 +580,11 @@ No providers.
 | <a name="module_vsocket-aws-ha-vpc"></a> [vsocket-aws-ha-vpc](#module\_vsocket-aws-ha-vpc) | ./modules/cato/aws/vsocket-ha-vpc | n/a |
 | <a name="module_vsocket-aws-tgw"></a> [vsocket-aws-tgw](#module\_vsocket-aws-tgw) | ./modules/cato/aws/vsocket-tgw | n/a |
 | <a name="module_vsocket-aws-vpc"></a> [vsocket-aws-vpc](#module\_vsocket-aws-vpc) | ./modules/cato/aws/vsocket-vpc | n/a |
+| <a name="module_vsocket-azure"></a> [vsocket-azure](#module\_vsocket-azure) | ./modules/cato/azure/vsocket | n/a |
+| <a name="module_vsocket-azure-ha"></a> [vsocket-azure-ha](#module\_vsocket-azure-ha) | ./modules/cato/azure/vsocket-ha | n/a |
+| <a name="module_vsocket-azure-ha-vnet"></a> [vsocket-azure-ha-vnet](#module\_vsocket-azure-ha-vnet) | ./modules/cato/azure/vsocket-ha-vnet | n/a |
+| <a name="module_vsocket-azure-ha-vnet-2nic"></a> [vsocket-azure-ha-vnet-2nic](#module\_vsocket-azure-ha-vnet-2nic) | ./modules/cato/azure/vsocket-ha-vnet-2nic | n/a |
+| <a name="module_vsocket-azure-vnet"></a> [vsocket-azure-vnet](#module\_vsocket-azure-vnet) | ./modules/cato/azure/vsocket-vnet | n/a |
 
 ## Resources
 
@@ -523,9 +612,11 @@ No resources.
 | <a name="input_build_aws_vsocket_vpc_module"></a> [build\_aws\_vsocket\_vpc\_module](#input\_build\_aws\_vsocket\_vpc\_module) | Build AWS vSocket VPC site module | `bool` | `false` | no |
 | <a name="input_build_azure_ipsec_module"></a> [build\_azure\_ipsec\_module](#input\_build\_azure\_ipsec\_module) | Build Azure IPsec site module | `bool` | `false` | no |
 | <a name="input_build_azure_vsocket_ha_module"></a> [build\_azure\_vsocket\_ha\_module](#input\_build\_azure\_vsocket\_ha\_module) | Build Azure vSocket VPC site module | `bool` | `false` | no |
+| <a name="input_build_azure_vsocket_ha_vnet_2nic_module"></a> [build\_azure\_vsocket\_ha\_vnet\_2nic\_module](#input\_build\_azure\_vsocket\_ha\_vnet\_2nic\_module) | Build Azure vSocket Net 2NIC site Module | `bool` | `false` | no |
 | <a name="input_build_azure_vsocket_ha_vnet_module"></a> [build\_azure\_vsocket\_ha\_vnet\_module](#input\_build\_azure\_vsocket\_ha\_vnet\_module) | Build Azure vSocket VNET site module | `bool` | `false` | no |
 | <a name="input_build_azure_vsocket_module"></a> [build\_azure\_vsocket\_module](#input\_build\_azure\_vsocket\_module) | Build Azure vSocket site module | `bool` | `false` | no |
 | <a name="input_build_azure_vsocket_vnet_module"></a> [build\_azure\_vsocket\_vnet\_module](#input\_build\_azure\_vsocket\_vnet\_module) | Build Azure vSocket VNET site module | `bool` | `false` | no |
+| <a name="input_build_azure_vwan_module"></a> [build\_azure\_vwan\_module](#input\_build\_azure\_vwan\_module) | Build Azure vWAN Site Module | `bool` | `false` | no |
 | <a name="input_build_bulk_socket_csv_module"></a> [build\_bulk\_socket\_csv\_module](#input\_build\_bulk\_socket\_csv\_module) | Build Bulk Socket site from csv module | `bool` | `false` | no |
 | <a name="input_build_gcp_ipsec_module"></a> [build\_gcp\_ipsec\_module](#input\_build\_gcp\_ipsec\_module) | Build GCP IPsec site module | `bool` | `false` | no |
 | <a name="input_build_gcp_vsocket_module"></a> [build\_gcp\_vsocket\_module](#input\_build\_gcp\_vsocket\_module) | Build GCP vSocket site module | `bool` | `false` | no |
@@ -540,6 +631,9 @@ No resources.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_private_ips_from_ipsec_tgw_test_env"></a> [private\_ips\_from\_ipsec\_tgw\_test\_env](#output\_private\_ips\_from\_ipsec\_tgw\_test\_env) | private IPs of servers in the test environment |
+| <a name="output_private_ips_from_tgw_ha_test_env"></a> [private\_ips\_from\_tgw\_ha\_test\_env](#output\_private\_ips\_from\_tgw\_ha\_test\_env) | private IPs of servers in the test environment |
+| <a name="output_private_ips_from_tgw_test_env"></a> [private\_ips\_from\_tgw\_test\_env](#output\_private\_ips\_from\_tgw\_test\_env) | private IPs of servers in the test environment |
 | <a name="output_vpc3_public_ips_from_ipsec_tgw_test_env"></a> [vpc3\_public\_ips\_from\_ipsec\_tgw\_test\_env](#output\_vpc3\_public\_ips\_from\_ipsec\_tgw\_test\_env) | Public IPs of Public VPC servers in the test environment |
 | <a name="output_vpc3_public_ips_from_tgw_ha_test_env"></a> [vpc3\_public\_ips\_from\_tgw\_ha\_test\_env](#output\_vpc3\_public\_ips\_from\_tgw\_ha\_test\_env) | Public IPs of Public VPC servers in the test environment |
 | <a name="output_vpc3_public_ips_from_tgw_test_env"></a> [vpc3\_public\_ips\_from\_tgw\_test\_env](#output\_vpc3\_public\_ips\_from\_tgw\_test\_env) | Public IPs of Public VPC servers in the test environment |
