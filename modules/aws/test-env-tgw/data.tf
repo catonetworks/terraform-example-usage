@@ -47,8 +47,8 @@ data "aws_ami" "kali_linux" {
     values = ["available"]
   }
 
-  filter { 
-    name = "architecture"
+  filter {
+    name   = "architecture"
     values = ["x86_64"]
   }
 }
