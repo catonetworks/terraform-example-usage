@@ -573,7 +573,6 @@ No providers.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_azure-vsocket-vwan-ha"></a> [azure-vsocket-vwan-ha](#module\_azure-vsocket-vwan-ha) | ./modules/cato/azure/vsocket-vwan | n/a |
-| <a name="module_azure-vwan"></a> [azure-vwan](#module\_azure-vwan) | ./modules/cato/azure/vwan | n/a |
 | <a name="module_build_aws_ipsec_tgw_module"></a> [build\_aws\_ipsec\_tgw\_module](#module\_build\_aws\_ipsec\_tgw\_module) | ./modules/cato/aws/ipsec-tgw | n/a |
 | <a name="module_build_aws_vsocket_tgw_ha_module"></a> [build\_aws\_vsocket\_tgw\_ha\_module](#module\_build\_aws\_vsocket\_tgw\_ha\_module) | ./modules/cato/aws/vsocket-tgw-ha | n/a |
 | <a name="module_ipsec-aws"></a> [ipsec-aws](#module\_ipsec-aws) | ./modules/cato/aws/ipsec | n/a |
