@@ -70,3 +70,8 @@
  - Tested all modules with Default configurations
  - Tested all Test-Environments with Default configurations
  
+## 0.0.9 (2025-09-25)
+
+### Features
+ - Integrated new vwan with Sockets module to repo
+   - Updated Docs
