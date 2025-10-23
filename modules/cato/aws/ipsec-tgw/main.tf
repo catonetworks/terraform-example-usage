@@ -80,7 +80,7 @@ module "test_env" {
   keypair_name           = var.key_pair
   external_testing_range = var.external_testing_range
   enable_kali            = var.enable_kali
-  kali_ami_id = var.kali_ami_id
+  kali_ami_id            = var.kali_ami_id
 }
 
 resource "random_password" "primary_vpn_tunnel1_preshared_key" {

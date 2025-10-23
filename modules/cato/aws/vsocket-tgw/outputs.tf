@@ -3,7 +3,7 @@ output "vpc3_public_ips_from_test_env" {
   value       = length(module.test_env) > 0 ? module.test_env[0].vpc3_public_ips : {}
 }
 
-output "test_env_private_ips" { 
+output "test_env_private_ips" {
   description = "Private IPs of Servers"
-  value = length(module.test_env) > 0 ? module.test_env[0].test_env_private_ips : {}
+  value       = length(module.test_env) > 0 ? module.test_env[0].test_env_private_ips : {}
 }

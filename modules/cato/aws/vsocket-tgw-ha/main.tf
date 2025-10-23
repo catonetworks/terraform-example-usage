@@ -56,8 +56,8 @@ module "vsocket-aws-tgw-ha" {
 
     "test-env-vpc-3" = {
       subnet = module.test_env_ha[0].vpc3_cidr_block
-    } 
-    } : {}
+    }
+  } : {}
 }
 
 module "transit-gateway" {
@@ -105,6 +105,6 @@ module "test_env_ha" {
   keypair_name           = var.key_pair
   external_testing_range = var.external_testing_range
   enable_kali            = var.enable_kali
-  kali_ami_id = var.kali_ami_id
+  kali_ami_id            = var.kali_ami_id
 
 }

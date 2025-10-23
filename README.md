@@ -320,7 +320,8 @@ Below is a list of the terraform modules included in this package, and the assoc
 | [azure-socket-ha](https://registry.terraform.io/modules/catonetworks/vsocket-azure-ha/cato/latest) | 10.53.0.0/16 | 16 min | N/A | 
 | [azure-socket-ha-vnet](https://registry.terraform.io/modules/catonetworks/vsocket-azure-ha-vpc/cato/latest) | 10.54.0.0/16 | 16 min | N/A |
 | [azure-vwan](https://registry.terraform.io/modules/catonetworks/vsocket-azure-vwan/cato/latest) | 10.55.0.0/16 | 120 min | N/A |
-| [azure-socket-ha-vnet-2nic](https://github.com/catonetworks/terraform-cato-vsocket-azure-ha-vnet-2nic) 10.56.0.0/16 | 25 min | N/A |
+| [azure-socket-ha-vnet-2nic](https://github.com/catonetworks/terraform-cato-vsocket-azure-ha-vnet-2nic) | 10.56.0.0/16 | 25 min | N/A |
+| [azure-vwan-vsocket-ha](https://github.com/catonetworks/terraform-cato-azure-vwan-vsocket-ha) | 10.57.0.0/16 | 120 min | N/A
 | [gcp-ipsec](https://registry.terraform.io/modules/catonetworks/vsocket-gcp-ipsec/cato/latest) | 10.100.0.0/16 | n/a | N/A |
 | [gcp-socket](https://registry.terraform.io/modules/catonetworks/vsocket-gcp/cato/latest) | 10.101.0.0/16 | 5 min | N/A | 
 | [gcp-socket-vpc](https://registry.terraform.io/modules/catonetworks/vsocket-gcp-vpc/cato/latest) | 10.102.0.0/16 | n/a  | N/A |
@@ -571,10 +572,11 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_azure-vwan"></a> [azure-vwan](#module\_azure-vwan) | ./modules/cato/azure/vwan | n/a |
+| <a name="module_azure-vsocket-vwan-ha"></a> [azure-vsocket-vwan-ha](#module\_azure-vsocket-vwan-ha) | ./modules/cato/azure/vsocket-vwan | n/a |
 | <a name="module_build_aws_ipsec_tgw_module"></a> [build\_aws\_ipsec\_tgw\_module](#module\_build\_aws\_ipsec\_tgw\_module) | ./modules/cato/aws/ipsec-tgw | n/a |
 | <a name="module_build_aws_vsocket_tgw_ha_module"></a> [build\_aws\_vsocket\_tgw\_ha\_module](#module\_build\_aws\_vsocket\_tgw\_ha\_module) | ./modules/cato/aws/vsocket-tgw-ha | n/a |
 | <a name="module_ipsec-aws"></a> [ipsec-aws](#module\_ipsec-aws) | ./modules/cato/aws/ipsec | n/a |
+| <a name="module_ipsec-azure"></a> [ipsec-azure](#module\_ipsec-azure) | ./modules/cato/azure/ipsec | n/a |
 | <a name="module_vsocket-aws"></a> [vsocket-aws](#module\_vsocket-aws) | ./modules/cato/aws/vsocket | n/a |
 | <a name="module_vsocket-aws-ha"></a> [vsocket-aws-ha](#module\_vsocket-aws-ha) | ./modules/cato/aws/vsocket-ha | n/a |
 | <a name="module_vsocket-aws-ha-vpc"></a> [vsocket-aws-ha-vpc](#module\_vsocket-aws-ha-vpc) | ./modules/cato/aws/vsocket-ha-vpc | n/a |
@@ -614,6 +616,7 @@ No resources.
 | <a name="input_build_azure_vsocket_ha_module"></a> [build\_azure\_vsocket\_ha\_module](#input\_build\_azure\_vsocket\_ha\_module) | Build Azure vSocket VPC site module | `bool` | `false` | no |
 | <a name="input_build_azure_vsocket_ha_vnet_2nic_module"></a> [build\_azure\_vsocket\_ha\_vnet\_2nic\_module](#input\_build\_azure\_vsocket\_ha\_vnet\_2nic\_module) | Build Azure vSocket Net 2NIC site Module | `bool` | `false` | no |
 | <a name="input_build_azure_vsocket_ha_vnet_module"></a> [build\_azure\_vsocket\_ha\_vnet\_module](#input\_build\_azure\_vsocket\_ha\_vnet\_module) | Build Azure vSocket VNET site module | `bool` | `false` | no |
+| <a name="input_build_azure_vsocket_ha_vwan_module"></a> [build\_azure\_vsocket\_ha\_vwan\_module](#input\_build\_azure\_vsocket\_ha\_vwan\_module) | Build Azure vSocket vWAN site module | `bool` | `false` | no |
 | <a name="input_build_azure_vsocket_module"></a> [build\_azure\_vsocket\_module](#input\_build\_azure\_vsocket\_module) | Build Azure vSocket site module | `bool` | `false` | no |
 | <a name="input_build_azure_vsocket_vnet_module"></a> [build\_azure\_vsocket\_vnet\_module](#input\_build\_azure\_vsocket\_vnet\_module) | Build Azure vSocket VNET site module | `bool` | `false` | no |
 | <a name="input_build_azure_vwan_module"></a> [build\_azure\_vwan\_module](#input\_build\_azure\_vwan\_module) | Build Azure vWAN Site Module | `bool` | `false` | no |

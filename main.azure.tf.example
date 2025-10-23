@@ -66,3 +66,19 @@ module "azure-vwan" {
   primary_cato_pop_ip   = "x.x.x.x"
   secondary_cato_pop_ip = "y.y.y.y"
 }
+
+module "azure-vsocket-vwan-ha" {
+  count  = var.build_azure_vsocket_ha_vwan_module ? 1 : 0
+  source = "./modules/cato/azure/vsocket-vwan"
+   # Authentication (Required)
+  cato_token            = var.cato_token
+  cato_account_id       = var.cato_account_id  
+  azure_subscription_id = var.azure_subscription_id
+
+  # Basic Configuration (Required)
+  azure_primary_location = "East US 2"
+
+  # Site Configuration (Required)
+  azure_site1_location = "East US 2"
+  azure_site2_location = "West US 2"
+}
