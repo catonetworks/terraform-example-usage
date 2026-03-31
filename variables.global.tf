@@ -184,6 +184,12 @@ variable "build_gcp_vsocket_vpc_module" {
   default     = false
 }
 
+variable "build_gcp_vsocket_ha_ncc_module" {
+  description = "Build GCP vSocket HA with NCC (Network Connectivity Center) module — security project + NCC hub and client spokes"
+  type        = bool
+  default     = false
+}
+
 # Settings for all GCP modules
 variable "build_socket_csv_module" {
   description = "Build Socket site from csv module"
