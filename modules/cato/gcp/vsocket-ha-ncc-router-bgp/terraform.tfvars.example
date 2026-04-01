@@ -1,0 +1,37 @@
+# ------------------------------------------------------------------------------
+# Example terraform.tfvars for GCP vSocket HA with NCC + Cloud Router + BGP
+# Copy to terraform.tfvars and fill in your values. See README for run order.
+# Uses "bgp" suffix and 10.4.x IP ranges to coexist with the plain NCC example.
+# ------------------------------------------------------------------------------
+
+# GCP (required)
+security_project_id = "YOUR_SECURITY_PROJECT_ID"
+region              = "us-central1"
+primary_zone        = "us-central1-a"
+secondary_zone      = "us-central1-b"
+web_tier_project_id = "YOUR_WEB_TIER_PROJECT_ID"
+app_tier_project_id = "YOUR_APP_TIER_PROJECT_ID"
+
+# Cato (required)
+token      = "YOUR_CATO_API_TOKEN"
+account_id = 12345
+
+# Optional
+# baseurl   = "https://api.catonetworks.com/api/v1/graphql2"
+# site_name = "security-bgp"
+# vsocket_ha_ncc_module_source = "../../../../../terraform-cato-vsocket-gcp-ha-ncc"
+# license_id = null
+# license_bw  = null
+
+# Cloud Router + BGP (defaults are already enabled in variables.tf)
+# enable_cloud_router                     = true
+# enable_bgp                              = true
+# cloud_router_asn                        = 64520
+# cato_bgp_asn                            = 64515
+# cloud_router_bgp_interface_ip_primary   = "10.4.3.10"
+# cloud_router_bgp_interface_ip_secondary = "10.4.3.11"
+# advertised_route_priority               = 100
+# enable_bfd                              = true
+# cloud_router_advertised_ip_ranges = [
+#   { range = "10.0.0.0/8", description = "On-prem networks" },
+# ]

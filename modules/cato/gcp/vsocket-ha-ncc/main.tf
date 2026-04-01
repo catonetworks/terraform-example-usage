@@ -11,6 +11,11 @@
 # and optionally service projects + VMs.
 # ------------------------------------------------------------------------------
 
+provider "google" {
+  project = var.security_project_id
+  region  = var.region
+}
+
 provider "cato" {
   baseurl    = var.baseurl
   token      = var.token
@@ -29,8 +34,8 @@ module "vsocket_gcp_ha_ncc" {
   site_location    = var.site_location
   site_type        = var.site_type
 
-  region        = var.region
-  primary_zone  = var.primary_zone
+  region         = var.region
+  primary_zone   = var.primary_zone
   secondary_zone = var.secondary_zone
 
   # Security VPC (diagram: 10.3.x) — mgmt 10.3.1.0/24, wan 10.3.2.8/29, lan 10.3.3.0/24
@@ -41,10 +46,10 @@ module "vsocket_gcp_ha_ncc" {
   mgmt_network_ip_primary   = var.mgmt_network_ip_primary
   mgmt_network_ip_secondary = var.mgmt_network_ip_secondary
   wan_network_ip_primary    = var.wan_network_ip_primary
-  wan_network_ip_secondary   = var.wan_network_ip_secondary
+  wan_network_ip_secondary  = var.wan_network_ip_secondary
   lan_network_ip_primary    = var.lan_network_ip_primary
-  lan_network_ip_secondary   = var.lan_network_ip_secondary
-  load_balancer_ip           = var.load_balancer_ip
+  lan_network_ip_secondary  = var.lan_network_ip_secondary
+  load_balancer_ip          = var.load_balancer_ip
 
   public_ip_mgmt = var.public_ip_mgmt
   public_ip_wan  = var.public_ip_wan
@@ -54,12 +59,12 @@ module "vsocket_gcp_ha_ncc" {
   labels                 = var.labels
   tags                   = var.tags
 
-  license_id  = var.license_id
-  license_bw  = var.license_bw
-  routed_networks                  = var.routed_networks
-  enable_static_range_translation   = var.enable_static_range_translation
-  upstream_bandwidth               = var.upstream_bandwidth
-  downstream_bandwidth             = var.downstream_bandwidth
+  license_id                      = var.license_id
+  license_bw                      = var.license_bw
+  routed_networks                 = var.routed_networks
+  enable_static_range_translation = var.enable_static_range_translation
+  upstream_bandwidth              = var.upstream_bandwidth
+  downstream_bandwidth            = var.downstream_bandwidth
 
   # NCC: client spokes (Host Project web-tier and app-tier from diagram)
   ncc_hub_name = var.ncc_hub_name
