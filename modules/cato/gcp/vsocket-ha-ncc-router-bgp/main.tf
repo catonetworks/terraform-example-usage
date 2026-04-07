@@ -3,9 +3,9 @@
 # ------------------------------------------------------------------------------
 # Same as the vsocket-ha-ncc example, but also enables a Cloud Router in the LAN
 # VPC with BGP peering to the vSocket(s) via the NCC Router Appliance pattern.
-# This solves the return-routing problem (GCP → on-prem) by allowing the vSocket
-# to advertise on-prem routes to the Cloud Router, which creates dynamic routes
-# in the LAN VPC that propagate through NCC Hub to client spoke VPCs.
+# Routes that vSocket advertises back via BGP propagate through the Router
+# Appliance spoke into the NCC hub, steering client traffic through the security
+# VPC for SASE inspection.
 #
 # Uses a "bgp" suffix on names / different IP ranges (10.4.x) so this can
 # coexist alongside the plain NCC example in the same GCP project.
@@ -81,7 +81,7 @@ module "vsocket_gcp_ha_ncc_bgp" {
     }
   }
 
-  # Cloud Router + BGP
+  # Cloud Router + BGP (GCP side)
   enable_cloud_router                     = var.enable_cloud_router
   cloud_router_name                       = var.cloud_router_name
   cloud_router_asn                        = var.cloud_router_asn
@@ -96,4 +96,13 @@ module "vsocket_gcp_ha_ncc_bgp" {
   bfd_min_receive_interval                = var.bfd_min_receive_interval
   bfd_multiplier                          = var.bfd_multiplier
   create_bgp_firewall_rule                = var.create_bgp_firewall_rule
+
+  # Cato BGP peer (Cato side — auto-configured via Cato API)
+  create_cato_bgp_peer                  = var.create_cato_bgp_peer
+  cato_bgp_peer_default_action          = var.cato_bgp_peer_default_action
+  cato_bgp_peer_advertise_default_route = var.cato_bgp_peer_advertise_default_route
+  cato_bgp_peer_advertise_all_routes    = var.cato_bgp_peer_advertise_all_routes
+  cato_bgp_peer_summary_routes          = var.cato_bgp_peer_summary_routes
+  cato_bgp_peer_metric                  = var.cato_bgp_peer_metric
+  enable_cato_bfd                       = var.enable_cato_bfd
 }

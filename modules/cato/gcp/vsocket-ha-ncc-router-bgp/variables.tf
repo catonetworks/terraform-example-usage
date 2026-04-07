@@ -235,9 +235,9 @@ variable "ncc_hub_name" {
 }
 
 variable "ncc_spoke_isolation" {
-  description = "Isolate client spokes (STAR topology) so inter-spoke traffic is inspected by vSocket."
+  description = "Switch hub to STAR preset topology (center/edge groups). Default is MESH with BGP route injection."
   type        = bool
-  default     = true
+  default     = false
 }
 
 # ------------------------------------------------------------------------------
@@ -328,4 +328,55 @@ variable "create_bgp_firewall_rule" {
   description = "Create firewall rules for BGP (TCP/179) and BFD (UDP/3784-3785) traffic."
   type        = bool
   default     = true
+}
+
+# ------------------------------------------------------------------------------
+# Cato BGP peer (auto-configured via Cato API)
+# ------------------------------------------------------------------------------
+variable "create_cato_bgp_peer" {
+  description = "Create cato_bgp_peer resources for automatic Cato-side BGP configuration."
+  type        = bool
+  default     = true
+}
+
+variable "cato_bgp_peer_default_action" {
+  description = "Default action for routes not matching filters (ACCEPT or DROP)."
+  type        = string
+  default     = "ACCEPT"
+}
+
+variable "cato_bgp_peer_advertise_default_route" {
+  description = "Advertise default route (0.0.0.0/0) from vSocket to Cloud Router for traffic inspection."
+  type        = bool
+  default     = true
+}
+
+variable "cato_bgp_peer_advertise_all_routes" {
+  description = "Advertise all Cato routes to the Cloud Router."
+  type        = bool
+  default     = false
+}
+
+variable "cato_bgp_peer_summary_routes" {
+  description = "Summary routes to advertise from vSocket to Cloud Router."
+  type = list(object({
+    route = string
+    community = optional(list(object({
+      from = number
+      to   = number
+    })), [])
+  }))
+  default = []
+}
+
+variable "cato_bgp_peer_metric" {
+  description = "Route preference metric for the Cato BGP peer (lower = preferred)."
+  type        = number
+  default     = 150
+}
+
+variable "enable_cato_bfd" {
+  description = "Enable BFD settings on cato_bgp_peer resources (leave false for CLOUD_DC sites)."
+  type        = bool
+  default     = false
 }
