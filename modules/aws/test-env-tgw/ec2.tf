@@ -32,7 +32,7 @@ module "prod_test_servers" {
     #   Name = "root-disk"
     # }
   }]
-  user_data = file("./templates/aws_al2023_user_data.tftpl")
+  user_data = file("${path.module}/../../../templates/aws_al2023_user_data.tftpl")
 
   #   user_data = templatefile("./templates/aws_al2023_user_data.tftpl",
   # variable_name = thing 
@@ -77,7 +77,7 @@ module "windows_test_servers" {
     #   Name = "root-disk"
     # }
   }]
-  user_data = file("./templates/aws_windows_user_data.tftpl")
+  user_data = file("${path.module}/../../../templates/aws_windows_user_data.tftpl")
 
   #   user_data = templatefile("./templates/aws_al2023_user_data.tftpl",{
   # region = var.region
@@ -122,7 +122,7 @@ module "kali_server" {
     #   Name = "root-disk"
     # }
   }]
-  user_data = file("./templates/aws_kali_user_data.tftpl")
+  user_data = file("${path.module}/../../../templates/aws_kali_user_data.tftpl")
 
   #   user_data = templatefile("./templates/aws_al2023_user_data.tftpl",{
   # region = var.region
