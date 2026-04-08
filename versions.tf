@@ -2,11 +2,11 @@ terraform {
   required_providers {
     cato = {
       source  = "catonetworks/cato"
-      version = ">= 0.0.30"
+      version = ">= 0.0.57"
     }
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.98.0"
+      version = ">= 5.98.0"
     }
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -21,6 +21,6 @@ terraform {
 
 provider "cato" {
   baseurl    = var.baseurl
-  token      = var.cato_token
-  account_id = var.account_id
+  token      = var.cato_token_base
+  account_id = var.account_id_base
 }
