@@ -259,27 +259,27 @@ WARNING: DO NOT add your cato token in clear text to any variable files on your 
 Use the following syntax in a unix command prompt to temporarily set environment variables.
 
 ```bash
-set TF_VAR_account_id=xxxxx
-set TF_VAR_cato_token=xxxxx
+set TF_VAR_ACCOUNT_ID=xxxxx
+set TF_VAR_CATO_TOKEN=xxxxx
 ```
 To make these values persistent, run either `vi ~/.bash_profile` or `vi ~/.zshrc`, and add the following lines.
 
 ```bash
-set TF_VAR_account_id=xxxxx
-set TF_VAR_cato_token=xxxxx
+set TF_VAR_ACCOUNT_ID=xxxxx
+set TF_VAR_CATO_TOKEN=xxxxx
 ```
 </details>
 <details>
 <summary>Setting environment variables in Windows</summary>
 Use the following syntax in a windows command prompt to temporarily set environment variables.
 ```bash
-set TF_VAR_account_id=xxxxx
-set TF_VAR_cato_token=xxxxx
+set TF_VAR_ACCOUNT_ID=xxxxx
+set TF_VAR_CATO_TOKEN=xxxxx
 ```
 To make these values persistent, run the following windows command prompt:
 ```bash
-setx TF_VAR_account_id=xxxxx
-setx TF_VAR_cato_token=xxxxx
+setx TF_VAR_ACCOUNT_ID=xxxxx
+setx TF_VAR_CATO_TOKEN=xxxxx
 ```
 NOTE: On a local system, variables created or modified by this tool will be available in future command windows but not in the current CMD.exe command window.
 </details>
@@ -559,9 +559,9 @@ The Kali instances come with:
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.98.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.98.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 4.1.0 |
-| <a name="requirement_cato"></a> [cato](#requirement\_cato) | >= 0.0.30 |
+| <a name="requirement_cato"></a> [cato](#requirement\_cato) | >= 0.0.70 |
 | <a name="requirement_google"></a> [google](#requirement\_google) | ~> 4.0 |
 
 ## Providers
@@ -641,3 +641,4 @@ No resources.
 | <a name="output_vpc3_public_ips_from_tgw_ha_test_env"></a> [vpc3\_public\_ips\_from\_tgw\_ha\_test\_env](#output\_vpc3\_public\_ips\_from\_tgw\_ha\_test\_env) | Public IPs of Public VPC servers in the test environment |
 | <a name="output_vpc3_public_ips_from_tgw_test_env"></a> [vpc3\_public\_ips\_from\_tgw\_test\_env](#output\_vpc3\_public\_ips\_from\_tgw\_test\_env) | Public IPs of Public VPC servers in the test environment |
 <!-- END_TF_DOCS -->
+
