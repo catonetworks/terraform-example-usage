@@ -23,7 +23,7 @@ provider "cato" {
 }
 
 module "vsocket_gcp_ha_ncc_bgp" {
-  source = "../../../../../terraform-cato-vsocket-gcp-ha-ncc"
+  source = "../../../../../terraform-cato-vsocket-gcp-ha-ncc-mesh"
 
   token      = var.token
   account_id = var.account_id
@@ -34,21 +34,22 @@ module "vsocket_gcp_ha_ncc_bgp" {
   site_location    = var.site_location
   site_type        = var.site_type
 
-  region         = var.region
-  primary_zone   = var.primary_zone
-  secondary_zone = var.secondary_zone
+  region       = var.region
+  primary_zone = var.primary_zone
+  # secondary_zone = var.secondary_zone
+  ha = var.ha
 
   subnet_mgmt_cidr = var.subnet_mgmt_cidr
   subnet_wan_cidr  = var.subnet_wan_cidr
   subnet_lan_cidr  = var.subnet_lan_cidr
 
-  mgmt_network_ip_primary   = var.mgmt_network_ip_primary
-  mgmt_network_ip_secondary = var.mgmt_network_ip_secondary
-  wan_network_ip_primary    = var.wan_network_ip_primary
-  wan_network_ip_secondary  = var.wan_network_ip_secondary
-  lan_network_ip_primary    = var.lan_network_ip_primary
-  lan_network_ip_secondary  = var.lan_network_ip_secondary
-  load_balancer_ip          = var.load_balancer_ip
+  mgmt_network_ip_primary = var.mgmt_network_ip_primary
+  # mgmt_network_ip_secondary = var.mgmt_network_ip_secondary
+  wan_network_ip_primary = var.wan_network_ip_primary
+  # wan_network_ip_secondary  = var.wan_network_ip_secondary
+  lan_network_ip_primary = var.lan_network_ip_primary
+  # lan_network_ip_secondary  = var.lan_network_ip_secondary
+  # load_balancer_ip          = var.load_balancer_ip
 
   public_ip_mgmt = var.public_ip_mgmt
   public_ip_wan  = var.public_ip_wan
@@ -82,20 +83,20 @@ module "vsocket_gcp_ha_ncc_bgp" {
   }
 
   # Cloud Router + BGP (GCP side)
-  enable_cloud_router                     = var.enable_cloud_router
-  cloud_router_name                       = var.cloud_router_name
-  cloud_router_asn                        = var.cloud_router_asn
-  cloud_router_advertised_ip_ranges       = var.cloud_router_advertised_ip_ranges
-  enable_bgp                              = var.enable_bgp
-  cato_bgp_asn                            = var.cato_bgp_asn
-  cloud_router_bgp_interface_ip_primary   = var.cloud_router_bgp_interface_ip_primary
-  cloud_router_bgp_interface_ip_secondary = var.cloud_router_bgp_interface_ip_secondary
-  advertised_route_priority               = var.advertised_route_priority
-  enable_bfd                              = var.enable_bfd
-  bfd_min_transmit_interval               = var.bfd_min_transmit_interval
-  bfd_min_receive_interval                = var.bfd_min_receive_interval
-  bfd_multiplier                          = var.bfd_multiplier
-  create_bgp_firewall_rule                = var.create_bgp_firewall_rule
+  enable_cloud_router                   = var.enable_cloud_router
+  cloud_router_name                     = var.cloud_router_name
+  cloud_router_asn                      = var.cloud_router_asn
+  cloud_router_advertised_ip_ranges     = var.cloud_router_advertised_ip_ranges
+  enable_bgp                            = var.enable_bgp
+  cato_bgp_asn                          = var.cato_bgp_asn
+  cloud_router_bgp_interface_ip_primary = var.cloud_router_bgp_interface_ip_primary
+  # cloud_router_bgp_interface_ip_secondary = var.cloud_router_bgp_interface_ip_secondary
+  advertised_route_priority = var.advertised_route_priority
+  enable_bfd                = var.enable_bfd
+  bfd_min_transmit_interval = var.bfd_min_transmit_interval
+  bfd_min_receive_interval  = var.bfd_min_receive_interval
+  bfd_multiplier            = var.bfd_multiplier
+  create_bgp_firewall_rule  = var.create_bgp_firewall_rule
 
   # Cato BGP peer (Cato side — auto-configured via Cato API)
   create_cato_bgp_peer                  = var.create_cato_bgp_peer

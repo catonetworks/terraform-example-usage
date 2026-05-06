@@ -2,9 +2,9 @@
 # Module source (point to terraform-cato-vsocket-gcp-ha-ncc repo)
 # ------------------------------------------------------------------------------
 variable "vsocket_ha_ncc_module_source" {
-  description = "Path or registry source for the terraform-cato-vsocket-gcp-ha-ncc module."
+  description = "Path or registry source for the terraform-cato-vsocket-gcp-ha-ncc-mesh module."
   type        = string
-  default     = "../../../../../terraform-cato-vsocket-gcp-ha-ncc"
+  default     = "../../../../../terraform-cato-vsocket-gcp-ha-ncc-mesh"
 }
 
 # ------------------------------------------------------------------------------
@@ -83,8 +83,15 @@ variable "primary_zone" {
 }
 
 variable "secondary_zone" {
-  description = "GCP zone for secondary vSocket. Required for HA BGP."
+  description = "GCP zone for secondary vSocket. Only used in HA mode."
   type        = string
+  default     = null
+}
+
+variable "ha" {
+  description = "Deploy vSocket in HA mode (primary+secondary). Set false for non-HA example."
+  type        = bool
+  default     = false
 }
 
 # ------------------------------------------------------------------------------
